@@ -39,12 +39,25 @@ function Header({ onCtaClick }) {
             JAMz: Introducing AI in Casting for <br />
             <span style={{ color: 'var(--accent)' }}>Casting Directors & Acting Schools</span>
           </h1>
-          <p className="sub-headline" style={{ maxWidth: '750px', margin: '0 auto 1.5rem' }}>
-            Stop losing hours to manual talent sorting. JAMz is the <strong>growth engine</strong> your business needs. 
-            Leverage AI to cut discovery time by 70%, double your project capacity, and transform your talent 
-            database into a high-speed revenue asset. Scale your reputation by delivering perfect casts 
-            faster than ever before, turning every project into a showcase of efficiency.
+          <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
+            The AI-powered growth engine for casting professionals. Scale your business, 
+            cut discovery time by 70%, and double your project capacity.
           </p>
+          
+          <div className="hero-benefits-row">
+            <div className="hero-benefit">
+              <Zap size={20} color="var(--accent)" />
+              <span>70% Faster Discovery</span>
+            </div>
+            <div className="hero-benefit">
+              <Trophy size={20} color="var(--accent)" />
+              <span>2x Project Capacity</span>
+            </div>
+            <div className="hero-benefit">
+              <Clock size={20} color="var(--accent)" />
+              <span>Save 40+ Hours/Week</span>
+            </div>
+          </div>
         </div>
         
         <div className="cta-group">
@@ -58,7 +71,13 @@ function Header({ onCtaClick }) {
           <div className="dashboard-real-ui">
             {/* Top Bar */}
             <div className="ui-top-bar">
-              <div className="ui-logo">JAM<span>z</span></div>
+              <div className="ui-logo-user-row">
+                <div className="ui-logo">JAM<span>z</span></div>
+                <div className="ui-user">
+                  <div className="ui-user-info"><Users size={14} /> Juned CD <span>Admin</span></div>
+                  <LogOut size={16} className="ui-logout" />
+                </div>
+              </div>
               <div className="ui-nav">
                 <div className="ui-nav-item active"><LayoutDashboard size={16} /> Dashboard</div>
                 <div className="ui-nav-item"><Users size={16} /> Actors</div>
@@ -66,10 +85,6 @@ function Header({ onCtaClick }) {
                 <div className="ui-nav-item"><FileText size={16} /> Scripts</div>
                 <div className="ui-nav-item"><Trophy size={16} /> Leaderboard</div>
                 <div className="ui-nav-item"><UserCircle size={16} /> Talent Profiles</div>
-              </div>
-              <div className="ui-user">
-                <div className="ui-user-info"><Users size={14} /> Juned CD <span>Admin</span></div>
-                <LogOut size={16} className="ui-logout" />
               </div>
             </div>
 
@@ -133,17 +148,21 @@ function Header({ onCtaClick }) {
                 <div className="top-actors-list">
                   <div className="actor-item">
                     <div className="rank">1</div>
-                    <div className="avatar">JD</div>
+                    <div className="avatar">
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" alt="Arjun Sharma" />
+                    </div>
                     <div className="info">
-                      <div className="name">John Doe</div>
+                      <div className="name">Arjun Sharma</div>
                       <div className="score-bar"><div className="fill" style={{ width: '85%' }}></div><span>85 pts</span></div>
                     </div>
                   </div>
                   <div className="actor-item">
                     <div className="rank">2</div>
-                    <div className="avatar">JS</div>
+                    <div className="avatar">
+                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop" alt="Priya Patel" />
+                    </div>
                     <div className="info">
-                      <div className="name">Jane Smith</div>
+                      <div className="name">Priya Patel</div>
                       <div className="score-bar"><div className="fill" style={{ width: '72%' }}></div><span>72 pts</span></div>
                     </div>
                   </div>
