@@ -7,28 +7,28 @@ function HowItWorks({ onCtaClick }) {
       icon: <FileText size={24} />,
       color: "#2563eb", // Blue
       title: "Upload Script",
-      desc: "AI extracts character requirements instantly."
+      desc: "AI reads the script and finds characters."
     },
     {
       number: "2",
       icon: <Search size={24} />,
       color: "#10b981", // Green
       title: "Get Matches",
-      desc: "Ranked talent from your pool with scores."
+      desc: "See the best actors from your list."
     },
     {
       number: "3",
       icon: <UserCheck size={24} />,
       color: "#f97316", // Orange
-      title: "Make Decisions",
-      desc: "Review top candidates and cast faster."
+      title: "Choose Talent",
+      desc: "Pick the best actors and finish faster."
     }
   ];
 
   return (
     <section className="how-it-works">
       <div className="container">
-        <h2>Casting simplified</h2>
+        <h2>How it works</h2>
         
         <div className="steps-grid">
           {steps.map((s, i) => (

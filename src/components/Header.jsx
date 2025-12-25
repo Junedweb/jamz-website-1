@@ -40,18 +40,18 @@ function Header({ onCtaClick }) {
             <span style={{ color: 'var(--accent)' }}>Casting Directors & Acting Schools</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
-            The AI-powered growth engine for casting professionals. Scale your business, 
-            cut discovery time by 70%, and double your project capacity.
+            The AI tool to help your casting business grow. Find the right actors 
+            70% faster and manage more projects easily.
           </p>
           
           <div className="hero-benefits-row">
             <div className="hero-benefit">
               <Zap size={20} color="var(--accent)" />
-              <span>70% Faster Discovery</span>
+              <span>70% Faster Search</span>
             </div>
             <div className="hero-benefit">
               <Trophy size={20} color="var(--accent)" />
-              <span>2x Project Capacity</span>
+              <span>Double Your Work</span>
             </div>
             <div className="hero-benefit">
               <Clock size={20} color="var(--accent)" />
@@ -95,7 +95,7 @@ function Header({ onCtaClick }) {
                   <span role="img" aria-label="clapper">🎬</span>
                   <h2>Good Morning, Juned CD</h2>
                 </div>
-                <p>Manage your casting flow effortlessly with JAMz</p>
+                <p>Manage your casting work easily with JAMz</p>
                 <div className="banner-badges">
                   <span className="badge-admin">Admin • cd-juned</span>
                 </div>
@@ -131,11 +131,11 @@ function Header({ onCtaClick }) {
                   <div className="card-title"><Zap size={18} /> AI Script Breakdowns</div>
                   <button className="ui-btn-gold">Upload Script</button>
                 </div>
-                <p className="card-subtitle">8 total AI extractions</p>
+                <p className="card-subtitle">8 scripts read by AI</p>
                 <div className="card-empty-state">
                   <Zap size={48} strokeWidth={1} />
-                  <h4>No AI breakdowns yet</h4>
-                  <p>Upload a script to get started</p>
+                  <h4>No scripts yet</h4>
+                  <p>Upload a script to start</p>
                 </div>
               </div>
 
@@ -184,10 +184,10 @@ function Header({ onCtaClick }) {
               </div>
               
               <div className="team-empty-state">
-                <UserPlus size={40} strokeWidth={1} />
-                <h4>No team members yet</h4>
-                <p>Invite team members to collaborate</p>
-              </div>
+                  <UserPlus size={40} strokeWidth={1} />
+                  <h4>No members yet</h4>
+                  <p>Invite your team to work together</p>
+                </div>
 
               <div className="quick-actions-grid">
                 <div className="action-card">

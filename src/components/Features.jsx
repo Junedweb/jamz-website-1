@@ -13,50 +13,50 @@ function Features({ onCtaClick }) {
   const features = [
     { 
       icon: <Share2 size={24} />, 
-      title: "One-Click Campaigns", 
-      desc: "Post talent calls across all platforms instantly.",
+      title: "Easy Posting", 
+      desc: "Post to all social media with one click.",
       color: "#8b5cf6" // Purple
     },
     { 
       icon: <Filter size={24} />, 
-      title: "Smart Filters", 
-      desc: "Search by age, city, language, and looks.",
+      title: "Quick Search", 
+      desc: "Search by age, city, and language.",
       color: "#f97316" // Orange
     },
     { 
       icon: <UserSearch size={24} />, 
-      title: "Face-Match AI", 
-      desc: "Find lookalikes of any actor in seconds.",
+      title: "Find Lookalikes", 
+      desc: "Find actors who look like anyone in seconds.",
       color: "#06b6d4" // Cyan
     },
     { 
       icon: <Mail size={24} />, 
-      title: "Centralized Inbox", 
-      desc: "Sync all platform profiles in one place.",
+      title: "One Inbox", 
+      desc: "See all your messages in one place.",
       color: "#10b981" // Green
     },
     { 
       icon: <LayoutDashboard size={24} />, 
-      title: "Project Dashboard", 
-      desc: "Track casting progress in real-time.",
+      title: "Project Board", 
+      desc: "See your project progress anytime.",
       color: "#3b82f6" // Blue
     },
     { 
       icon: <RefreshCw size={24} />, 
-      title: "Self-Updating Profiles", 
-      desc: "Actors manage their own info and photos.",
+      title: "Auto-Update", 
+      desc: "Actors update their own info and photos.",
       color: "#6366f1" // Indigo
     },
     { 
       icon: <FileText size={24} />, 
-      title: "Script Analysis", 
-      desc: "AI identifies characters and matches talent.",
+      title: "Script Help", 
+      desc: "AI finds characters in your scripts.",
       color: "#ec4899" // Pink
     },
     { 
       icon: <Users size={24} />, 
-      title: "Team Access Control", 
-      desc: "Secure role-based permissions.",
+      title: "Team Access", 
+      desc: "Give your team safe access to work.",
       color: "#64748b" // Slate
     }
   ];
@@ -64,7 +64,7 @@ function Features({ onCtaClick }) {
   return (
     <section className="features-section">
       <div className="container">
-        <h2>Powerful features</h2>
+        <h2>What you get</h2>
         
         <div className="features-grid">
           {features.map((f, i) => (

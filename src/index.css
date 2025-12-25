@@ -434,8 +434,8 @@ p {
   /* Adaptive Aspect Ratio */
   width: 100%;
   aspect-ratio: 16 / 10; /* Standard laptop/app ratio */
-  max-height: 55vh; /* Reduced from 65vh to fit better */
-  min-height: 380px; /* Ensures enough content is visible on small screens */
+  max-height: 65vh; /* Increased from 55vh to show more content */
+  min-height: 480px; /* Increased from 380px */
   
   overflow-y: auto;
   scrollbar-width: thin;
@@ -445,7 +445,7 @@ p {
 @media (max-width: 768px) {
   .dashboard-real-ui {
     aspect-ratio: 4 / 5; /* Taller ratio for mobile devices */
-    max-height: 60vh;
+    max-height: 75vh;
   }
 }
 

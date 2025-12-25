@@ -12,39 +12,39 @@ function WhyJamz() {
     {
       icon: <Clock size={24} />,
       title: "Save 40+ Hours",
-      desc: "Automate script breakdowns and talent sorting."
+      desc: "Let AI sort actors and read scripts for you."
     },
     {
       icon: <Brain size={24} />,
-      title: "Eliminate Fatigue",
-      desc: "Instantly recall the 'perfect face' from your memory."
+      title: "No More Stress",
+      desc: "Easily find the right face for any role."
     },
     {
       icon: <Lock size={24} />,
-      title: "Private & Secure",
-      desc: "Your data is kept in a secure, private vault."
+      title: "Safe & Private",
+      desc: "Your data is kept safe in a private lock."
     },
     {
       icon: <MessageSquareOff size={24} />,
-      title: "Reduce Clutter",
-      desc: "Centralize all communication in one dashboard."
+      title: "Clean Dashboard",
+      desc: "Keep all your chats in one easy place."
     },
     {
       icon: <Award size={24} />,
-      title: "Professional Workflow",
-      desc: "Impress clients with polished casting presentations."
+      title: "Professional Look",
+      desc: "Show your work to clients in a nice way."
     },
     {
       icon: <Globe size={24} />,
-      title: "Access Anywhere",
-      desc: "Access your database from the studio or the set."
+      title: "Work Anywhere",
+      desc: "Use JAMz from your office or on the film set."
     }
   ];
 
   return (
     <section className="why-jamz-section">
       <div className="container">
-        <h2>Built for your business</h2>
+        <h2>Why people use JAMz</h2>
         <div className="why-cards-container">
           {reasons.map((r, i) => (
             <div key={i} className="why-card">
