@@ -7,6 +7,7 @@ const FortuneTeller = () => {
   const [isLocating, setIsLocating] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
+    countryCode: '+91',
     mobile: '',
     gender: '',
     dob: '',
@@ -16,6 +17,46 @@ const FortuneTeller = () => {
   });
   const [fortune, setFortune] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [mobileError, setMobileError] = useState('');
+  const [dobError, setDobError] = useState('');
+
+  const countryCodes = [
+    { code: '+91', name: 'India' },
+    { code: '+1', name: 'USA/Canada' },
+    { code: '+44', name: 'UK' },
+    { code: '+61', name: 'Australia' },
+    { code: '+971', name: 'UAE' },
+    { code: '+65', name: 'Singapore' },
+    { code: '+49', name: 'Germany' },
+    { code: '+33', name: 'France' },
+    { code: '+81', name: 'Japan' },
+    { code: '+86', name: 'China' }
+  ];
+
+  // Global mobile validation regex (E.164 format or standard international)
+  const validateMobile = (number) => {
+    // Allows: 1234567890, 123-456-7890, etc.
+    // Minimum 7 digits, maximum 15 digits (global standard)
+    const phoneRegex = /^[\d-. ]+\d$/;
+    const digitsOnly = number.replace(/\D/g, '');
+    
+    if (!number) return '';
+    if (!phoneRegex.test(number)) return 'Invalid phone format';
+    if (digitsOnly.length < 7 || digitsOnly.length > 15) return 'Number must be 7-15 digits';
+    return '';
+  };
+
+  const validateDOB = (dateString) => {
+    if (!dateString) return '';
+    const selectedDate = new Date(dateString);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+
+    if (selectedDate > today) {
+      return 'Date of Birth cannot be in the future';
+    }
+    return '';
+  };
 
   const submitLead = (data) => {
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyhPsSlnFDQgncytyt4BJEFlGlEeAqcvma-tr7184zVedHihK8MaJq_zfuU6qWuvPYQ/exec';
@@ -23,7 +64,7 @@ const FortuneTeller = () => {
     // Prepare data for Google Sheets
     const payload = {
       fullName: data.name,
-      mobileNumber: data.mobile,
+      mobileNumber: `${data.countryCode}${data.mobile}`,
       gender: data.gender,
       dateOfBirth: data.dob,
       location: data.location,
@@ -109,7 +150,15 @@ const FortuneTeller = () => {
   };
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    if (name === 'mobile') {
+      setMobileError(validateMobile(value));
+    }
+    if (name === 'dob') {
+      setDobError(validateDOB(value));
+    }
   };
 
   const detectLocation = () => {
@@ -174,8 +223,31 @@ const FortuneTeller = () => {
                 </div>
                 <div className="input-group">
                   <label>Mobile Number</label>
-                  <input type="tel" name="mobile" placeholder="WhatsApp for Numerology" onChange={handleInputChange} value={formData.mobile} />
-                  <p className="field-hint">Promise, no spam! Helps with your Numerology.</p>
+                  <div className="mobile-input-wrapper">
+                    <select 
+                      name="countryCode" 
+                      className="country-select" 
+                      onChange={handleInputChange} 
+                      value={formData.countryCode}
+                    >
+                      {countryCodes.map(c => (
+                        <option key={c.code} value={c.code}>{c.code}</option>
+                      ))}
+                    </select>
+                    <input 
+                      type="tel" 
+                      name="mobile" 
+                      placeholder="9876543210" 
+                      onChange={handleInputChange} 
+                      value={formData.mobile} 
+                      className={mobileError ? 'input-error' : ''}
+                    />
+                  </div>
+                  {mobileError ? (
+                    <p className="error-text">{mobileError}</p>
+                  ) : (
+                    <p className="field-hint">Promise, no spam! Helps with your Numerology.</p>
+                  )}
                 </div>
                 <div className="input-group">
                   <label>Gender</label>
@@ -188,7 +260,15 @@ const FortuneTeller = () => {
                 </div>
                 <div className="input-group">
                   <label>Date of Birth</label>
-                  <input type="date" name="dob" onChange={handleInputChange} value={formData.dob} />
+                  <input 
+                    type="date" 
+                    name="dob" 
+                    max={new Date().toISOString().split('T')[0]}
+                    onChange={handleInputChange} 
+                    value={formData.dob} 
+                    className={dobError ? 'input-error' : ''}
+                  />
+                  {dobError && <p className="error-text">{dobError}</p>}
                 </div>
                 <div className="input-group full">
                   <label><MapPin size={14} /> Location</label>
@@ -200,7 +280,13 @@ const FortuneTeller = () => {
                   </div>
                 </div>
               </div>
-              <button className="btn-next" disabled={!formData.name || !formData.mobile} onClick={handleNext}>Consult the Stars</button>
+              <button 
+                className="btn-next" 
+                disabled={!formData.name || !formData.mobile || !!mobileError || !formData.dob || !!dobError} 
+                onClick={handleNext}
+              >
+                Consult the Stars
+              </button>
             </div>
           )}
 

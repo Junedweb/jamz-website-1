@@ -4,6 +4,7 @@ import { User, Phone, Calendar, Clock, CheckCircle, Loader2 } from 'lucide-react
 function LeadForm({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     fullName: '',
+    countryCode: '+91',
     mobileNumber: '',
     date: '',
     time: '',
@@ -11,12 +12,51 @@ function LeadForm({ isOpen, onClose }) {
   });
 
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [mobileError, setMobileError] = useState('');
+  const [dateError, setDateError] = useState('');
+
+  const countryCodes = [
+    { code: '+91', name: 'India' },
+    { code: '+1', name: 'USA/Canada' },
+    { code: '+44', name: 'UK' },
+    { code: '+61', name: 'Australia' },
+    { code: '+971', name: 'UAE' },
+    { code: '+65', name: 'Singapore' },
+    { code: '+49', name: 'Germany' },
+    { code: '+33', name: 'France' },
+    { code: '+81', name: 'Japan' },
+    { code: '+86', name: 'China' }
+  ];
+
+  const validateMobile = (number) => {
+    const phoneRegex = /^[\d-. ]+\d$/;
+    const digitsOnly = number.replace(/\D/g, '');
+    
+    if (!number) return '';
+    if (!phoneRegex.test(number)) return 'Invalid phone format';
+    if (digitsOnly.length < 7 || digitsOnly.length > 15) return 'Number must be 7-15 digits';
+    return '';
+  };
+
+  const validateDate = (dateString) => {
+    if (!dateString) return '';
+    const selectedDate = new Date(dateString);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      return 'Preferred date cannot be in the past';
+    }
+    return '';
+  };
 
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    if (mobileError || dateError) return;
+
     // Basic captcha check
     if (formData.captcha !== '9') {
       alert('Please solve the security question correctly.');
@@ -28,20 +68,25 @@ function LeadForm({ isOpen, onClose }) {
     // Prepare data for Google Sheets
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyhPsSlnFDQgncytyt4BJEFlGlEeAqcvma-tr7184zVedHihK8MaJq_zfuU6qWuvPYQ/exec';
 
+    const payload = {
+      fullName: formData.fullName,
+      mobileNumber: `${formData.countryCode}${formData.mobileNumber}`,
+      date: formData.date,
+      time: formData.time,
+      captcha: formData.captcha
+    };
+
     try {
-      // Create a hidden form and submit it to a hidden iframe
-      // This is the most reliable way to bypass CORS for Google Apps Script
       const form = document.createElement('form');
       form.method = 'POST';
       form.action = scriptURL;
       form.target = 'hidden_iframe';
 
-      // Add fields
-      Object.keys(formData).forEach(key => {
+      Object.keys(payload).forEach(key => {
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = key;
-        input.value = formData[key];
+        input.value = payload[key];
         form.appendChild(input);
       });
 
@@ -76,7 +121,15 @@ function LeadForm({ isOpen, onClose }) {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    if (name === 'mobileNumber') {
+      setMobileError(validateMobile(value));
+    }
+    if (name === 'date') {
+      setDateError(validateDate(value));
+    }
   };
 
   return (
@@ -114,21 +167,34 @@ function LeadForm({ isOpen, onClose }) {
                 <label className="form-label">
                   <Phone size={18} /> Mobile Number <span>*</span>
                 </label>
-                <div className="phone-input-group">
-                  <select className="country-select">
-                    <option value="+91">IN +91</option>
+                <div className="mobile-input-wrapper">
+                  <select 
+                    name="countryCode" 
+                    className="country-select form-input" 
+                    onChange={handleChange} 
+                    value={formData.countryCode}
+                    style={{ width: '75px', flex: '0 0 75px', padding: '0.75rem 0.5rem' }}
+                  >
+                    {countryCodes.map(c => (
+                      <option key={c.code} value={c.code}>{c.code}</option>
+                    ))}
                   </select>
                   <input 
                     type="tel" 
                     name="mobileNumber"
-                    className="form-input" 
-                    placeholder="10-digit mobile number" 
+                    className={`form-input ${mobileError ? 'input-error' : ''}`} 
+                    placeholder="9876543210" 
                     value={formData.mobileNumber}
                     onChange={handleChange}
                     required 
+                    style={{ flex: 1 }}
                   />
                 </div>
-                <p className="form-hint">Enter 10-digit Indian mobile number (starting with 6, 7, 8, or 9)</p>
+                {mobileError ? (
+                  <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.4rem' }}>{mobileError}</p>
+                ) : (
+                  <p className="form-hint">Enter your mobile number for confirmation</p>
+                )}
               </div>
 
               <div className="form-group">
@@ -138,11 +204,13 @@ function LeadForm({ isOpen, onClose }) {
                 <input 
                   type="date" 
                   name="date"
-                  className="form-input" 
+                  min={new Date().toISOString().split('T')[0]}
+                  className={`form-input ${dateError ? 'input-error' : ''}`} 
                   value={formData.date}
                   onChange={handleChange}
                   required 
                 />
+                {dateError && <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.4rem' }}>{dateError}</p>}
               </div>
 
               <div className="form-group">

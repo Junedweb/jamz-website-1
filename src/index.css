@@ -1428,11 +1428,17 @@ p {
   background: #1e293b;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 24px;
-  width: 100%;
+  width: 95%;
   max-width: 500px;
+  max-height: 90vh;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  scrollbar-width: none; /* Firefox */
+}
+
+.fortune-card::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .fortune-card::before {
@@ -1695,6 +1701,36 @@ p {
   to { transform: rotate(360deg); }
 }
 
+.error-text {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 0.4rem;
+  font-weight: 500;
+}
+
+.input-error {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.05) !important;
+}
+
+.mobile-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.country-select {
+  width: 75px !important;
+  flex: 0 0 75px;
+  padding: 0.85rem 0.5rem !important;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.mobile-input-wrapper input {
+  flex: 1;
+}
+
 @media (max-width: 640px) {
   .fortune-trigger-fab {
     bottom: 1.5rem;
@@ -1703,9 +1739,34 @@ p {
   }
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   .input-group.full {
     grid-column: span 1;
+  }
+  .fortune-header {
+    padding: 2rem 1.5rem 1rem;
+  }
+  .fortune-body {
+    padding: 0 1.5rem 2rem;
+  }
+  .fortune-header h3 {
+    font-size: 1.5rem;
+  }
+  .intro-text {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .btn-next {
+    margin-top: 1.5rem;
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+  .input-group input, 
+  .input-group select, 
+  .input-group textarea {
+    padding: 0.75rem 0.9rem;
+    font-size: 16px; /* Prevents iOS zoom on focus */
   }
 }
 .ui-actors-grid-new {
