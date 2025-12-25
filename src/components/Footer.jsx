@@ -6,8 +6,8 @@ function Footer() {
       <div className="container">
         <div className="footer-top-row">
           <div className="footer-brand-section">
-            <div className="footer-logo-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-              <img src="/logo.svg" alt="JAMz Logo" style={{ width: '40px', height: '40px' }} />
+            <div className="footer-logo-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+              <img src="/logo.svg" alt="JAMz Logo" style={{ width: '32px', height: '32px' }} />
               <h3 className="footer-logo" style={{ marginBottom: 0 }}>JAMz</h3>
             </div>
             <p className="footer-tagline">

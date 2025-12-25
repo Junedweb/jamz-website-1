@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   Users, 
@@ -24,19 +25,73 @@ import {
   Globe,
   UserPlus,
   ChevronRight,
-  Monitor
+  Monitor,
+  Snowflake
 } from 'lucide-react';
 
 function Header({ onCtaClick }) {
+  const [dateTime, setDateTime] = useState(new Date());
+  const [greeting, setGreeting] = useState('');
+  const [isChristmas, setIsChristmas] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date();
+      setDateTime(now);
+      
+      const hour = now.getHours();
+      if (hour < 12) setGreeting('Good Morning');
+      else if (hour < 17) setGreeting('Good Afternoon');
+      else if (hour < 21) setGreeting('Good Evening');
+      else setGreeting('Good Night');
+
+      // Christmas check (Dec 25)
+      if (now.getMonth() === 11 && now.getDate() === 25) {
+        setIsChristmas(true);
+      } else {
+        setIsChristmas(false);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatDate = (date) => {
+    return date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+  };
+
+  const formatTime = (date) => {
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+  };
+
   return (
-    <section className="hero">
-      <div className="bg-glow" style={{ top: '-10%', right: '-5%' }}></div>
+    <section className={`hero ${isChristmas ? 'festive-christmas' : ''}`}>
+      {isChristmas && (
+        <div className="snow-container">
+          {[...Array(20)].map((_, i) => (
+            <div key={i} className="snowflake" style={{ 
+              left: `${Math.random() * 100}%`, 
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 10}s`
+            }}>
+              <Snowflake size={12 + Math.random() * 10} color="white" opacity={0.6} />
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="bg-glow" style={{ 
+        top: '-10%', 
+        right: '-5%',
+        background: dateTime.getHours() >= 18 || dateTime.getHours() < 6 
+          ? 'radial-gradient(circle, rgba(30, 58, 138, 0.2) 0%, transparent 70%)' // Night glow
+          : 'radial-gradient(circle, var(--primary-light) 0%, transparent 70%)'  // Day glow
+      }}></div>
       <div className="bg-glow" style={{ bottom: '10%', left: '-5%', background: 'radial-gradient(circle, var(--accent-gold) 0%, transparent 70%)', opacity: 0.05 }}></div>
       
       <div className="container fade-in">
         <div className="hero-content-main">
           <h1 style={{ marginBottom: '0.75rem' }}>
-            JAMz: Introducing AI in Casting for <br />
+            <span className="shiny-gold-brown">JAMz: Introducing AI in Casting for</span> <br />
             <span style={{ color: 'var(--accent)' }}>Casting Directors & Acting Schools</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
@@ -71,20 +126,28 @@ function Header({ onCtaClick }) {
           <div className="dashboard-real-ui">
             {/* Top Bar */}
             <div className="ui-top-bar">
-              <div className="ui-logo-user-row">
-                <div className="ui-logo">JAM<span>z</span></div>
-                <div className="ui-user">
-                  <div className="ui-user-info"><Users size={14} /> Juned CD <span>Admin</span></div>
-                  <LogOut size={16} className="ui-logout" />
-                </div>
-              </div>
+              <div className="ui-logo">JAM<span>z</span></div>
+              
               <div className="ui-nav">
-                <div className="ui-nav-item active"><LayoutDashboard size={16} /> Dashboard</div>
-                <div className="ui-nav-item"><Users size={16} /> Actors</div>
-                <div className="ui-nav-item"><Briefcase size={16} /> Roles</div>
-                <div className="ui-nav-item"><FileText size={16} /> Scripts</div>
-                <div className="ui-nav-item"><Trophy size={16} /> Leaderboard</div>
-                <div className="ui-nav-item"><UserCircle size={16} /> Talent Profiles</div>
+                <div className="ui-nav-item active"><LayoutDashboard size={16} /> <span>Dashboard</span></div>
+                <div className="ui-nav-item"><Users size={16} /> <span>Actors</span></div>
+                <div className="ui-nav-item"><Briefcase size={16} /> <span>Roles</span></div>
+                <div className="ui-nav-item"><FileText size={16} /> <span>Scripts</span></div>
+                <div className="ui-nav-item"><Trophy size={16} /> <span>Leaderboard</span></div>
+                <div className="ui-nav-item"><UserCircle size={16} /> <span>Talent Profiles</span></div>
+              </div>
+
+              <div className="ui-user">
+                <div className="ui-user-info">
+                  <div className="ui-avatar">J</div>
+                  <div className="ui-user-details">
+                    <span className="ui-user-name">Juned CD</span>
+                    <span className="ui-user-role">Admin</span>
+                  </div>
+                </div>
+                <button className="ui-logout-btn" title="Logout">
+                  <LogOut size={16} />
+                </button>
               </div>
             </div>
 
@@ -92,16 +155,18 @@ function Header({ onCtaClick }) {
             <div className="ui-dashboard-banner">
               <div className="banner-content">
                 <div className="banner-title">
-                  <span role="img" aria-label="clapper">🎬</span>
-                  <h2>Good Morning, Juned CD</h2>
+                  <span role="img" aria-label="clapper">
+                    {isChristmas ? '🎄' : '🎬'}
+                  </span>
+                  <h2>{greeting}, Juned CD {isChristmas && '🎅'}</h2>
                 </div>
-                <p>Manage your casting work easily with JAMz</p>
+                <p>{isChristmas ? 'Merry Christmas! Enjoy festive casting with JAMz' : 'Manage your casting work easily with JAMz'}</p>
                 <div className="banner-badges">
                   <span className="badge-admin">Admin • cd-juned</span>
                 </div>
               </div>
               <div className="banner-date">
-                12/25/2025<br />01:41 AM
+                {formatDate(dateTime)}<br />{formatTime(dateTime)}
               </div>
             </div>
 
@@ -133,7 +198,7 @@ function Header({ onCtaClick }) {
                 </div>
                 <p className="card-subtitle">8 scripts read by AI</p>
                 <div className="card-empty-state">
-                  <Zap size={48} strokeWidth={1} />
+                  <img src="https://images.unsplash.com/photo-15120706327b2-ac7c5c64159d?q=80&w=300&h=200&fit=crop&fm=jpg" alt="Script Breakdown" style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem', opacity: 0.6 }} />
                   <h4>No scripts yet</h4>
                   <p>Upload a script to start</p>
                 </div>
@@ -184,7 +249,7 @@ function Header({ onCtaClick }) {
               </div>
               
               <div className="team-empty-state">
-                  <UserPlus size={40} strokeWidth={1} />
+                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=300&h=150&fit=crop&fm=jpg" alt="Team" style={{ width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem', opacity: 0.6 }} />
                   <h4>No members yet</h4>
                   <p>Invite your team to work together</p>
                 </div>
@@ -304,7 +369,7 @@ function Header({ onCtaClick }) {
               <div className="ui-actor-card-new">
                 <div className="actor-image-container">
                   <div className="actor-image-placeholder">
-                    <Users size={48} strokeWidth={1} />
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=600&fit=crop&fm=jpg" alt="Arjun Sharma" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
                     <span className="badge-available">Available</span>
                     <div className="view-icon"><Eye size={16} /></div>
                   </div>
@@ -329,7 +394,7 @@ function Header({ onCtaClick }) {
               <div className="ui-actor-card-new">
                 <div className="actor-image-container">
                   <div className="actor-image-placeholder">
-                    <Users size={48} strokeWidth={1} />
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&h=600&fit=crop&fm=jpg" alt="Priya Patel" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
                     <span className="badge-busy">Busy</span>
                     <div className="view-icon-hidden"><Eye size={16} opacity={0.5} /></div>
                   </div>
