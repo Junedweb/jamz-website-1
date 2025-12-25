@@ -248,11 +248,43 @@ function Header({ onCtaClick }) {
                 <button className="ui-btn-maroon">Invite Member</button>
               </div>
               
-              <div className="team-empty-state">
-                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=300&h=150&fit=crop&fm=jpg" alt="Team" style={{ width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem', opacity: 0.6 }} />
-                  <h4>No members yet</h4>
-                  <p>Invite your team to work together</p>
+              <div className="team-members-list">
+                <div className="team-member-card">
+                  <div className="member-avatar">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&h=150&fit=crop" alt="Sarah J." />
+                    <div className="status-indicator online"></div>
+                  </div>
+                  <div className="member-info">
+                    <h4>Sarah Jenkins</h4>
+                    <p>Senior Casting Director</p>
+                  </div>
+                  <button className="btn-member-action">Manage</button>
                 </div>
+
+                <div className="team-member-card">
+                  <div className="member-avatar">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&fit=crop" alt="Rahul S." />
+                    <div className="status-indicator online"></div>
+                  </div>
+                  <div className="member-info">
+                    <h4>Rahul Sharma</h4>
+                    <p>Associate Director</p>
+                  </div>
+                  <button className="btn-member-action">Manage</button>
+                </div>
+
+                <div className="team-member-card">
+                  <div className="member-avatar">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&h=150&fit=crop" alt="Emma W." />
+                    <div className="status-indicator offline"></div>
+                  </div>
+                  <div className="member-info">
+                    <h4>Emma Watson</h4>
+                    <p>Junior CD</p>
+                  </div>
+                  <button className="btn-member-action">Manage</button>
+                </div>
+              </div>
 
               <div className="quick-actions-grid">
                 <div className="action-card">
@@ -296,9 +328,9 @@ function Header({ onCtaClick }) {
                 
                 <div className="role-metadata">
                   <div className="meta-item"><Users size={14} /> 45 applicants</div>
-                  <div className="meta-item"><Calendar size={14} /> Due: 2024-01-15</div>
+                  <div className="meta-item"><Calendar size={14} /> Due: 2026-01-15</div>
                   <div className="meta-item"><MapPin size={14} /> Los Angeles, CA</div>
-                  <div className="meta-item"><Clock size={14} /> Posted: 2023-12-01</div>
+                  <div className="meta-item"><Clock size={14} /> Posted: 2025-12-01</div>
                 </div>
 
                 <div className="role-tags">
@@ -338,9 +370,9 @@ function Header({ onCtaClick }) {
                 
                 <div className="role-metadata">
                   <div className="meta-item"><Users size={14} /> 67 applicants</div>
-                  <div className="meta-item"><Calendar size={14} /> Due: 2024-01-20</div>
+                  <div className="meta-item"><Calendar size={14} /> Due: 2026-01-20</div>
                   <div className="meta-item"><MapPin size={14} /> New York, NY</div>
-                  <div className="meta-item"><Clock size={14} /> Posted: 2023-12-05</div>
+                  <div className="meta-item"><Clock size={14} /> Posted: 2025-12-05</div>
                 </div>
 
                 <div className="role-tags">

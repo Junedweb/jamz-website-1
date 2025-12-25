@@ -8,6 +8,7 @@ import WhyJamz from './WhyJamz';
 import CTA from './CTA';
 import Footer from './Footer';
 import LeadForm from './LeadForm';
+import FortuneTeller from './FortuneTeller';
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,6 +32,7 @@ function Home() {
       <Footer onCtaClick={openModal} />
       
       <LeadForm isOpen={isModalOpen} onClose={closeModal} />
+      <FortuneTeller />
     </div>
   );
 }
