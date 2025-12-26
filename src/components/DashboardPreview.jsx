@@ -108,7 +108,7 @@ function DashboardPreview({ onCtaClick }) {
                 <span className="dot green"></span>
               </div>
               <div className="browser-address-bar">
-                app.jamz.ai/dashboard
+                www.jamzconnect.com/Mukesh
               </div>
             </div>
             
