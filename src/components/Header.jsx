@@ -19,6 +19,9 @@ function Header({ onCtaClick }) {
 
   return (
     <section id="hero" className={`hero ${isChristmas ? 'festive-christmas' : ''}`}>
+      <div className="launch-bar">
+        🚀 LAUNCHING SOON: Exclusively for <span>Casting Directors & Acting Schools</span>
+      </div>
       {isChristmas && (
         <div className="snow-container">
           {[...Array(20)].map((_, i) => (
@@ -41,6 +44,10 @@ function Header({ onCtaClick }) {
       
       <div className="container fade-in">
         <div className="hero-content-main">
+          <div className="launch-tag">
+            <div className="pulse-red"></div>
+            Private Beta Coming Soon
+          </div>
           <h1 style={{ marginBottom: '0.75rem' }}>
             <span className="text-gradient-gold">JAMz: Introducing AI in Casting for</span> <br />
             <span style={{ color: 'var(--accent)' }}>Casting Directors & Acting Schools</span>
