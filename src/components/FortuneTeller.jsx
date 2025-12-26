@@ -59,15 +59,15 @@ const FortuneTeller = () => {
   };
 
   const submitLead = (data) => {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyhPsSlnFDQgncytyt4BJEFlGlEeAqcvma-tr7184zVedHihK8MaJq_zfuU6qWuvPYQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyOlzGpYrQ83KLbwkr-gHat1wQN2WxpSc_7xETd-V9701e8jZoLRFjusnk_T9DFgCaS/exec';
     
     // Prepare data for Google Sheets
     const payload = {
       fullName: data.name,
-      mobileNumber: `${data.countryCode}${data.mobile}`,
+      mobileNumber: `${data.countryCode.replace('+', '')}${data.mobile}`,
       gender: data.gender,
       dateOfBirth: data.dob,
-      location: data.location,
+      geoLocation: data.location,
       goal: data.q1,
       manualHours: data.q2,
       source: '2026 Fortune Quiz',

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { User, Phone, Calendar, Clock, CheckCircle, Loader2 } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { User, Phone, Calendar, Clock, CheckCircle, Loader2, MapPin, Navigation, ShieldCheck } from 'lucide-react';
 
 function LeadForm({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -8,12 +8,48 @@ function LeadForm({ isOpen, onClose }) {
     mobileNumber: '',
     date: '',
     time: '',
+    location: '',
     captcha: ''
   });
 
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
   const [mobileError, setMobileError] = useState('');
   const [dateError, setDateError] = useState('');
+  const [timeError, setTimeError] = useState('');
+  const [isLocating, setIsLocating] = useState(false);
+  const [selectedCaptcha, setSelectedCaptcha] = useState(null);
+
+  const captchaOptions = useMemo(() => [
+    { id: 'camera', icon: '📷', label: 'Camera' },
+    { id: 'star', icon: '⭐', label: 'Star' },
+    { id: 'heart', icon: '❤️', label: 'Heart' },
+    { id: 'car', icon: '🚗', label: 'Car' }
+  ], []);
+
+  const targetCaptcha = useMemo(() => captchaOptions[1], [captchaOptions]); // Let's pick 'Star' as the target
+
+  const timeOptions = useMemo(() => {
+    const options = [];
+    for (let hour = 8; hour <= 21; hour++) {
+      const displayHour = hour > 12 ? hour - 12 : hour;
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      
+      // On the hour
+      options.push({
+        value: `${hour.toString().padStart(2, '0')}:00`,
+        label: `${displayHour}:00 ${ampm}`
+      });
+      
+      // Half past
+      options.push({
+        value: `${hour.toString().padStart(2, '0')}:30`,
+        label: `${displayHour}:30 ${ampm}`
+      });
+    }
+    // Add 10:00 PM specifically
+    options.push({ value: '22:00', label: '10:00 PM' });
+    return options;
+  }, []);
 
   const countryCodes = [
     { code: '+91', name: 'India' },
@@ -50,30 +86,41 @@ function LeadForm({ isOpen, onClose }) {
     return '';
   };
 
+  const validateTime = (timeString) => {
+    if (!timeString) return '';
+    const [hours, minutes] = timeString.split(':').map(Number);
+    // 8:00 AM to 10:00 PM (22:00)
+    if (hours < 8 || (hours >= 22 && minutes > 0)) {
+      return 'Please select a time between 8:00 AM and 10:00 PM';
+    }
+    return '';
+  };
+
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (mobileError || dateError) return;
+    if (mobileError || dateError || timeError) return;
 
-    // Basic captcha check
-    if (formData.captcha !== '9') {
-      alert('Please solve the security question correctly.');
+    // Image captcha check
+    if (!selectedCaptcha || selectedCaptcha.id !== targetCaptcha.id) {
+      alert(`Security check: Please select the ${targetCaptcha.label} icon.`);
       return;
     }
 
     setStatus('loading');
 
     // Prepare data for Google Sheets
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyhPsSlnFDQgncytyt4BJEFlGlEeAqcvma-tr7184zVedHihK8MaJq_zfuU6qWuvPYQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyOlzGpYrQ83KLbwkr-gHat1wQN2WxpSc_7xETd-V9701e8jZoLRFjusnk_T9DFgCaS/exec';
 
     const payload = {
       fullName: formData.fullName,
-      mobileNumber: `${formData.countryCode}${formData.mobileNumber}`,
+      mobileNumber: `${formData.countryCode.replace('+', '')}${formData.mobileNumber}`,
       date: formData.date,
       time: formData.time,
-      captcha: formData.captcha
+      geoLocation: formData.location,
+      captcha: selectedCaptcha?.label || 'none'
     };
 
     try {
@@ -110,7 +157,8 @@ function LeadForm({ isOpen, onClose }) {
         setTimeout(() => {
           onClose();
           setStatus('idle');
-          setFormData({ fullName: '', mobileNumber: '', date: '', time: '', captcha: '' });
+          setSelectedCaptcha(null);
+          setFormData({ fullName: '', mobileNumber: '', date: '', time: '', location: '', captcha: '' });
         }, 3000);
       }, 1000);
 
@@ -130,6 +178,34 @@ function LeadForm({ isOpen, onClose }) {
     if (name === 'date') {
       setDateError(validateDate(value));
     }
+    if (name === 'time') {
+      setTimeError(validateTime(value));
+    }
+  };
+
+  const handleGetLocation = () => {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
+      return;
+    }
+
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setFormData(prev => ({
+          ...prev,
+          location: `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`
+        }));
+        setIsLocating(false);
+      },
+      (error) => {
+        console.error('Location Error:', error);
+        alert('Unable to retrieve your location. Please enter it manually.');
+        setIsLocating(false);
+      },
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+    );
   };
 
   return (
@@ -217,29 +293,86 @@ function LeadForm({ isOpen, onClose }) {
                 <label className="form-label">
                   <Clock size={18} /> Preferred Time <span>*</span>
                 </label>
-                <input 
-                  type="time" 
+                <select 
                   name="time"
-                  className="form-input" 
+                  className={`form-input ${timeError ? 'input-error' : ''}`} 
                   value={formData.time}
                   onChange={handleChange}
                   required 
-                />
+                >
+                  <option value="">Select a time</option>
+                  {timeOptions.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                {timeError && <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.4rem' }}>{timeError}</p>}
+                <p className="form-hint">Working hours: 8:00 AM - 10:00 PM</p>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">
+                  <MapPin size={18} /> Location
+                </label>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <input 
+                    type="text" 
+                    name="location"
+                    className="form-input" 
+                    placeholder="Enter location or use current location" 
+                    value={formData.location}
+                    onChange={handleChange}
+                    style={{ flex: 1 }}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleGetLocation}
+                    className="btn-location"
+                    disabled={isLocating}
+                    title="Get Current Location"
+                  >
+                    {isLocating ? (
+                      <Loader2 size={18} className="animate-spin" />
+                    ) : (
+                      <Navigation size={18} />
+                    )}
+                  </button>
+                </div>
               </div>
 
               <div className="captcha-section">
-                <p className="captcha-question">Security Question: What is 10 - 1? <span>*</span></p>
-                <input 
-                  type="text" 
-                  name="captcha"
-                  className="form-input" 
-                  style={{ width: '150px' }} 
-                  placeholder="Enter your ans" 
-                  value={formData.captcha}
-                  onChange={handleChange}
-                  required 
-                />
-                <p className="form-hint">Please solve this simple math problem to verify you're human</p>
+                <p className="captcha-question">
+                  <ShieldCheck size={18} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
+                  Verification: Select the <strong>{targetCaptcha.label}</strong> <span>*</span>
+                </p>
+                <div className="captcha-options" style={{ display: 'flex', gap: '1rem', marginTop: '0.75rem' }}>
+                  {captchaOptions.map((option) => (
+                    <button
+                      key={option.id}
+                      type="button"
+                      className={`captcha-option-btn ${selectedCaptcha?.id === option.id ? 'active' : ''}`}
+                      onClick={() => setSelectedCaptcha(option)}
+                      style={{
+                        fontSize: '1.5rem',
+                        padding: '0.75rem',
+                        border: '2px solid',
+                        borderColor: selectedCaptcha?.id === option.id ? '#f97316' : '#e2e8f0',
+                        borderRadius: '12px',
+                        background: selectedCaptcha?.id === option.id ? '#fff7ed' : 'white',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        flex: 1,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      {option.icon}
+                    </button>
+                  ))}
+                </div>
+                <p className="form-hint">Click on the icon that matches the description above</p>
               </div>
 
               <button 

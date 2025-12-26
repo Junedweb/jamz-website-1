@@ -1,6 +1,6 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
 
-function Footer() {
+function Footer({ onInfoClick }) {
   return (
     <footer className="footer">
       <div className="container">
@@ -33,22 +33,12 @@ function Footer() {
 
         <div className="footer-links-row">
           <div className="footer-links-group">
-            <h4>Platform</h4>
-            <ul>
-              <li><a href="#">AI Analysis</a></li>
-              <li><a href="#">Talent Matching</a></li>
-              <li><a href="#">Centralized Inbox</a></li>
-              <li><a href="#">Project Dashboard</a></li>
-            </ul>
-          </div>
-          
-          <div className="footer-links-group">
             <h4>Company</h4>
             <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); onInfoClick('about'); }}>About Us</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); onInfoClick('careers'); }}>Careers</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); onInfoClick('privacy'); }}>Privacy Policy</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); onInfoClick('terms'); }}>Terms of Service</a></li>
             </ul>
           </div>
           
