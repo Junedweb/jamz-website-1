@@ -23,9 +23,9 @@ function UseCases() {
   ];
 
   return (
-    <section className="use-cases">
+    <section id="use-cases" className="use-cases reveal">
       <div className="container">
-        <h2 style={{ textAlign: 'center', marginBottom: '2.5rem' }}>Built for your scale</h2>
+        <h2 className="text-gradient-primary" style={{ textAlign: 'center', marginBottom: '2.5rem' }}>Built for your scale</h2>
         <div className="use-cases-grid">
           {cases.map((c, i) => (
             <div key={i} className={`case-card ${c.highlighted ? 'highlighted' : ''}`}>

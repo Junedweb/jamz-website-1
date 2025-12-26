@@ -42,9 +42,9 @@ function WhyJamz() {
   ];
 
   return (
-    <section className="why-jamz-section">
+    <section id="why-jamz" className="why-jamz-section reveal">
       <div className="container">
-        <h2>Why people use JAMz</h2>
+        <h2 className="text-gradient-primary">Why people use JAMz</h2>
         <div className="why-cards-container">
           {reasons.map((r, i) => (
             <div key={i} className="why-card">

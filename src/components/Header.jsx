@@ -18,7 +18,7 @@ function Header({ onCtaClick }) {
   }, []);
 
   return (
-    <section className={`hero ${isChristmas ? 'festive-christmas' : ''}`}>
+    <section id="hero" className={`hero ${isChristmas ? 'festive-christmas' : ''}`}>
       {isChristmas && (
         <div className="snow-container">
           {[...Array(20)].map((_, i) => (
@@ -42,7 +42,7 @@ function Header({ onCtaClick }) {
       <div className="container fade-in">
         <div className="hero-content-main">
           <h1 style={{ marginBottom: '0.75rem' }}>
-            <span className="shiny-gold-brown">JAMz: Introducing AI in Casting for</span> <br />
+            <span className="text-gradient-gold">JAMz: Introducing AI in Casting for</span> <br />
             <span style={{ color: 'var(--accent)' }}>Casting Directors & Acting Schools</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>

@@ -26,9 +26,9 @@ function HowItWorks({ onCtaClick }) {
   ];
 
   return (
-    <section className="how-it-works">
+    <section id="how-it-works" className="how-it-works reveal">
       <div className="container">
-        <h2>How it works</h2>
+        <h2 className="text-gradient-primary">How it works</h2>
         
         <div className="steps-grid">
           {steps.map((s, i) => (

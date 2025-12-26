@@ -113,7 +113,6 @@ const FortuneTeller = () => {
   const steps = [
     { title: "Welcome to 2026", icon: <Sparkles className="text-amber-500" /> },
     { title: "Personal Details", icon: <User className="text-blue-500" /> },
-    { title: "Your Stars", icon: <Star className="text-purple-500" /> },
     { title: "The Revelation", icon: <Wand2 className="text-emerald-500" /> }
   ];
 
@@ -132,8 +131,9 @@ const FortuneTeller = () => {
   };
 
   const handleNext = () => {
-    if (step === 2) {
+    if (step === 1) {
       setIsProcessing(true);
+      setStep(2); // Move to revelation step immediately
       
       // Submit details to the leads DB
       submitLead(formData);
@@ -142,8 +142,7 @@ const FortuneTeller = () => {
         const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
         setFortune(randomFortune);
         setIsProcessing(false);
-        setStep(3);
-      }, 2000);
+      }, 1500); // Slightly longer for better effect
     } else {
       setStep(step + 1);
     }
@@ -205,6 +204,7 @@ const FortuneTeller = () => {
   return (
     <div className="fortune-overlay">
       <div className="fortune-card">
+        <div className="fortune-card-top-glow"></div>
         <button className="close-btn" onClick={() => setIsOpen(false)}><X size={20} /></button>
         
         <div className="fortune-header">
@@ -246,7 +246,7 @@ const FortuneTeller = () => {
                   {mobileError ? (
                     <p className="error-text">{mobileError}</p>
                   ) : (
-                    <p className="field-hint">Promise, no spam! Helps with your Numerology.</p>
+                    <p className="field-hint">Your data is safe with our cosmic vault. No spam, just the numerical secrets to your 2026 success.</p>
                   )}
                 </div>
                 <div className="input-group">
@@ -285,32 +285,12 @@ const FortuneTeller = () => {
                 disabled={!formData.name || !formData.mobile || !!mobileError || !formData.dob || !!dobError} 
                 onClick={handleNext}
               >
-                Consult the Stars
+                Reveal My Fortune
               </button>
             </div>
           )}
 
           {step === 2 && (
-            <div className="fortune-form">
-              <p className="intro-text">Just two more spiritual questions...</p>
-              <div className="input-group full">
-                <label>What is your biggest creative goal for the New Year?</label>
-                <textarea name="q1" placeholder="e.g. Find the next big star, scale my agency..." onChange={handleInputChange} value={formData.q1}></textarea>
-              </div>
-              <div className="input-group full">
-                <label>How much time do you currently spend on manual casting tasks?</label>
-                <select name="q2" onChange={handleInputChange} value={formData.q2}>
-                  <option value="">Select</option>
-                  <option value="lots">Way too much (40+ hours)</option>
-                  <option value="some">A fair amount (20-40 hours)</option>
-                  <option value="little">I'm already efficient</option>
-                </select>
-              </div>
-              <button className="btn-next" disabled={!formData.q1 || !formData.q2} onClick={handleNext}>Reveal My Fortune</button>
-            </div>
-          )}
-
-          {step === 3 && (
             <div className="fortune-result">
               {isProcessing ? (
                 <div className="processing">

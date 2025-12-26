@@ -62,9 +62,9 @@ function Features({ onCtaClick }) {
   ];
 
   return (
-    <section className="features-section">
+    <section id="features" className="features-section reveal">
       <div className="container">
-        <h2>What you get</h2>
+        <h2 className="text-gradient-primary">What you get</h2>
         
         <div className="features-grid">
           {features.map((f, i) => (

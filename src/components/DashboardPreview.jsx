@@ -70,7 +70,7 @@ function DashboardPreview({ onCtaClick }) {
   };
 
   return (
-    <section className={`dashboard-preview-section ${isChristmas ? 'festive-christmas' : ''}`} style={{ padding: '80px 0', background: 'var(--bg-light)', position: 'relative', overflow: 'hidden' }}>
+    <section id="dashboard" className={`dashboard-preview-section reveal ${isChristmas ? 'festive-christmas' : ''}`} style={{ padding: '80px 0', background: 'var(--bg-light)', position: 'relative', overflow: 'hidden' }}>
       {showDemoMsg && (
         <div className="demo-notification">
           <div className="demo-notification-content">
@@ -86,7 +86,7 @@ function DashboardPreview({ onCtaClick }) {
 
       <div className="container">
         <div className="section-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Experience the <span className="shiny-gold-brown">Live Dashboard</span></h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Experience the <span className="text-gradient-gold">Live Dashboard</span></h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto' }}>
             Get a glimpse of how JAMz simplifies your casting workflow with our intuitive, AI-powered interface.
           </p>

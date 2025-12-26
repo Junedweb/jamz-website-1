@@ -45,16 +45,15 @@ function Footer({ onInfoClick }) {
           <div className="footer-links-group">
             <h4>Connect</h4>
             <ul>
-              <li><a href="#">LinkedIn</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Instagram</a></li>
-              <li><a href="#">YouTube</a></li>
+              <li><a href="https://www.linkedin.com/in/jamzconnect/" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://www.instagram.com/jamzconnect/" rel="noopener">Instagram</a></li>
+              <li><a href="https://www.youtube.com/channel/UCVflK9gD26xrMbiHL0LQOVg" rel="noopener">YouTube</a></li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom-row">
-          <p className="copyright">&copy; 2025 JAMz AI. Powered by <a href="http://www.jamzconnect.com" target="_blank" rel="noopener noreferrer">jamzconnect.com</a></p>
+          <p className="copyright">&copy; 2025 JAMz AI. Powered by <a href="https://jamzconnect.com/">jamzconnect.com</a></p>
           <div className="footer-meta">
             <span>Made with precision for Casting Professionals</span>
           </div>

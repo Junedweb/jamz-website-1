@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import HowItWorks from './HowItWorks';
 import ValueProp from './ValueProp';
@@ -11,10 +11,31 @@ import Footer from './Footer';
 import LeadForm from './LeadForm';
 import FortuneTeller from './FortuneTeller';
 import InfoModal from './InfoModal';
+import SideDecorations from './SideDecorations';
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [infoModal, setInfoModal] = useState({ isOpen: false, type: null });
+
+  useEffect(() => {
+    const reveal = () => {
+      const reveals = document.querySelectorAll('.reveal');
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', reveal);
+    // Initial check
+    reveal();
+    
+    return () => window.removeEventListener('scroll', reveal);
+  }, []);
 
   const openModal = (e) => {
     if (e) e.preventDefault();
@@ -33,6 +54,7 @@ function Home() {
 
   return (
     <div className="home-wrapper">
+      <SideDecorations />
       <Header onCtaClick={openModal} />
       <HowItWorks onCtaClick={openModal} />
       <ValueProp onCtaClick={openModal} />
