@@ -19,9 +19,6 @@ function Header({ onCtaClick }) {
 
   return (
     <section id="hero" className={`hero ${isChristmas ? 'festive-christmas' : ''}`}>
-      <div className="launch-bar">
-        🚀 LAUNCHING SOON: Exclusively for <span>Casting Directors & Acting Schools</span>
-      </div>
       {isChristmas && (
         <div className="snow-container">
           {[...Array(20)].map((_, i) => (
@@ -44,13 +41,13 @@ function Header({ onCtaClick }) {
       
       <div className="container fade-in">
         <div className="hero-content-main">
-          <div className="launch-tag">
-            <div className="pulse-red"></div>
-            Private Beta Coming Soon
+          <div className="hero-announcement">
+            <span className="announcement-badge">Launching Soon</span>
+            <span className="announcement-text">Exclusively for Casting Directors & Acting Schools</span>
           </div>
-          <h1 style={{ marginBottom: '0.75rem' }}>
-            <span className="text-gradient-gold">JAMz: Introducing AI in Casting for</span> <br />
-            <span style={{ color: 'var(--accent)' }}>Casting Directors & Acting Schools</span>
+          <h1 className="hero-title">
+            <span className="text-gradient-gold">JAMz: Introducing AI in Casting for</span>
+            <span className="hero-title-accent">Casting Directors & Acting Schools</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
             The AI tool to help your casting business grow. Find the right actors 

@@ -86,9 +86,9 @@ function DashboardPreview({ onCtaClick }) {
 
       <div className="container">
         <div className="section-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Experience the <span className="text-gradient-gold">Live Dashboard</span></h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>See the <span className="text-gradient-gold">App in Action</span></h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto' }}>
-            Get a glimpse of how JAMz simplifies your casting workflow with our intuitive, AI-powered interface.
+            Take a look at how JAMz simplifies your casting workflow with our intuitive, interactive app demonstration.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ function DashboardPreview({ onCtaClick }) {
           <div className="preview-header-meta">
             <div className="preview-badge">
               <span className="pulse-dot"></span>
-              LIVE DASHBOARD PREVIEW
+              INTERACTIVE APP DEMONSTRATION
             </div>
           </div>
           

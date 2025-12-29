@@ -6,9 +6,8 @@ const SideDecorations = () => {
 
   const sections = [
     { id: 'hero', label: 'Top' },
-    { id: 'how-it-works', label: 'Workflow' },
     { id: 'features', label: 'Features' },
-    { id: 'dashboard', label: 'AI Panel' },
+    { id: 'dashboard', label: 'App Demo' },
     { id: 'use-cases', label: 'Impact' },
     { id: 'why-jamz', label: 'About' }
   ];
@@ -73,7 +72,7 @@ const SideDecorations = () => {
           <div className="card-icon">✨</div>
           <div className="card-info">
             <h4>AI Efficiency</h4>
-            <p>98% Faster</p>
+            <p>70% Faster</p>
           </div>
         </div>
         
@@ -90,14 +89,6 @@ const SideDecorations = () => {
           <div className="card-info">
             <h4>Processing</h4>
             <p>Real-time</p>
-          </div>
-        </div>
-
-        <div className="floating-card" style={{ top: '45%', left: '30px', animationDelay: '-4.5s' }}>
-          <div className="card-icon">🎬</div>
-          <div className="card-info">
-            <h4>Productions</h4>
-            <p>500+ Listed</p>
           </div>
         </div>
 

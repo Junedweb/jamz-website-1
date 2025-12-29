@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
-import HowItWorks from './HowItWorks';
+import Navbar from './Navbar';
 import ValueProp from './ValueProp';
 import Features from './Features';
 import DashboardPreview from './DashboardPreview';
@@ -54,9 +54,9 @@ function Home() {
 
   return (
     <div className="home-wrapper">
+      <Navbar onCtaClick={openModal} />
       <SideDecorations />
       <Header onCtaClick={openModal} />
-      <HowItWorks onCtaClick={openModal} />
       <ValueProp onCtaClick={openModal} />
       <Features onCtaClick={openModal} />
       <DashboardPreview onCtaClick={openModal} />
