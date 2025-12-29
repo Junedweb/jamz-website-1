@@ -25,10 +25,25 @@ function DashboardPreview({ onCtaClick }) {
   const [greeting, setGreeting] = useState('');
   const [isChristmas, setIsChristmas] = useState(false);
   const [showDemoMsg, setShowDemoMsg] = useState(false);
+  const [clickPos, setClickPos] = useState({ x: 0, y: 0 });
+  const [timerId, setTimerId] = useState(null);
 
   const handleDashboardClick = (e) => {
+    // Only trigger if not clicking the button itself
+    if (e.target.closest('.demo-cta-inline')) return;
+    
+    // Clear existing timer if any
+    if (timerId) clearTimeout(timerId);
+    
+    setClickPos({ x: e.clientX, y: e.clientY });
     setShowDemoMsg(true);
-    setTimeout(() => setShowDemoMsg(false), 4000);
+    
+    const newTimerId = setTimeout(() => {
+      setShowDemoMsg(false);
+      setTimerId(null);
+    }, 4000);
+    
+    setTimerId(newTimerId);
   };
 
   useEffect(() => {
@@ -72,7 +87,17 @@ function DashboardPreview({ onCtaClick }) {
   return (
     <section id="dashboard" className={`dashboard-preview-section reveal ${isChristmas ? 'festive-christmas' : ''}`} style={{ padding: '80px 0', background: 'var(--bg-light)', position: 'relative', overflow: 'hidden' }}>
       {showDemoMsg && (
-        <div className="demo-notification">
+        <div 
+          className="demo-notification" 
+          style={{ 
+            position: 'fixed',
+            top: `${clickPos.y}px`,
+            left: `${clickPos.x}px`,
+            transform: 'translate(-50%, -120%)', // Position above the click point
+            margin: 0,
+            pointerEvents: 'auto'
+          }}
+        >
           <div className="demo-notification-content">
             <Zap size={20} className="icon-gold" />
             <div>
