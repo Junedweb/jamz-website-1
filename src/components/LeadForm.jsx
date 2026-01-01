@@ -181,6 +181,15 @@ function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
       document.body.appendChild(form);
       form.submit();
 
+      // Track conversion in GA4
+      if (window.gtag) {
+        window.gtag('event', 'generate_lead', {
+          'event_category': 'engagement',
+          'event_label': type,
+          'value': 1.0
+        });
+      }
+
       // Clean up
       setTimeout(() => {
         document.body.removeChild(form);
