@@ -52,8 +52,8 @@ function Header({ onCtaClick }) {
             <span className="announcement-text">Crafting the Future of Casting Excellence</span>
           </div>
           <h1 className="hero-title">
-            <span className="text-gradient-gold">AI-Powered Casting for</span>
-            <span className="hero-title-accent">Visionary Directors & Schools</span>
+            <span className="text-gradient-gold">AI Talent Management App India</span>
+            <span className="hero-title-accent">For Visionary Casting Directors</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
             Eliminate the manual grind. Our AI-driven engine finds your perfect 

@@ -8,65 +8,97 @@ import {
   RefreshCw, 
   FileText, 
   Users,
-  Star
+  Star,
+  Image as ImageIcon,
+  Database,
+  Lock,
+  MessageSquare,
+  ExternalLink,
+  Clock,
+  BarChart3,
+  CheckCircle
 } from 'lucide-react';
 
 function Features({ onCtaClick }) {
   const features = [
     { 
-      icon: <Share2 size={24} />, 
-      title: "Easy Posting", 
-      desc: "Bulk contact 50+ talents & share audition PDF/links via WhatsApp with one click.",
+      icon: <Users size={24} />, 
+      title: "Talent Management", 
+      desc: "Easily manage your talent pool with 1-click job posts and social media sharing.",
       color: "#8b5cf6" // Purple
     },
     { 
       icon: <Filter size={24} />, 
-      title: "Deep Search", 
-      desc: "Filter by Trained/Untrained, Intro Videos, Age, and Language.",
+      title: "Smart Search", 
+      desc: "Filter by Age, Language, Height, and Training status to find the perfect match.",
       color: "#f97316" // Orange
     },
     { 
       icon: <Activity size={24} />, 
-      title: "Audition Funnel", 
-      desc: "Manage multiple projects & castings. Track 1-to-many confirmations in real-time.",
+      title: "Project Tracker", 
+      desc: "Keep all your projects, shortlists, and follow-ups in one clear dashboard.",
       color: "#06b6d4" // Cyan
     },
     { 
-      icon: <ShieldCheck size={24} />, 
-      title: "Smart Agreements", 
-      desc: "Digital T&C for Standard Shift Hours and Per Diem clauses.",
+      icon: <ImageIcon size={24} />, 
+      title: "Visual Studio", 
+      desc: "Create and share professional requirement posters and greetings via WhatsApp.",
+      color: "#ec4899" // Pink
+    },
+    { 
+      icon: <Lock size={24} />, 
+      title: "Secure Database", 
+      desc: "Your private data is linked only to your login. Safe, secure, and private.",
       color: "#10b981" // Green
+    },
+    { 
+      icon: <ShieldCheck size={24} />, 
+      title: "Digital Agreements", 
+      desc: "Simple digital T&Cs for shift hours and per diems to speed up contracting.",
+      color: "#3b82f6" // Blue
     },
     { 
       icon: <Star size={24} />, 
       title: "Reputation Score", 
-      desc: "Auto-scoring for Talent & Clients based on feedback. Flags triggered by low scores.",
+      desc: "Track reliability for talent and clients with automated feedback scores.",
       color: "#ef4444" // Red
     },
     { 
-      icon: <Calendar size={24} />, 
-      title: "Client Nurture", 
-      desc: "Automated festive greetings and co-branded updates for your clients.",
-      color: "#3b82f6" // Blue
-    },
-    { 
-      icon: <FileText size={24} />, 
-      title: "Script Help", 
-      desc: "AI finds characters in your scripts.",
-      color: "#ec4899" // Pink
-    },
-    { 
       icon: <Users size={24} />, 
-      title: "Team Access", 
-      desc: "Give your team safe access to work.",
+      title: "Team Sync", 
+      desc: "Collaborate with your entire team with shared access and project controls.",
       color: "#64748b" // Slate
+    },
+    { 
+      icon: <MessageSquare size={24} />, 
+      title: "WhatsApp Sharing", 
+      desc: "Share auditions and posters directly to talent via WhatsApp in one click.",
+      color: "#25d366" // WhatsApp Green
+    },
+    { 
+      icon: <ExternalLink size={24} />, 
+      title: "Client Portals", 
+      desc: "Share professional shortlists with clients for quick feedback and selection.",
+      color: "#6366f1" // Indigo
+    },
+    { 
+      icon: <Clock size={24} />, 
+      title: "Auto Reminders", 
+      desc: "Never miss a follow-up with automated reminders for auditions and feedback.",
+      color: "#f59e0b" // Amber
+    },
+    { 
+      icon: <BarChart3 size={24} />, 
+      title: "Efficiency Stats", 
+      desc: "Track your casting success and efficiency with simple real-time data.",
+      color: "#14b8a6" // Teal
     }
   ];
 
   return (
     <section id="features" className="features-section reveal">
       <div className="container">
-        <h2 className="text-gradient-primary">What you get</h2>
+        <h2 className="text-gradient-primary">What You Get with Our Talent Management Platform</h2>
         
         <div className="features-grid">
           {features.map((f, i) => (
@@ -78,6 +110,36 @@ function Features({ onCtaClick }) {
               <p>{f.desc}</p>
             </div>
           ))}
+        </div>
+
+        <div className="offerings-summary">
+          <h3 className="offerings-title">What's Included in Your Access:</h3>
+          <div className="offerings-grid-mini">
+            <div className="offering-item-mini">
+              <CheckCircle size={16} className="text-primary" />
+              <span>Full Casting Dashboard</span>
+            </div>
+            <div className="offering-item-mini">
+              <CheckCircle size={16} className="text-primary" />
+              <span>Talent Mobile App Access</span>
+            </div>
+            <div className="offering-item-mini">
+              <CheckCircle size={16} className="text-primary" />
+              <span>Private Database Sync</span>
+            </div>
+            <div className="offering-item-mini">
+              <CheckCircle size={16} className="text-primary" />
+              <span>WhatsApp Outreach Tools</span>
+            </div>
+            <div className="offering-item-mini">
+              <CheckCircle size={16} className="text-primary" />
+              <span>Project Performance Analytics</span>
+            </div>
+            <div className="offering-item-mini">
+              <CheckCircle size={16} className="text-primary" />
+              <span>Priority support for issues or new requirements.</span>
+            </div>
+          </div>
         </div>
 
         <a href="#" className="btn-primary features-cta" onClick={onCtaClick}>

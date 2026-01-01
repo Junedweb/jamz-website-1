@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /dashboard/private/
 
 # Sitemaps
 Sitemap: https://www.jamzconnect.com/sitemap.xml

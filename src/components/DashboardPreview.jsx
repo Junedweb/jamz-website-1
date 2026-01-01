@@ -157,7 +157,7 @@ function DashboardPreview({ onCtaClick }) {
 
       <div className="container">
         <div className="section-header">
-          <h2>See the <span className="text-gradient-gold">Vision in Action</span></h2>
+          <h2>AI-Powered <span className="text-gradient-gold">Casting Dashboard</span></h2>
           <p>
             Explore our pre-launch interactive demonstration to see how we're building the future of casting.
           </p>
@@ -443,7 +443,7 @@ function DashboardPreview({ onCtaClick }) {
                     <div className="actor-item">
                       <div className="rank">1</div>
                       <div className="avatar">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" alt="Arjun Sharma" />
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" alt="Arjun Sharma - Featured Actor on JAMz Talent Management App" loading="lazy" />
                       </div>
                       <div className="info">
                         <div className="name-row">
@@ -462,7 +462,7 @@ function DashboardPreview({ onCtaClick }) {
                     <div className="actor-item flagged">
                       <div className="rank">2</div>
                       <div className="avatar">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop" alt="Priya Patel" />
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop" alt="Priya Patel - Professional Talent in India" loading="lazy" />
                       </div>
                       <div className="info">
                         <div className="name-row">
@@ -545,7 +545,7 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="team-members-list">
                   <div className="team-member-card">
                     <div className="member-avatar">
-                      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&h=150&fit=crop" alt="Sarah J." />
+                      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&h=150&fit=crop" alt="Sarah J. - Casting Director on JAMz" loading="lazy" />
                       <div className="status-indicator online"></div>
                     </div>
                     <div className="member-info">
@@ -557,7 +557,7 @@ function DashboardPreview({ onCtaClick }) {
 
                   <div className="team-member-card">
                     <div className="member-avatar">
-                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&fit=crop" alt="Rahul S." />
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&fit=crop" alt="Rahul S. - Talent Scout India" loading="lazy" />
                       <div className="status-indicator online"></div>
                     </div>
                     <div className="member-info">
@@ -569,7 +569,7 @@ function DashboardPreview({ onCtaClick }) {
 
                   <div className="team-member-card">
                     <div className="member-avatar">
-                      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&h=150&fit=crop" alt="Emma W." />
+                      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&h=150&fit=crop" alt="Emma W. - Casting Assistant" loading="lazy" />
                       <div className="status-indicator offline"></div>
                     </div>
                     <div className="member-info">
@@ -692,7 +692,7 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="ui-actor-card-new">
                   <div className="actor-image-container">
                     <div className="actor-image-placeholder">
-                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=600&fit=crop&fm=jpg" alt="Arjun Sharma" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=600&fit=crop&fm=jpg" alt="Arjun Sharma - Portfolio Photo on JAMz Casting Platform" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
                       <span className="badge-available">Available</span>
                       <div className="view-icon"><Eye size={16} /></div>
                     </div>
