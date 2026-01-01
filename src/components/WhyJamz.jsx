@@ -2,37 +2,45 @@ import {
   Clock, 
   Brain, 
   Lock, 
-  MessageSquareOff, 
+  MessageSquare, 
   Award, 
-  Globe 
+  Globe,
+  Layout,
+  Zap,
+  ShieldCheck
 } from 'lucide-react';
 
 function WhyJamz() {
   const reasons = [
     {
       icon: <Clock size={24} />,
-      title: "Save 40+ Hours",
-      desc: "Let AI sort actors and read scripts for you."
+      title: "Double Your Work",
+      desc: "By saving time."
     },
     {
-      icon: <Brain size={24} />,
-      title: "No More Stress",
-      desc: "Easily find the right face for any role."
+      icon: <Layout size={24} />,
+      title: "All in One Place",
+      desc: "Keep all your data organized."
+    },
+    {
+      icon: <MessageSquare size={24} />,
+      title: "No More Chaos",
+      desc: "Stop using 100+ WhatsApp groups."
+    },
+    {
+      icon: <Zap size={24} />,
+      title: "AI Helper",
+      desc: "Let AI do the boring office work."
+    },
+    {
+      icon: <ShieldCheck size={24} />,
+      title: "You Are in Charge",
+      desc: "You make all the final choices."
     },
     {
       icon: <Lock size={24} />,
       title: "Safe & Private",
       desc: "Your data is kept safe in a private lock."
-    },
-    {
-      icon: <MessageSquareOff size={24} />,
-      title: "Clean Dashboard",
-      desc: "Keep all your chats in one easy place."
-    },
-    {
-      icon: <Award size={24} />,
-      title: "Professional Look",
-      desc: "Show your work to clients in a nice way."
     },
     {
       icon: <Globe size={24} />,

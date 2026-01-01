@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, Shield, FileText, Info, Briefcase } from 'lucide-react';
 
 function InfoModal({ isOpen, onClose, type }) {
+  // Body scroll lock
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const getContent = () => {
@@ -13,7 +39,7 @@ function InfoModal({ isOpen, onClose, type }) {
           body: (
             <div className="info-content">
               <p>JAMZ is an AI-powered casting and talent management platform built to simplify how the entertainment industry discovers, manages, and collaborates with talent.</p>
-              <p>We bring actors, acting schools, and casting directors onto a single, structured platform — replacing scattered files, WhatsApp forwards, and outdated spreadsheets with intelligent workflows and smart matching.</p>
+              <p>We bring talent, acting schools, and casting directors onto a single, structured platform — replacing scattered files, WhatsApp forwards, and outdated spreadsheets with intelligent workflows and smart matching.</p>
               <h3>Our focus is simple:</h3>
               <ul>
                 <li>Reduce friction in casting</li>

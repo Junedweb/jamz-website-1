@@ -85,7 +85,7 @@ function DashboardPreview({ onCtaClick }) {
   };
 
   return (
-    <section id="dashboard" className={`dashboard-preview-section reveal ${isChristmas ? 'festive-christmas' : ''}`} style={{ padding: '80px 0', background: 'var(--bg-light)', position: 'relative', overflow: 'hidden' }}>
+    <section id="dashboard" className={`dashboard-preview-section reveal ${isChristmas ? 'festive-christmas' : ''}`}>
       {showDemoMsg && (
         <div 
           className="demo-notification" 
@@ -101,19 +101,19 @@ function DashboardPreview({ onCtaClick }) {
           <div className="demo-notification-content">
             <Zap size={20} className="icon-gold" />
             <div>
-              <strong>Interactive Preview Mode</strong>
-              <p>You're exploring a sandbox version of JAMz. Book a demo to see the full power of AI-driven casting on your own live dashboard.</p>
+              <strong>Launching Soon Preview</strong>
+              <p>You're exploring a sandbox version of JAMz while we build the future. Join our waitlist to be among the first to experience the full platform.</p>
             </div>
-            <button className="demo-cta-inline" onClick={onCtaClick}>Get Full Access</button>
+            <button className="demo-cta-inline" onClick={onCtaClick}>Join Waitlist</button>
           </div>
         </div>
       )}
 
       <div className="container">
-        <div className="section-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>See the <span className="text-gradient-gold">App in Action</span></h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto' }}>
-            Take a look at how JAMz simplifies your casting workflow with our intuitive, interactive app demonstration.
+        <div className="section-header">
+          <h2>See the <span className="text-gradient-gold">Vision in Action</span></h2>
+          <p>
+            Explore our pre-launch interactive demonstration to see how we're building the future of casting.
           </p>
         </div>
 
@@ -144,7 +144,7 @@ function DashboardPreview({ onCtaClick }) {
                 
                 <div className="ui-nav">
                   <div className="ui-nav-item active"><LayoutDashboard size={16} /> <span>Dashboard</span></div>
-                  <div className="ui-nav-item"><Users size={16} /> <span>Actors</span></div>
+                  <div className="ui-nav-item"><Users size={16} /> <span>Talent</span></div>
                   <div className="ui-nav-item"><Briefcase size={16} /> <span>Roles</span></div>
                   <div className="ui-nav-item"><FileText size={16} /> <span>Scripts</span></div>
                   <div className="ui-nav-item"><Trophy size={16} /> <span>Leaderboard</span></div>
@@ -174,7 +174,7 @@ function DashboardPreview({ onCtaClick }) {
                     </span>
                     <h2>{greeting}, Mukesh CD {isChristmas && '🎅'}</h2>
                   </div>
-                  <p>{isChristmas ? 'Merry Christmas! Enjoy festive casting with JAMz' : 'Manage your casting work easily with JAMz'}</p>
+                  <p>{isChristmas ? 'Merry Christmas! Previewing the future of casting with JAMz' : 'We are launching soon. Preview the future of casting here.'}</p>
                   <div className="banner-badges">
                     <span className="badge-admin">Admin • cd-mukesh</span>
                   </div>
@@ -195,7 +195,7 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="stat-card green">
                   <Users size={24} />
                   <div className="stat-value">12</div>
-                  <div className="stat-label">Total Actors</div>
+                  <div className="stat-label">Total Talent</div>
                 </div>
                 <div className="stat-card orange">
                   <Clock size={24} />
@@ -459,78 +459,6 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="action-circle-item">
                   <div className="circle-bg red"><Video size={20} color="#dc2626" /></div>
                   <span>Share Video</span>
-                </div>
-              </div>
-
-              {/* Actor Rankings */}
-              <div className="ui-leaderboard-section">
-                <div className="section-header">
-                  <div className="section-title"><Trophy size={20} color="#f59e0b" /> Actor Rankings</div>
-                </div>
-                
-                <div className="rankings-list">
-                  <div className="ranking-card gold-tier">
-                    <div className="rank-badge"><Trophy size={16} /></div>
-                    <div className="actor-avatar">
-                      <img src="https://i.pravatar.cc/150?u=michael" alt="Michael Rodriguez" />
-                    </div>
-                    <div className="actor-main">
-                      <h3>Michael Rodriguez</h3>
-                      <div className="actor-stats-row">
-                        <span><Eye size={12} /> 1234</span>
-                        <span><Users size={12} /> 89</span>
-                        <span><Trophy size={12} /> 18 matches</span>
-                      </div>
-                    </div>
-                    <div className="actor-points">
-                      <div className="points-val">2450</div>
-                      <div className="points-label">points</div>
-                      <div className="trend up">+15%</div>
-                    </div>
-                    <button className="ui-btn-outline-sm">View Profile</button>
-                  </div>
-
-                  <div className="ranking-card silver-tier">
-                    <div className="rank-badge silver"><Trophy size={16} /></div>
-                    <div className="actor-avatar">
-                      <img src="https://i.pravatar.cc/150?u=emma" alt="Emma Thompson" />
-                    </div>
-                    <div className="actor-main">
-                      <h3>Emma Thompson</h3>
-                      <div className="actor-stats-row">
-                        <span><Eye size={12} /> 1156</span>
-                        <span><Users size={12} /> 76</span>
-                        <span><Trophy size={12} /> 16 matches</span>
-                      </div>
-                    </div>
-                    <div className="actor-points">
-                      <div className="points-val">2380</div>
-                      <div className="points-label">points</div>
-                      <div className="trend up">+12%</div>
-                    </div>
-                    <button className="ui-btn-outline-sm">View Profile</button>
-                  </div>
-
-                  <div className="ranking-card bronze-tier">
-                    <div className="rank-badge bronze"><Trophy size={16} /></div>
-                    <div className="actor-avatar">
-                      <img src="https://i.pravatar.cc/150?u=james" alt="James Wilson" />
-                    </div>
-                    <div className="actor-main">
-                      <h3>James Wilson</h3>
-                      <div className="actor-stats-row">
-                        <span><Eye size={12} /> 1089</span>
-                        <span><Users size={12} /> 67</span>
-                        <span><Trophy size={12} /> 15 matches</span>
-                      </div>
-                    </div>
-                    <div className="actor-points">
-                      <div className="points-val">2290</div>
-                      <div className="points-label">points</div>
-                      <div className="trend up">+8%</div>
-                    </div>
-                    <button className="ui-btn-outline-sm">View Profile</button>
-                  </div>
                 </div>
               </div>
             </div>

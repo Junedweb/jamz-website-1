@@ -26,7 +26,7 @@ function Features({ onCtaClick }) {
     { 
       icon: <UserSearch size={24} />, 
       title: "Find Lookalikes", 
-      desc: "Find actors who look like anyone in seconds.",
+      desc: "Find talent who look like anyone in seconds.",
       color: "#06b6d4" // Cyan
     },
     { 
@@ -44,7 +44,7 @@ function Features({ onCtaClick }) {
     { 
       icon: <RefreshCw size={24} />, 
       title: "Auto-Update", 
-      desc: "Actors update their own info and photos.",
+      desc: "Talent update their own info and photos.",
       color: "#6366f1" // Indigo
     },
     { 
@@ -78,8 +78,8 @@ function Features({ onCtaClick }) {
           ))}
         </div>
 
-        <a href="#" className="btn-primary" style={{ padding: '0.75rem 2rem', fontSize: '1rem', fontWeight: 600, marginTop: '1rem' }} onClick={onCtaClick}>
-          Book a Demo →
+        <a href="#" className="btn-primary features-cta" onClick={onCtaClick}>
+          Join Waitlist →
         </a>
       </div>
     </section>

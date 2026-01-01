@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Navbar from './Navbar';
-import ValueProp from './ValueProp';
 import Features from './Features';
 import DashboardPreview from './DashboardPreview';
 import UseCases from './UseCases';
@@ -14,7 +13,7 @@ import InfoModal from './InfoModal';
 import SideDecorations from './SideDecorations';
 
 function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalConfig, setModalConfig] = useState({ isOpen: false, type: 'waitlist' });
   const [infoModal, setInfoModal] = useState({ isOpen: false, type: null });
 
   useEffect(() => {
@@ -37,12 +36,13 @@ function Home() {
     return () => window.removeEventListener('scroll', reveal);
   }, []);
 
-  const openModal = (e) => {
-    if (e) e.preventDefault();
-    setIsModalOpen(true);
+  const openModal = (type = 'waitlist') => {
+    // If it's a synthetic event, default to 'waitlist'
+    const actualType = typeof type === 'string' ? type : 'waitlist';
+    setModalConfig({ isOpen: true, type: actualType });
   };
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => setModalConfig({ ...modalConfig, isOpen: false });
 
   const openInfoModal = (type) => {
     setInfoModal({ isOpen: true, type });
@@ -57,7 +57,6 @@ function Home() {
       <Navbar onCtaClick={openModal} />
       <SideDecorations />
       <Header onCtaClick={openModal} />
-      <ValueProp onCtaClick={openModal} />
       <Features onCtaClick={openModal} />
       <DashboardPreview onCtaClick={openModal} />
       <UseCases onCtaClick={openModal} />
@@ -65,7 +64,7 @@ function Home() {
       <CTA onCtaClick={openModal} />
       <Footer onCtaClick={openModal} onInfoClick={openInfoModal} />
       
-      <LeadForm isOpen={isModalOpen} onClose={closeModal} />
+      <LeadForm isOpen={modalConfig.isOpen} onClose={closeModal} type={modalConfig.type} />
       <InfoModal 
         isOpen={infoModal.isOpen} 
         onClose={closeInfoModal} 

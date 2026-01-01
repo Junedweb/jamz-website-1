@@ -20,7 +20,7 @@ function UseCases() {
     {
       icon: <Zap size={32} />,
       title: "The OTT Specialist",
-      tagline: "Process 1000+ actors across OTT seasons without manual chaos.",
+      tagline: "Process 1000+ talent across OTT seasons without manual chaos.",
       highlights: [
         { icon: <Zap size={18} />, text: "Auto Script Breakdowns" },
         { icon: <Filter size={18} />, text: "Smart High-Speed Filtering" },

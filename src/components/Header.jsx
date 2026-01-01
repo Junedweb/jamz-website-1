@@ -43,36 +43,36 @@ function Header({ onCtaClick }) {
         <div className="hero-content-main">
           <div className="hero-announcement">
             <span className="announcement-badge">Launching Soon</span>
-            <span className="announcement-text">Exclusively for Casting Directors & Acting Schools</span>
+            <span className="announcement-text">Crafting the Future of Casting Excellence</span>
           </div>
           <h1 className="hero-title">
-            <span className="text-gradient-gold">JAMz: Introducing AI in Casting for</span>
-            <span className="hero-title-accent">Casting Directors & Acting Schools</span>
+            <span className="text-gradient-gold">AI-Powered Casting for</span>
+            <span className="hero-title-accent">Visionary Directors & Schools</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
-            The AI tool to help your casting business grow. Find the right actors 
-            70% faster and manage more projects easily.
+            Eliminate the manual grind. Our AI-driven engine finds your perfect 
+            cast 70% faster while automating your entire workflow.
           </p>
           
           <div className="hero-benefits-row">
             <div className="hero-benefit">
               <Zap size={20} color="var(--accent)" />
-              <span>70% Faster Search</span>
+              <span>70% Faster Discovery</span>
             </div>
             <div className="hero-benefit">
               <Trophy size={20} color="var(--accent)" />
-              <span>Double Your Work</span>
+              <span>2x Workflow Efficiency</span>
             </div>
             <div className="hero-benefit">
               <Clock size={20} color="var(--accent)" />
-              <span>Save 40+ Hours/Week</span>
+              <span>40+ Hours Saved Weekly</span>
             </div>
           </div>
         </div>
         
         <div className="cta-group">
-          <a href="#" className="btn-primary" onClick={onCtaClick}>Book a Demo</a>
-          <a href="#" className="btn-secondary" onClick={onCtaClick}>Request Access</a>
+          <a href="#" className="btn-primary" onClick={onCtaClick}>Join Waitlist</a>
+          <a href="#" className="btn-secondary" onClick={() => onCtaClick('suggestion')}>Share Suggestions</a>
         </div>
       </div>
     </section>

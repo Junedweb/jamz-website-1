@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
-import { User, Phone, Calendar, Clock, CheckCircle, Loader2, MapPin, Navigation, ShieldCheck } from 'lucide-react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { User, Phone, Calendar, Clock, CheckCircle, Loader2, MapPin, Navigation, ShieldCheck, FileText } from 'lucide-react';
 
-function LeadForm({ isOpen, onClose }) {
+function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
   const [formData, setFormData] = useState({
     fullName: '',
     countryCode: '+91',
@@ -9,6 +9,7 @@ function LeadForm({ isOpen, onClose }) {
     date: '',
     time: '',
     location: '',
+    suggestion: '',
     captcha: ''
   });
 
@@ -18,6 +19,33 @@ function LeadForm({ isOpen, onClose }) {
   const [timeError, setTimeError] = useState('');
   const [isLocating, setIsLocating] = useState(false);
   const [selectedCaptcha, setSelectedCaptcha] = useState(null);
+
+  // Body scroll lock
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      // Store current scroll position to prevent jump on iOS if needed
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [isOpen]);
 
   const captchaOptions = useMemo(() => [
     { id: 'camera', icon: '📷', label: 'Camera' },
@@ -101,7 +129,8 @@ function LeadForm({ isOpen, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (mobileError || dateError || timeError) return;
+    if (type !== 'suggestion' && (mobileError || dateError || timeError)) return;
+    if (type === 'suggestion' && mobileError) return;
 
     // Image captcha check
     if (!selectedCaptcha || selectedCaptcha.id !== targetCaptcha.id) {
@@ -112,13 +141,15 @@ function LeadForm({ isOpen, onClose }) {
     setStatus('loading');
 
     // Prepare data for Google Sheets
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyOlzGpYrQ83KLbwkr-gHat1wQN2WxpSc_7xETd-V9701e8jZoLRFjusnk_T9DFgCaS/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyrRMgUWnYNzF1KuUnl2rLk_WzE01RvfwwYzkvoUbOUtRv1vdXMG-V6NrgIqDE4mG6O/exec';
 
     const payload = {
+      type: type,
       fullName: formData.fullName,
       mobileNumber: `${formData.countryCode.replace('+', '')}${formData.mobileNumber}`,
-      date: formData.date,
-      time: formData.time,
+      date: type === 'suggestion' ? 'N/A' : (formData.date || 'N/A'),
+      time: type === 'suggestion' ? 'N/A' : (formData.time || 'N/A'),
+      suggestion: formData.suggestion || 'N/A',
       geoLocation: formData.location,
       captcha: selectedCaptcha?.label || 'none'
     };
@@ -214,14 +245,22 @@ function LeadForm({ isOpen, onClose }) {
         {status === 'success' ? (
           <div style={{ textAlign: 'center', padding: '2rem 0' }}>
             <CheckCircle size={64} color="#10b981" style={{ marginBottom: '1.5rem' }} />
-            <h2>Request Received!</h2>
-            <p className="subtitle">Our team will contact you shortly to confirm your consultation.</p>
+            <h2>{type === 'suggestion' ? 'Thank You!' : 'Request Received!'}</h2>
+            <p className="subtitle">
+              {type === 'suggestion' 
+                ? "We value your input. Your suggestions help us build a better platform for everyone."
+                : "Our team will contact you shortly to confirm your early access."}
+            </p>
             <button className="btn-back" onClick={onClose}>Close</button>
           </div>
         ) : (
           <>
-            <h2>Book Your Free Consultation</h2>
-            <p className="subtitle">Let's discuss how JAMZ can improve your casting workflow</p>
+            <h2>{type === 'suggestion' ? 'Share Your Suggestions' : 'Join the Waitlist'}</h2>
+            <p className="subtitle">
+              {type === 'suggestion' 
+                ? "Help us build the professional standard for modern casting with your feedback."
+                : "Be among the first to experience the future of AI-powered casting."}
+            </p>
 
             <form onSubmit={handleSubmit}>
               <div className="form-group">
@@ -273,43 +312,79 @@ function LeadForm({ isOpen, onClose }) {
                 )}
               </div>
 
-              <div className="form-group">
-                <label className="form-label">
-                  <Calendar size={18} /> Preferred Date <span>*</span>
-                </label>
-                <input 
-                  type="date" 
-                  name="date"
-                  min={new Date().toISOString().split('T')[0]}
-                  className={`form-input ${dateError ? 'input-error' : ''}`} 
-                  value={formData.date}
-                  onChange={handleChange}
-                  required 
-                />
-                {dateError && <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.4rem' }}>{dateError}</p>}
-              </div>
+              {type === 'suggestion' ? (
+                <div className="form-group">
+                  <label className="form-label">
+                    <FileText size={18} /> Your Suggestions
+                  </label>
+                  <textarea 
+                    name="suggestion"
+                    className="form-input" 
+                    placeholder="Tell us what features or improvements you'd like to see..." 
+                    value={formData.suggestion}
+                    onChange={handleChange}
+                    rows="4"
+                    style={{ resize: 'vertical', minHeight: '100px' }}
+                  />
+                </div>
+              ) : (
+                <>
+                  <div className="form-group">
+                    <label className="form-label">
+                      <Calendar size={18} /> Preferred Date to Connect (Optional)
+                    </label>
+                    <input 
+                      type="date" 
+                      name="date"
+                      min={new Date().toISOString().split('T')[0]}
+                      className={`form-input ${dateError ? 'input-error' : ''}`} 
+                      value={formData.date}
+                      onChange={handleChange}
+                    />
+                    {dateError ? (
+                      <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.4rem' }}>{dateError}</p>
+                    ) : (
+                      <p className="form-hint">Select a date if you'd like to meet or connect</p>
+                    )}
+                  </div>
 
-              <div className="form-group">
-                <label className="form-label">
-                  <Clock size={18} /> Preferred Time <span>*</span>
-                </label>
-                <select 
-                  name="time"
-                  className={`form-input ${timeError ? 'input-error' : ''}`} 
-                  value={formData.time}
-                  onChange={handleChange}
-                  required 
-                >
-                  <option value="">Select a time</option>
-                  {timeOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-                {timeError && <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.4rem' }}>{timeError}</p>}
-                <p className="form-hint">Working hours: 8:00 AM - 10:00 PM</p>
-              </div>
+                  <div className="form-group">
+                    <label className="form-label">
+                      <Clock size={18} /> Preferred Time to Connect (Optional)
+                    </label>
+                    <select 
+                      name="time"
+                      className={`form-input ${timeError ? 'input-error' : ''}`} 
+                      value={formData.time}
+                      onChange={handleChange}
+                    >
+                      <option value="">Select a time</option>
+                      {timeOptions.map(option => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                    {timeError && <p className="error-text" style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.4rem' }}>{timeError}</p>}
+                    <p className="form-hint">Working hours: 8:00 AM - 10:00 PM</p>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">
+                      <FileText size={18} /> Suggestions (Optional)
+                    </label>
+                    <textarea 
+                      name="suggestion"
+                      className="form-input" 
+                      placeholder="Any specific requirements or questions?" 
+                      value={formData.suggestion}
+                      onChange={handleChange}
+                      rows="2"
+                      style={{ resize: 'vertical', minHeight: '60px' }}
+                    />
+                  </div>
+                </>
+              )}
 
               <div className="form-group">
                 <label className="form-label">
@@ -384,7 +459,7 @@ function LeadForm({ isOpen, onClose }) {
                 {status === 'loading' ? (
                   <><Loader2 className="animate-spin" size={20} /> Sending...</>
                 ) : (
-                  'Book Consultation'
+                  type === 'suggestion' ? 'Submit Suggestion' : 'Join Waitlist'
                 )}
               </button>
               <button type="button" className="btn-back" onClick={onClose}>Back to Home</button>

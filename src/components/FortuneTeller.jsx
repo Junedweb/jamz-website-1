@@ -59,7 +59,7 @@ const FortuneTeller = () => {
   };
 
   const submitLead = (data) => {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyOlzGpYrQ83KLbwkr-gHat1wQN2WxpSc_7xETd-V9701e8jZoLRFjusnk_T9DFgCaS/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyrRMgUWnYNzF1KuUnl2rLk_WzE01RvfwwYzkvoUbOUtRv1vdXMG-V6NrgIqDE4mG6O/exec';
     
     // Prepare data for Google Sheets
     const payload = {
