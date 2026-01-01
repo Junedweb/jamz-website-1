@@ -18,6 +18,10 @@ import {
   Calendar,
   UserPlus,
   Snowflake,
+  Facebook,
+  Instagram,
+  MessageCircle,
+  Share2,
   Activity,
   Flag,
   CheckCircle,
@@ -25,7 +29,6 @@ import {
   Search,
   Filter,
   FileSignature,
-  Share2,
   HeartHandshake,
   AlertTriangle,
   ExternalLink,
@@ -292,10 +295,29 @@ function DashboardPreview({ onCtaClick }) {
                     <span>Easy Posting</span>
                   </div>
                   <div className="stat-value-row">
-                    <div className="stat-value">50+</div>
-                    <span className="stat-sub">Contacts Sent</span>
+                    <div className="stat-value" style={{ fontSize: '1.2rem' }}>Link Socials</div>
+                    <span className="stat-sub">1-Click Post</span>
                   </div>
-                  <div className="stat-mini-text">WhatsApp & SMS Bulk</div>
+                  <div className="posting-stats-row">
+                    <div className="p-stat">
+                      <span className="p-label">Today</span>
+                      <span className="p-count">12</span>
+                    </div>
+                    <div className="p-stat">
+                      <span className="p-label">MTD</span>
+                      <span className="p-count">145</span>
+                    </div>
+                    <div className="p-stat">
+                      <span className="p-label">Live</span>
+                      <span className="p-count">1,240</span>
+                    </div>
+                  </div>
+                  <div className="social-mini-icons">
+                    <Facebook size={12} />
+                    <Instagram size={12} />
+                    <MessageCircle size={12} />
+                    <MessageSquare size={12} />
+                  </div>
                 </div>
               </div>
 
@@ -381,27 +403,31 @@ function DashboardPreview({ onCtaClick }) {
               <div className="ui-dashboard-row">
                 <div className="ui-card half">
                   <div className="card-header">
-                    <div className="card-title"><Zap size={18} /> AI Script Breakdowns</div>
-                    <button className="ui-btn-gold">Upload Script</button>
+                    <div className="card-title"><ImageIcon size={18} /> Visual Outreach Studio</div>
+                    <button className="ui-btn-gold">Generate New</button>
                   </div>
-                  <p className="card-subtitle">8 scripts read by AI</p>
+                  <p className="card-subtitle">Broadcast requirements & festive wishes to your talent network</p>
                   <div className="card-empty-state">
-                    <div className="script-list">
-                      <div className="script-item-ui">
-                        <FileText size={16} color="var(--primary)" />
-                        <div className="script-details">
-                          <span className="script-name">The_Midnight_Heist.pdf</span>
-                          <span className="script-meta">12 roles identified • 24 scenes</span>
+                    <div className="poster-list">
+                      <div className="poster-item-ui">
+                        <div className="poster-preview-mini christmas">
+                          <Snowflake size={14} color="white" />
                         </div>
-                        <span className="badge-processed">Processed</span>
+                        <div className="poster-details">
+                          <span className="poster-name">Festive Wishes: Christmas 2025</span>
+                          <span className="poster-meta">Target: All Talent • WhatsApp Ready</span>
+                        </div>
+                        <button className="ui-btn-whatsapp-xs"><MessageSquare size={12} /> Share</button>
                       </div>
-                      <div className="script-item-ui">
-                        <FileText size={16} color="var(--primary)" />
-                        <div className="script-details">
-                          <span className="script-name">Project_Shadow.docx</span>
-                          <span className="script-meta">8 roles identified • 15 scenes</span>
+                      <div className="poster-item-ui">
+                        <div className="poster-preview-mini requirement">
+                          <Briefcase size={14} color="white" />
                         </div>
-                        <span className="badge-processed">Processed</span>
+                        <div className="poster-details">
+                          <span className="poster-name">Requirement: Project Shadow</span>
+                          <span className="poster-meta">Target: Deep Filter (Male, Age 18-25, Hindi, Height: 5'10") • 120+ Sent</span>
+                        </div>
+                        <button className="ui-btn-whatsapp-xs"><MessageSquare size={12} /> Resend</button>
                       </div>
                     </div>
                   </div>
@@ -452,6 +478,53 @@ function DashboardPreview({ onCtaClick }) {
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Activity Management Section */}
+              <div className="ui-section-title">Activity Management</div>
+              <div className="ui-activity-grid">
+                <div className="activity-card-mini">
+                  <div className="activity-icon-mini blue"><Briefcase size={16} /></div>
+                  <div className="activity-content-mini">
+                    <span className="activity-label-mini">Projects</span>
+                    <span className="activity-value-mini">{projects.length} Active</span>
+                  </div>
+                </div>
+                <div className="activity-card-mini">
+                  <div className="activity-icon-mini purple"><Users size={16} /></div>
+                  <div className="activity-content-mini">
+                    <span className="activity-label-mini">Castings</span>
+                    <span className="activity-value-mini">{projects.reduce((acc, p) => acc + p.castings.length, 0)} Ongoing</span>
+                  </div>
+                </div>
+                <div className="activity-card-mini">
+                  <div className="activity-icon-mini orange"><Clock size={16} /></div>
+                  <div className="activity-content-mini">
+                    <span className="activity-label-mini">Followups</span>
+                    <span className="activity-value-mini">6 Pending</span>
+                  </div>
+                </div>
+                <div className="activity-card-mini">
+                  <div className="activity-icon-mini green"><CheckCircle size={16} /></div>
+                  <div className="activity-content-mini">
+                    <span className="activity-label-mini">Shortlistings</span>
+                    <span className="activity-value-mini">32 Selected</span>
+                  </div>
+                </div>
+                <div className="activity-card-mini clickable">
+                  <div className="activity-icon-mini gold"><MessageSquare size={16} /></div>
+                  <div className="activity-content-mini">
+                    <span className="activity-label-mini">Feedback</span>
+                    <span className="activity-value-mini">Share with Talent</span>
+                  </div>
+                </div>
+                <div className="activity-card-mini clickable">
+                  <div className="activity-icon-mini maroon"><ExternalLink size={16} /></div>
+                  <div className="activity-content-mini">
+                    <span className="activity-label-mini">Client Share</span>
+                    <span className="activity-value-mini">Share Shortlist</span>
                   </div>
                 </div>
               </div>
@@ -510,19 +583,19 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="quick-actions-grid">
                   <div className="action-card">
                     <Users size={20} />
-                    <span>Browse Actors</span>
+                    <span>Talent management</span>
                   </div>
                   <div className="action-card">
                     <Briefcase size={20} />
                     <span>Create Role</span>
                   </div>
                   <div className="action-card">
-                    <Zap size={20} />
-                    <span>AI Breakdown</span>
+                    <ImageIcon size={20} />
+                    <span>Visual Outreach Studio</span>
                   </div>
                   <div className="action-card">
-                    <Trophy size={20} />
-                    <span>Leaderboard</span>
+                    <Activity size={20} />
+                    <span>Activity management</span>
                   </div>
                 </div>
               </div>

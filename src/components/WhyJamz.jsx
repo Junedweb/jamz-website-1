@@ -20,23 +20,23 @@ function WhyJamz() {
     },
     {
       icon: <Lock size={24} />,
-      title: "Your Data, Your Choice",
-      desc: "80% of your casting comes from your private database. We keep it 100% secure."
+      title: "Secure Private Database",
+      desc: "Link your private talent data securely. Your database stays 100% safe and protected within your unique login."
     },
     {
       icon: <Users size={24} />,
-      title: "Fresh 20% Talent",
+      title: "Fresh Talent Requirement",
       desc: "Leverage JAMz Drama School database for serious, career-building talent."
     },
     {
       icon: <Layout size={24} />,
-      title: "Multiple Data Cuts",
+      title: "Deep Search",
       desc: "Filter your private database with any industry-specific criteria you want."
     },
     {
       icon: <ShieldCheck size={24} />,
-      title: "You Are in Charge",
-      desc: "You make all the final choices."
+      title: "Full Team Control",
+      desc: "Whether you're a sole powerhouse or a full team, everyone stays in perfect sync and in full control of every casting decision under one roof."
     },
     {
       icon: <Globe size={24} />,
