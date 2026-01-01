@@ -1,12 +1,14 @@
 import { 
   Share2, 
   Filter, 
-  UserSearch, 
-  Mail, 
-  LayoutDashboard, 
+  Activity, 
+  ShieldCheck, 
+  Flag, 
+  Calendar, 
   RefreshCw, 
   FileText, 
-  Users 
+  Users,
+  Star
 } from 'lucide-react';
 
 function Features({ onCtaClick }) {
@@ -14,38 +16,38 @@ function Features({ onCtaClick }) {
     { 
       icon: <Share2 size={24} />, 
       title: "Easy Posting", 
-      desc: "Post to all social media with one click.",
+      desc: "Bulk contact 50+ talents & share audition PDF/links via WhatsApp with one click.",
       color: "#8b5cf6" // Purple
     },
     { 
       icon: <Filter size={24} />, 
-      title: "Quick Search", 
-      desc: "Search by age, city, and language.",
+      title: "Deep Search", 
+      desc: "Filter by Trained/Untrained, Intro Videos, Age, and Language.",
       color: "#f97316" // Orange
     },
     { 
-      icon: <UserSearch size={24} />, 
-      title: "Find Lookalikes", 
-      desc: "Find talent who look like anyone in seconds.",
+      icon: <Activity size={24} />, 
+      title: "Audition Funnel", 
+      desc: "Manage multiple projects & castings. Track 1-to-many confirmations in real-time.",
       color: "#06b6d4" // Cyan
     },
     { 
-      icon: <Mail size={24} />, 
-      title: "One Inbox", 
-      desc: "See all your messages in one place.",
+      icon: <ShieldCheck size={24} />, 
+      title: "Smart Agreements", 
+      desc: "Digital T&C for Standard Shift Hours and Per Diem clauses.",
       color: "#10b981" // Green
     },
     { 
-      icon: <LayoutDashboard size={24} />, 
-      title: "Project Board", 
-      desc: "See your project progress anytime.",
-      color: "#3b82f6" // Blue
+      icon: <Star size={24} />, 
+      title: "Reputation Score", 
+      desc: "Auto-scoring for Talent & Clients based on feedback. Flags triggered by low scores.",
+      color: "#ef4444" // Red
     },
     { 
-      icon: <RefreshCw size={24} />, 
-      title: "Auto-Update", 
-      desc: "Talent update their own info and photos.",
-      color: "#6366f1" // Indigo
+      icon: <Calendar size={24} />, 
+      title: "Client Nurture", 
+      desc: "Automated festive greetings and co-branded updates for your clients.",
+      color: "#3b82f6" // Blue
     },
     { 
       icon: <FileText size={24} />, 

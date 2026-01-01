@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Sparkles, X, User, MapPin, Calendar, Send, Wand2, Star, Moon, Sun, Phone, MapPinned, Loader2 } from 'lucide-react';
 
 const FortuneTeller = () => {

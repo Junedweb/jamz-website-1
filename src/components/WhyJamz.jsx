@@ -7,7 +7,8 @@ import {
   Globe,
   Layout,
   Zap,
-  ShieldCheck
+  ShieldCheck,
+  Users
 } from 'lucide-react';
 
 function WhyJamz() {
@@ -18,29 +19,24 @@ function WhyJamz() {
       desc: "By saving time."
     },
     {
+      icon: <Lock size={24} />,
+      title: "Your Data, Your Choice",
+      desc: "80% of your casting comes from your private database. We keep it 100% secure."
+    },
+    {
+      icon: <Users size={24} />,
+      title: "Fresh 20% Talent",
+      desc: "Leverage JAMz Drama School database for serious, career-building talent."
+    },
+    {
       icon: <Layout size={24} />,
-      title: "All in One Place",
-      desc: "Keep all your data organized."
-    },
-    {
-      icon: <MessageSquare size={24} />,
-      title: "No More Chaos",
-      desc: "Stop using 100+ WhatsApp groups."
-    },
-    {
-      icon: <Zap size={24} />,
-      title: "AI Helper",
-      desc: "Let AI do the boring office work."
+      title: "Multiple Data Cuts",
+      desc: "Filter your private database with any industry-specific criteria you want."
     },
     {
       icon: <ShieldCheck size={24} />,
       title: "You Are in Charge",
       desc: "You make all the final choices."
-    },
-    {
-      icon: <Lock size={24} />,
-      title: "Safe & Private",
-      desc: "Your data is kept safe in a private lock."
     },
     {
       icon: <Globe size={24} />,

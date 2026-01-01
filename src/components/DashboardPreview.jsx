@@ -17,7 +17,23 @@ import {
   MapPin,
   Calendar,
   UserPlus,
-  Snowflake
+  Snowflake,
+  Activity,
+  Flag,
+  CheckCircle,
+  Lock,
+  Search,
+  Filter,
+  FileSignature,
+  Share2,
+  HeartHandshake,
+  AlertTriangle,
+  ExternalLink,
+  MessageSquare,
+  X,
+  Star,
+  ThumbsUp,
+  ThumbsDown
 } from 'lucide-react';
 
 function DashboardPreview({ onCtaClick }) {
@@ -27,6 +43,33 @@ function DashboardPreview({ onCtaClick }) {
   const [showDemoMsg, setShowDemoMsg] = useState(false);
   const [clickPos, setClickPos] = useState({ x: 0, y: 0 });
   const [timerId, setTimerId] = useState(null);
+
+  // New state for multi-project management
+  const [projects] = useState([
+    {
+      id: 1,
+      name: "Project Shadow",
+      client: "Netflix India",
+      castings: [
+        { id: 101, title: "Lead Male - Action Hero", status: "Open", talentCount: 45, applicants: 120 },
+        { id: 102, title: "Supporting Female", status: "Auditioning", talentCount: 67, applicants: 85 }
+      ]
+    },
+    {
+      id: 2,
+      name: "The Midnight Heist",
+      client: "Amazon Prime",
+      castings: [
+        { id: 201, title: "Main Antagonist", status: "Open", talentCount: 32, applicants: 54 },
+        { id: 202, title: "Police Chief", status: "Shortlisting", talentCount: 15, applicants: 28 }
+      ]
+    }
+  ]);
+  const [selectedProjectId, setSelectedProjectId] = useState(1);
+  const [selectedCastingId, setSelectedCastingId] = useState(101);
+
+  const selectedProject = projects.find(p => p.id === selectedProjectId);
+  const selectedCasting = selectedProject.castings.find(c => c.id === selectedCastingId) || selectedProject.castings[0];
 
   const handleDashboardClick = (e) => {
     // Only trigger if not clicking the button itself
@@ -140,15 +183,24 @@ function DashboardPreview({ onCtaClick }) {
             <div className="dashboard-real-ui">
               {/* Top Bar */}
               <div className="ui-top-bar">
-                <div className="ui-logo">JAM<span>z</span></div>
+                <div className="ui-logo-user-row">
+                  <div className="ui-logo">JAM<span>z</span></div>
+                  <div className="ui-search-bar">
+                    <Search size={16} className="search-icon" />
+                    <input type="text" placeholder="Deep Search talent..." className="search-input" />
+                    <div className="search-filters">
+                      <span className="filter-tag">Trained <X size={10}/></span>
+                      <span className="filter-tag">Intro Video <X size={10}/></span>
+                    </div>
+                  </div>
+                </div>
                 
                 <div className="ui-nav">
                   <div className="ui-nav-item active"><LayoutDashboard size={16} /> <span>Dashboard</span></div>
                   <div className="ui-nav-item"><Users size={16} /> <span>Talent</span></div>
                   <div className="ui-nav-item"><Briefcase size={16} /> <span>Roles</span></div>
                   <div className="ui-nav-item"><FileText size={16} /> <span>Scripts</span></div>
-                  <div className="ui-nav-item"><Trophy size={16} /> <span>Leaderboard</span></div>
-                  <div className="ui-nav-item"><UserCircle size={16} /> <span>Talent Profiles</span></div>
+                  <div className="ui-nav-item"><FileSignature size={16} /> <span>Contracts</span></div>
                 </div>
 
                 <div className="ui-user">
@@ -165,6 +217,28 @@ function DashboardPreview({ onCtaClick }) {
                 </div>
               </div>
 
+              {/* Project Selector Tabs */}
+              <div className="ui-project-tabs">
+                {projects.map(project => (
+                  <button 
+                    key={project.id}
+                    className={`project-tab ${selectedProjectId === project.id ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedProjectId(project.id);
+                      setSelectedCastingId(project.castings[0].id);
+                    }}
+                  >
+                    <Briefcase size={14} />
+                    <span>{project.name}</span>
+                  </button>
+                ))}
+                <button className="add-project-btn" onClick={(e) => e.stopPropagation()}>
+                  <UserPlus size={14} />
+                  <span>New Project</span>
+                </button>
+              </div>
+
               {/* Dashboard Hero Banner */}
               <div className="ui-dashboard-banner">
                 <div className="banner-content">
@@ -174,9 +248,10 @@ function DashboardPreview({ onCtaClick }) {
                     </span>
                     <h2>{greeting}, Mukesh CD {isChristmas && '🎅'}</h2>
                   </div>
-                  <p>{isChristmas ? 'Merry Christmas! Previewing the future of casting with JAMz' : 'We are launching soon. Preview the future of casting here.'}</p>
+                  <p>{isChristmas ? 'Merry Christmas! Managing ' : 'Currently managing '} <span className="text-gold-bold">{selectedProject.name}</span> for {selectedProject.client}</p>
                   <div className="banner-badges">
                     <span className="badge-admin">Admin • cd-mukesh</span>
+                    <span className="badge-active-project">{selectedProject.castings.length} Active Castings</span>
                   </div>
                 </div>
                 <div className="banner-date">
@@ -188,19 +263,117 @@ function DashboardPreview({ onCtaClick }) {
               {/* Stats Grid */}
               <div className="ui-stats-grid">
                 <div className="stat-card blue">
-                  <Briefcase size={24} />
-                  <div className="stat-value">5</div>
-                  <div className="stat-label">Active Roles</div>
+                  <div className="stat-header">
+                    <Activity size={20} />
+                    <span>Audition Funnel</span>
+                  </div>
+                  <div className="stat-value-row">
+                    <div className="stat-value">{selectedCasting.talentCount}/{selectedCasting.applicants}</div>
+                    <span className="stat-sub">Confirmed</span>
+                  </div>
+                  <div className="funnel-bar">
+                    <div className="funnel-fill" style={{ width: `${(selectedCasting.talentCount / selectedCasting.applicants) * 100}%` }}></div>
+                  </div>
                 </div>
                 <div className="stat-card green">
-                  <Users size={24} />
-                  <div className="stat-value">12</div>
-                  <div className="stat-label">Total Talent</div>
+                  <div className="stat-header">
+                    <FileSignature size={20} />
+                    <span>Smart Agreements</span>
+                  </div>
+                  <div className="stat-value-row">
+                    <div className="stat-value">12</div>
+                    <span className="stat-sub">Signed</span>
+                  </div>
+                  <div className="stat-mini-text">T&C • Per Diem Active</div>
                 </div>
                 <div className="stat-card orange">
-                  <Clock size={24} />
-                  <div className="stat-value">3</div>
-                  <div className="stat-label">Awaiting Profile</div>
+                  <div className="stat-header">
+                    <Share2 size={20} />
+                    <span>Easy Posting</span>
+                  </div>
+                  <div className="stat-value-row">
+                    <div className="stat-value">50+</div>
+                    <span className="stat-sub">Contacts Sent</span>
+                  </div>
+                  <div className="stat-mini-text">WhatsApp & SMS Bulk</div>
+                </div>
+              </div>
+
+              {/* Multi-Project Casting Management Section */}
+              <div className="ui-casting-management">
+                <div className="casting-sidebar">
+                  <div className="sidebar-header">
+                    <h3>Casting Requirements</h3>
+                  </div>
+                  <div className="casting-list">
+                    {selectedProject.castings.map(casting => (
+                      <div 
+                        key={casting.id}
+                        className={`casting-item ${selectedCastingId === casting.id ? 'active' : ''}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCastingId(casting.id);
+                        }}
+                      >
+                        <div className="casting-item-info">
+                          <span className="casting-title">{casting.title}</span>
+                          <span className={`casting-status-badge ${casting.status.toLowerCase()}`}>{casting.status}</span>
+                        </div>
+                        <span className="casting-meta">{casting.talentCount} contacted</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="casting-details-main">
+                  <div className="casting-header-actions">
+                    <div className="header-info">
+                      <h3>{selectedCasting.title}</h3>
+                      <p>Contacting 50+ talents for this requirement</p>
+                    </div>
+                    <div className="bulk-actions">
+                      <button className="ui-btn-primary-sm" onClick={(e) => e.stopPropagation()}>
+                        <UserPlus size={14} /> <span>Bulk Outreach</span>
+                      </button>
+                      <button className="ui-btn-outline-sm" onClick={(e) => e.stopPropagation()}>
+                        <ExternalLink size={14} /> <span>Forward to Client</span>
+                      </button>
+                      <div className="export-options">
+                        <button className="ui-btn-dark-sm" onClick={(e) => e.stopPropagation()}>
+                          <FileText size={14} /> <span>Export PDF</span>
+                        </button>
+                        <button className="ui-btn-whatsapp-sm" onClick={(e) => e.stopPropagation()}>
+                          <MessageSquare size={14} /> <span>WhatsApp Share</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="talent-contact-grid">
+                    {[1, 2, 3, 4].map(i => (
+                      <div key={i} className="talent-contact-card">
+                        <div className="talent-avatar-row">
+                          <div className="mini-avatar">T{i}</div>
+                          <div className="talent-brief">
+                            <span className="talent-name">Talent Profile #{100 + i}</span>
+                            <span className="talent-location">Mumbai, India</span>
+                          </div>
+                          <span className="status-dot online"></span>
+                        </div>
+                        <div className="talent-stats">
+                          <div className="t-stat">
+                            <Video size={12} />
+                            <span>Audition Received</span>
+                          </div>
+                        </div>
+                        <div className="talent-actions">
+                          <button className="btn-icon-only"><Eye size={14} /></button>
+                          <button className="btn-icon-only"><Share2 size={14} /></button>
+                          <button className="btn-icon-only text-green"><CheckCircle size={14} /></button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -236,10 +409,10 @@ function DashboardPreview({ onCtaClick }) {
 
                 <div className="ui-card half">
                   <div className="card-header">
-                    <div className="card-title"><Trophy size={18} /> Top Actors</div>
-                    <button className="ui-btn-outline-sm">Full Board</button>
+                    <div className="card-title"><Search size={18} /> Deep Search Results</div>
+                    <button className="ui-btn-outline-sm">Filter</button>
                   </div>
-                  <p className="card-subtitle">Weekly leaderboard highlights</p>
+                  <p className="card-subtitle">Showing: Trained • Intro Video</p>
                   <div className="top-actors-list">
                     <div className="actor-item">
                       <div className="rank">1</div>
@@ -247,18 +420,36 @@ function DashboardPreview({ onCtaClick }) {
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" alt="Arjun Sharma" />
                       </div>
                       <div className="info">
-                        <div className="name">Arjun Sharma</div>
-                        <div className="score-bar"><div className="fill" style={{ width: '85%' }}></div><span>85 pts</span></div>
+                        <div className="name-row">
+                          <div className="name">Arjun Sharma</div>
+                          <span className="badge-trained">Trained</span>
+                        </div>
+                        <div className="score-row">
+                           <div className="star-rating">
+                             <Star size={10} fill="#fbbf24" color="#fbbf24" />
+                             <span className="score-val">4.8</span>
+                           </div>
+                           <span className="feedback-count">(12 jobs)</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="actor-item">
+                    <div className="actor-item flagged">
                       <div className="rank">2</div>
                       <div className="avatar">
                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop" alt="Priya Patel" />
                       </div>
                       <div className="info">
-                        <div className="name">Priya Patel</div>
-                        <div className="score-bar"><div className="fill" style={{ width: '72%' }}></div><span>72 pts</span></div>
+                        <div className="name-row">
+                          <div className="name">Priya Patel</div>
+                          <Flag size={12} className="icon-red-flag" />
+                        </div>
+                        <div className="score-row">
+                           <div className="star-rating low">
+                             <Star size={10} fill="#ef4444" color="#ef4444" />
+                             <span className="score-val">2.1</span>
+                           </div>
+                           <span className="feedback-alert">Low Score Alert</span>
+                        </div>
                       </div>
                     </div>
                   </div>

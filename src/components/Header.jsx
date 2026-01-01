@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   Zap,
   Trophy, 
@@ -7,27 +7,33 @@ import {
 } from 'lucide-react';
 
 function Header({ onCtaClick }) {
-  const [isChristmas, setIsChristmas] = useState(false);
-
-  useEffect(() => {
+  const [isChristmas] = useState(() => {
     const now = new Date();
-    // Christmas check (Dec 25)
-    if (now.getMonth() === 11 && now.getDate() === 25) {
-      setIsChristmas(true);
-    }
-  }, []);
+    return now.getMonth() === 11 && now.getDate() === 25;
+  });
+
+  const [snowflakes] = useState(() => {
+    if (!isChristmas) return [];
+    return [...Array(20)].map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 5}s`,
+      animationDuration: `${5 + Math.random() * 10}s`,
+      size: 12 + Math.random() * 10
+    }));
+  });
 
   return (
     <section id="hero" className={`hero ${isChristmas ? 'festive-christmas' : ''}`}>
       {isChristmas && (
         <div className="snow-container">
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className="snowflake" style={{ 
-              left: `${Math.random() * 100}%`, 
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${5 + Math.random() * 10}s`
+          {snowflakes.map((snow) => (
+            <div key={snow.id} className="snowflake" style={{ 
+              left: snow.left, 
+              animationDelay: snow.animationDelay,
+              animationDuration: snow.animationDuration
             }}>
-              <Snowflake size={12 + Math.random() * 10} color="white" opacity={0.6} />
+              <Snowflake size={snow.size} color="white" opacity={0.6} />
             </div>
           ))}
         </div>

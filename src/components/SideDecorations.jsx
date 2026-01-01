@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 
+const sections = [
+  { id: 'hero', label: 'Top' },
+  { id: 'features', label: 'Features' },
+  { id: 'dashboard', label: 'App Demo' },
+  { id: 'use-cases', label: 'Impact' },
+  { id: 'why-jamz', label: 'About' }
+];
+
 const SideDecorations = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const glowRef = useRef(null);
-
-  const sections = [
-    { id: 'hero', label: 'Top' },
-    { id: 'features', label: 'Features' },
-    { id: 'dashboard', label: 'App Demo' },
-    { id: 'use-cases', label: 'Impact' },
-    { id: 'why-jamz', label: 'About' }
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
