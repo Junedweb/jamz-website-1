@@ -38,6 +38,15 @@ const FortuneTeller = () => {
   ], []);
 
   const submitLead = useCallback((data) => {
+    // GA4 Tracking for suggestion submission
+    if (window.gtag) {
+      window.gtag('event', 'submit_suggestion', {
+        'event_category': 'engagement',
+        'event_label': 'Feature Suggestion Submitted',
+        'suggestion_module': selectedModule?.label || 'Direct'
+      });
+    }
+
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyrRMgUWnYNzF1KuUnl2rLk_WzE01RvfwwYzkvoUbOUtRv1vdXMG-V6NrgIqDE4mG6O/exec';
     
     const payload = {
@@ -214,6 +223,13 @@ const FortuneTeller = () => {
   ], []);
 
   const handleStart = useCallback(() => {
+    // GA4 Tracking
+    if (window.gtag) {
+      window.gtag('event', 'open_suggestion_fab', {
+        'event_category': 'engagement',
+        'event_label': 'Let us know what you need in the app'
+      });
+    }
     setIsOpen(true);
     setStep(1);
   }, []);
