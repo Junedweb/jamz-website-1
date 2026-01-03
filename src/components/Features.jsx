@@ -23,8 +23,8 @@ function Features({ onCtaClick }) {
   const features = [
     { 
       icon: <Users size={24} />, 
-      title: "Talent Management", 
-      desc: "Easily manage your talent pool with 1-click job posts and social media sharing.",
+      title: "Organize Your Talent", 
+      desc: "Easily organize your roster with 1-click job posts and social media sharing.",
       color: "#8b5cf6" // Purple
     },
     { 
@@ -35,26 +35,26 @@ function Features({ onCtaClick }) {
     },
     { 
       icon: <Activity size={24} />, 
-      title: "Project Tracker", 
-      desc: "Keep all your projects, shortlists, and follow-ups in one clear dashboard.",
+      title: "Live Castings", 
+      desc: "Keep all your assignments, shortlists, and follow-ups in one clear dashboard.",
       color: "#06b6d4" // Cyan
     },
     { 
       icon: <ImageIcon size={24} />, 
-      title: "Visual Studio", 
+      title: "Creative Studio", 
       desc: "Create and share professional requirement posters and greetings via WhatsApp.",
       color: "#ec4899" // Pink
     },
     { 
       icon: <Lock size={24} />, 
-      title: "Secure Database", 
-      desc: "Your private data is linked only to your login. Safe, secure, and private.",
+      title: "Safe & Private Data", 
+      desc: "Your data is linked only to your login. Safe, secure, and completely confidential.",
       color: "#10b981" // Green
     },
     { 
       icon: <ShieldCheck size={24} />, 
-      title: "Digital Agreements", 
-      desc: "Simple digital T&Cs for shift hours and per diems to speed up contracting.",
+      title: "Quick Contracts", 
+      desc: "Simple digital T&Cs for shift hours and per diems to get to work faster.",
       color: "#3b82f6" // Blue
     },
     { 
@@ -89,8 +89,8 @@ function Features({ onCtaClick }) {
     },
     { 
       icon: <BarChart3 size={24} />, 
-      title: "Efficiency Stats", 
-      desc: "Track your casting success and efficiency with simple real-time data.",
+      title: "Success Insights", 
+      desc: "Track your casting success and efficiency with simple real-time updates.",
       color: "#14b8a6" // Teal
     }
   ];
@@ -98,7 +98,7 @@ function Features({ onCtaClick }) {
   return (
     <section id="features" className="features-section reveal">
       <div className="container">
-        <h2 className="text-gradient-primary">What You Get with Our Talent Management Platform</h2>
+        <h2 className="text-gradient-primary">Everything Included in Your Casting Toolkit</h2>
         
         <div className="features-grid">
           {features.map((f, i) => (

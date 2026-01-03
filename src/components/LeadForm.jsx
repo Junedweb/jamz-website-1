@@ -49,7 +49,7 @@ function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
 
   const captchaOptions = useMemo(() => [
     { id: 'camera', icon: '📷', label: 'Camera' },
-    { id: 'star', icon: '⭐', label: 'Star' },
+    { id: 'diamond', icon: '💎', label: 'Diamond' },
     { id: 'heart', icon: '❤️', label: 'Heart' },
     { id: 'car', icon: '🚗', label: 'Car' }
   ], []);
@@ -264,11 +264,11 @@ function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
           </div>
         ) : (
           <>
-            <h2>{type === 'suggestion' ? 'Share Your Suggestions' : 'Join the Waitlist'}</h2>
+            <h2>{type === 'suggestion' ? 'Share Your Thoughts' : 'Join the Waitlist'}</h2>
             <p className="subtitle">
               {type === 'suggestion' 
-                ? "Help us build the professional standard for modern casting with your feedback."
-                : "Be among the first to experience the future of AI-powered casting."}
+                ? "Help us build the industry standard for casting today with your feedback."
+                : "Be among the first to experience the future of smart casting."}
             </p>
 
             <form onSubmit={handleSubmit}>

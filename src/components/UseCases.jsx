@@ -5,17 +5,17 @@ function UseCases() {
     {
       icon: <User size={32} />,
       title: "Solo Directors",
-      desc: "JAMz is your solo power enhancer—get the strength of 5 people with just you."
+      desc: "JAMz is your productivity partner—achieve the results of a full team on your own."
     },
     {
       icon: <Zap size={32} />,
       title: "OTT & Large Projects",
-      desc: "Manage 1000+ talent profiles across multiple seasons without the manual chaos."
+      desc: "Organize thousands of actors across multiple seasons without the endless clutter."
     },
     {
       icon: <Users size={32} />,
       title: "Casting Studios",
-      desc: "Keep your entire team aligned. Senior directors stay in total control of every project."
+      desc: "Stay in sync with your crew. Lead your team with clarity and confidence on every project."
     }
   ];
 
@@ -24,7 +24,7 @@ function UseCases() {
       <div className="container">
         <div className="section-header">
           <h2 className="text-gradient-primary">Casting Solutions Built for Growth</h2>
-          <p className="section-subtitle">Tailored workflows for every scale of talent management in India.</p>
+          <p className="section-subtitle">Custom solutions for every casting journey in India.</p>
         </div>
 
         <div className="use-cases-grid-simple">

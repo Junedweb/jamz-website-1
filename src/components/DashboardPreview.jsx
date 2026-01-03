@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { 
-  LayoutDashboard, 
   Users, 
   Briefcase, 
   FileText, 
-  Trophy, 
-  UserCircle, 
-  LogOut,
   Zap,
   Clock,
   Eye,
@@ -25,24 +21,30 @@ import {
   Activity,
   Flag,
   CheckCircle,
-  Lock,
   Search,
-  Filter,
   FileSignature,
-  HeartHandshake,
-  AlertTriangle,
   ExternalLink,
   MessageSquare,
   X,
   Star,
-  ThumbsUp,
-  ThumbsDown
+  Smartphone,
+  Monitor,
+  Loader2
 } from 'lucide-react';
 
 function DashboardPreview({ onCtaClick }) {
   const [dateTime, setDateTime] = useState(new Date());
   const [greeting, setGreeting] = useState('');
   const [isChristmas, setIsChristmas] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const [showDemoMsg, setShowDemoMsg] = useState(false);
   const [clickPos, setClickPos] = useState({ x: 0, y: 0 });
   const [timerId, setTimerId] = useState(null);
@@ -71,8 +73,107 @@ function DashboardPreview({ onCtaClick }) {
   const [selectedProjectId, setSelectedProjectId] = useState(1);
   const [selectedCastingId, setSelectedCastingId] = useState(101);
 
+  // Deep Search States
+  const [searchCommand, setSearchCommand] = useState('');
+  const [mandatoryFilters, setMandatoryFilters] = useState({
+    gender: '',
+    ageGroups: [] // Changed to array for multi-selection
+  });
+  const [dynamicFilters, setDynamicFilters] = useState([]);
+  const [isVaultSearching, setIsVaultSearching] = useState(false);
+  const [vaultResults, setVaultResults] = useState([]);
+  const [isGeneratingPoster, setIsGeneratingPoster] = useState(false);
+  const [aiPosterPrompt, setAiPosterPrompt] = useState('');
+  const [outreachMessage, setOutreachMessage] = useState('');
+  const [isAiRewriting, setIsAiRewriting] = useState(false);
+
+  // Logic to suggest filters based on command
+  useEffect(() => {
+    const command = searchCommand.toLowerCase();
+    const suggestions = [];
+    
+    if (command.includes('martial arts') || command.includes('action')) {
+      suggestions.push({ id: 'f1', label: 'Action Ready', active: true });
+    }
+    if (command.includes('hindi') || command.includes('language')) {
+      suggestions.push({ id: 'f2', label: 'Fluent Hindi', active: true });
+    }
+    if (command.includes('video') || command.includes('intro')) {
+      suggestions.push({ id: 'f3', label: 'Intro Video', active: true });
+    }
+    if (command.includes('tall') || command.includes('height')) {
+      suggestions.push({ id: 'f4', label: 'Height: 5\'10"+', active: true });
+    }
+    
+    setDynamicFilters(suggestions);
+  }, [searchCommand]);
+
   const selectedProject = projects.find(p => p.id === selectedProjectId);
   const selectedCasting = selectedProject.castings.find(c => c.id === selectedCastingId) || selectedProject.castings[0];
+
+  const toggleAgeGroup = (group) => {
+    setMandatoryFilters(prev => {
+      const exists = prev.ageGroups.includes(group);
+      if (exists) {
+        return { ...prev, ageGroups: prev.ageGroups.filter(g => g !== group) };
+      } else {
+        return { ...prev, ageGroups: [...prev.ageGroups, group] };
+      }
+    });
+  };
+
+  const handleVaultSearch = () => {
+    if (!mandatoryFilters.gender || mandatoryFilters.ageGroups.length === 0) {
+      alert("Please select mandatory filters (Gender & at least one Age Group)");
+      return;
+    }
+    setIsVaultSearching(true);
+    // Simulate smart auto-filtering based on command
+    setTimeout(() => {
+      setVaultResults([
+        {
+          id: 'v1',
+          name: "Vikram Malhotra",
+          score: 4.9,
+          jobs: 24,
+          isVault: true,
+          instagram: "vikram_malhotra_official",
+          image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&h=200&auto=format&fit=crop",
+          tags: ["Trained", "Action Ready"]
+        },
+        {
+          id: 'v2',
+          name: "Sanya Deshmukh",
+          score: 4.7,
+          jobs: 18,
+          isVault: true,
+          instagram: "sanya_deshmukh_acts",
+          image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&h=200&auto=format&fit=crop",
+          tags: ["Fluent Hindi", "Intro Video"]
+        }
+      ]);
+      setIsVaultSearching(false);
+    }, 1500);
+  };
+
+  const handleAiPosterGen = () => {
+    if (!aiPosterPrompt) return;
+    setIsGeneratingPoster(true);
+    setTimeout(() => {
+      setIsGeneratingPoster(false);
+      setAiPosterPrompt('');
+      // In a real app, this would add a new poster to the list
+    }, 2000);
+  };
+
+  const handleAiRewrite = () => {
+    if (!outreachMessage) return;
+    setIsAiRewriting(true);
+    setTimeout(() => {
+      setOutreachMessage("Dear Talent, we are currently casting for 'Project Shadow'. Based on your profile, we believe you'd be a great fit for the Lead Action role. Please review the details in the JAMz app.");
+      setIsAiRewriting(false);
+    }, 1200);
+  };
 
   const handleDashboardClick = (e) => {
     // Only trigger if not clicking the button itself
@@ -167,21 +268,38 @@ function DashboardPreview({ onCtaClick }) {
           <div className="preview-header-meta">
             <div className="preview-badge">
               <span className="pulse-dot"></span>
-              INTERACTIVE APP DEMONSTRATION
+              {isMobileView ? (
+                <><Smartphone size={14} /> MOBILE APP PREVIEW</>
+              ) : (
+                <><Monitor size={14} /> DESKTOP DASHBOARD PREVIEW</>
+              )}
             </div>
           </div>
           
-          <div className="browser-window">
-            <div className="browser-top-bar">
-              <div className="browser-dots">
-                <span className="dot red"></span>
-                <span className="dot yellow"></span>
-                <span className="dot green"></span>
+          <div className={isMobileView ? "mobile-device-frame" : "browser-window"}>
+            {isMobileView ? (
+              <div className="mobile-top-bar">
+                <div className="mobile-notch"></div>
+                <div className="mobile-status-icons">
+                  <span className="time">{formatTime(dateTime)}</span>
+                  <div className="right-icons">
+                    <div className="signal">📶</div>
+                    <div className="battery">🔋</div>
+                  </div>
+                </div>
               </div>
-              <div className="browser-address-bar">
-                www.jamzconnect.com/Mukesh
+            ) : (
+              <div className="browser-top-bar">
+                <div className="browser-dots">
+                  <span className="dot red"></span>
+                  <span className="dot yellow"></span>
+                  <span className="dot green"></span>
+                </div>
+                <div className="browser-address-bar">
+                  www.jamzconnect.com/dashboard
+                </div>
               </div>
-            </div>
+            )}
             
             <div className="dashboard-real-ui">
               {/* Top Bar */}
@@ -196,27 +314,6 @@ function DashboardPreview({ onCtaClick }) {
                       <span className="filter-tag">Intro Video <X size={10}/></span>
                     </div>
                   </div>
-                </div>
-                
-                <div className="ui-nav">
-                  <div className="ui-nav-item active"><LayoutDashboard size={16} /> <span>Dashboard</span></div>
-                  <div className="ui-nav-item"><Users size={16} /> <span>Talent</span></div>
-                  <div className="ui-nav-item"><Briefcase size={16} /> <span>Roles</span></div>
-                  <div className="ui-nav-item"><FileText size={16} /> <span>Scripts</span></div>
-                  <div className="ui-nav-item"><FileSignature size={16} /> <span>Contracts</span></div>
-                </div>
-
-                <div className="ui-user">
-                  <div className="ui-user-info">
-                    <div className="ui-avatar">M</div>
-                    <div className="ui-user-details">
-                      <span className="ui-user-name">Mukesh CD</span>
-                      <span className="ui-user-role">Admin</span>
-                    </div>
-                  </div>
-                  <button className="ui-logout-btn" title="Logout">
-                    <LogOut size={16} />
-                  </button>
                 </div>
               </div>
 
@@ -249,11 +346,11 @@ function DashboardPreview({ onCtaClick }) {
                     <span role="img" aria-label="clapper">
                       {isChristmas ? '🎄' : '🎬'}
                     </span>
-                    <h2>{greeting}, Mukesh CD {isChristmas && '🎅'}</h2>
+                    <h2>{greeting}{isChristmas && ' 🎅'}</h2>
                   </div>
                   <p>{isChristmas ? 'Merry Christmas! Managing ' : 'Currently managing '} <span className="text-gold-bold">{selectedProject.name}</span> for {selectedProject.client}</p>
                   <div className="banner-badges">
-                    <span className="badge-admin">Admin • cd-mukesh</span>
+                    <span className="badge-admin">Casting Admin</span>
                     <span className="badge-active-project">{selectedProject.castings.length} Active Castings</span>
                   </div>
                 </div>
@@ -372,13 +469,30 @@ function DashboardPreview({ onCtaClick }) {
                   </div>
 
                   <div className="talent-contact-grid">
-                    {[1, 2, 3, 4].map(i => (
-                      <div key={i} className="talent-contact-card">
+                    {[
+                      { id: 101, name: "Rahul Khanna", insta: "rahul_k_actor" },
+                      { id: 102, name: "Sneha Kapoor", insta: "sneha_kapoor_arts" },
+                      { id: 103, name: "Ishaan Singh", insta: "ishaan_singh_official" },
+                      { id: 104, name: "Ananya Roy", insta: "ananya_roy_acts" }
+                    ].map(talent => (
+                      <div key={talent.id} className="talent-contact-card">
                         <div className="talent-avatar-row">
-                          <div className="mini-avatar">T{i}</div>
+                          <div className="mini-avatar">T{talent.id % 100}</div>
                           <div className="talent-brief">
-                            <span className="talent-name">Talent Profile #{100 + i}</span>
-                            <span className="talent-location">Mumbai, India</span>
+                            <span className="talent-name">{talent.name}</span>
+                            <div className="talent-sub-meta">
+                              <span className="talent-location">Mumbai, India</span>
+                              <a 
+                                href={`https://instagram.com/${talent.insta}`} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="insta-link-card"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Instagram size={10} />
+                                <span>@{talent.insta}</span>
+                              </a>
+                            </div>
                           </div>
                           <span className="status-dot online"></span>
                         </div>
@@ -404,9 +518,28 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="ui-card half">
                   <div className="card-header">
                     <div className="card-title"><ImageIcon size={18} /> Visual Outreach Studio</div>
-                    <button className="ui-btn-gold">Generate New</button>
+                    <div className="ai-badge-sm"><Zap size={10} /> AI Powered</div>
                   </div>
-                  <p className="card-subtitle">Broadcast requirements & festive wishes to your talent network</p>
+                  <p className="card-subtitle">Generate co-branded requirement posters with JAMz & Your Agency branding</p>
+                  
+                  <div className="ai-poster-creator" onClick={(e) => e.stopPropagation()}>
+                    <input 
+                      type="text" 
+                      placeholder="Describe requirement (e.g. Action Hero for Netflix)..." 
+                      className="ai-input-sm"
+                      value={aiPosterPrompt}
+                      onChange={(e) => setAiPosterPrompt(e.target.value)}
+                    />
+                    <button 
+                      className="ui-btn-gold-sm" 
+                      onClick={handleAiPosterGen}
+                      disabled={isGeneratingPoster || !aiPosterPrompt}
+                    >
+                      {isGeneratingPoster ? <Loader2 size={14} className="animate-spin" /> : <Pencil size={14} />}
+                      <span>{isGeneratingPoster ? 'Generating...' : 'Gen Poster'}</span>
+                    </button>
+                  </div>
+
                   <div className="card-empty-state">
                     <div className="poster-list">
                       <div className="poster-item-ui">
@@ -435,46 +568,145 @@ function DashboardPreview({ onCtaClick }) {
 
                 <div className="ui-card half">
                   <div className="card-header">
-                    <div className="card-title"><Search size={18} /> Deep Search Results</div>
-                    <button className="ui-btn-outline-sm">Filter</button>
+                    <div className="card-title"><Zap size={18} className="text-gold" /> Deep Search Command Center</div>
                   </div>
-                  <p className="card-subtitle">Showing: Trained • Intro Video</p>
-                  <div className="top-actors-list">
-                    <div className="actor-item">
-                      <div className="rank">1</div>
-                      <div className="avatar">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" alt="Arjun Sharma - Featured Actor on JAMz Talent Management App" loading="lazy" />
-                      </div>
-                      <div className="info">
-                        <div className="name-row">
-                          <div className="name">Arjun Sharma</div>
-                          <span className="badge-trained">Trained</span>
-                        </div>
-                        <div className="score-row">
-                           <div className="star-rating">
-                             <Star size={10} fill="#fbbf24" color="#fbbf24" />
-                             <span className="score-val">4.8</span>
-                           </div>
-                           <span className="feedback-count">(12 jobs)</span>
+                  
+                  <div className="deep-search-controls" onClick={(e) => e.stopPropagation()}>
+                    <div className="mandatory-filters-row">
+                      <select 
+                        value={mandatoryFilters.gender} 
+                        onChange={(e) => setMandatoryFilters(prev => ({ ...prev, gender: e.target.value }))}
+                        className="filter-select-sm gender-select"
+                      >
+                        <option value="">Gender (Req)</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                      
+                      <div className="age-multi-select">
+                        <span className="multi-label">Age Groups:</span>
+                        <div className="age-tags">
+                          {['Kids', 'Teens', '20s', '30s', '40s+'].map(age => (
+                            <button 
+                              key={age}
+                              className={`age-tag-btn ${mandatoryFilters.ageGroups.includes(age) ? 'active' : ''}`}
+                              onClick={() => toggleAgeGroup(age)}
+                            >
+                              {age}
+                            </button>
+                          ))}
                         </div>
                       </div>
                     </div>
-                    <div className="actor-item flagged">
-                      <div className="rank">2</div>
-                      <div className="avatar">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop" alt="Priya Patel - Professional Talent in India" loading="lazy" />
-                      </div>
-                      <div className="info">
-                        <div className="name-row">
-                          <div className="name">Priya Patel</div>
-                          <Flag size={12} className="icon-red-flag" />
+
+                    {dynamicFilters.length > 0 && (
+                      <div className="dynamic-filters-row">
+                        <span className="dynamic-label">Auto-detected filters:</span>
+                        <div className="dynamic-tags">
+                          {dynamicFilters.map(filter => (
+                            <span key={filter.id} className="dynamic-tag">
+                              <Zap size={10} /> {filter.label}
+                            </span>
+                          ))}
                         </div>
-                        <div className="score-row">
-                           <div className="star-rating low">
-                             <Star size={10} fill="#ef4444" color="#ef4444" />
-                             <span className="score-val">2.1</span>
-                           </div>
-                           <span className="feedback-alert">Low Score Alert</span>
+                      </div>
+                    )}
+                    
+                    <div className="command-box-row">
+                      <textarea 
+                        placeholder="Type your command (e.g., 'Find a tall actor for an action role who knows martial arts')..."
+                        value={searchCommand}
+                        onChange={(e) => setSearchCommand(e.target.value)}
+                        className="command-textarea"
+                      />
+                      <button 
+                        className="ui-btn-gold-sm" 
+                        onClick={handleVaultSearch}
+                        disabled={isVaultSearching}
+                      >
+                        {isVaultSearching ? <Loader2 size={14} className="animate-spin" /> : <Search size={14} />}
+                        <span>Execute Command</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="dual-search-results">
+                    <div className="results-section">
+                      <div className="section-label">Private vault</div>
+                      <div className="top-actors-list">
+                        {(vaultResults.length > 0 ? vaultResults : [
+                          {
+                            id: 1,
+                            name: "Arjun Sharma",
+                            score: 4.8,
+                            jobs: 12,
+                            instagram: "arjun_sharma_actor",
+                            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop",
+                            tags: ["Trained"]
+                          },
+                          {
+                            id: 2,
+                            name: "Priya Patel",
+                            score: 2.1,
+                            jobs: 5,
+                            instagram: "priya_patel_official",
+                            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop",
+                            tags: ["Flagged"],
+                            isFlagged: true
+                          }
+                        ]).map((actor, idx) => (
+                          <div key={actor.id} className={`actor-item ${actor.isFlagged ? 'flagged' : ''}`}>
+                            <div className="rank">{idx + 1}</div>
+                            <div className="avatar">
+                              <img src={actor.image} alt={actor.name} loading="lazy" />
+                              {actor.isVault && <div className="vault-avatar-badge"><Zap size={8} /></div>}
+                            </div>
+                            <div className="info">
+                              <div className="name-row">
+                                <div className="name">{actor.name}</div>
+                                {actor.instagram && (
+                                  <a 
+                                    href={`https://instagram.com/${actor.instagram}`} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="insta-link-mini"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <Instagram size={12} />
+                                    <span>@{actor.instagram}</span>
+                                  </a>
+                                )}
+                                {actor.isVault && <span className="badge-vault">Vault Profile</span>}
+                                {actor.tags.map(tag => (
+                                  <span key={tag} className={`badge-${tag.toLowerCase().replace(' ', '-')}`}>{tag}</span>
+                                ))}
+                                {actor.isFlagged && <Flag size={12} className="icon-red-flag" />}
+                              </div>
+                              <div className="score-row">
+                                <div className={`star-rating ${actor.isFlagged ? 'low' : ''}`}>
+                                  <Star size={10} fill={actor.isFlagged ? "#ef4444" : "#fbbf24"} color={actor.isFlagged ? "#ef4444" : "#fbbf24"} />
+                                  <span className="score-val">{actor.score}</span>
+                                </div>
+                                <span className="feedback-count">({actor.jobs} jobs)</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="results-section premium-gated">
+                      <div className="section-label">
+                        Jamz Talent base
+                        <span className="premium-badge">Premium</span>
+                      </div>
+                      <div className="locked-state">
+                        <div className="locked-content">
+                          <Zap size={24} className="text-gold mb-2" />
+                          <div className="match-count">1,240+ Potential Matches</div>
+                          <p>Global talent network access requires a premium subscription.</p>
+                          <button className="ui-btn-gold-xs" onClick={(e) => { e.stopPropagation(); onCtaClick(); }}>View Plans</button>
                         </div>
                       </div>
                     </div>
@@ -525,77 +757,6 @@ function DashboardPreview({ onCtaClick }) {
                   <div className="activity-content-mini">
                     <span className="activity-label-mini">Client Share</span>
                     <span className="activity-value-mini">Share Shortlist</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Quick Actions & Team Management */}
-              <div className="ui-team-section">
-                <div className="team-header">
-                  <div className="team-title">
-                    <UserPlus size={18} />
-                    <div>
-                      <h3>Team Management</h3>
-                      <p>3 active team members</p>
-                    </div>
-                  </div>
-                  <button className="ui-btn-maroon">Invite Member</button>
-                </div>
-                
-                <div className="team-members-list">
-                  <div className="team-member-card">
-                    <div className="member-avatar">
-                      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&h=150&fit=crop" alt="Sarah J. - Casting Director on JAMz" loading="lazy" />
-                      <div className="status-indicator online"></div>
-                    </div>
-                    <div className="member-info">
-                      <h4>Sarah Jenkins</h4>
-                      <p>Senior Casting Director</p>
-                    </div>
-                    <button className="btn-member-action">Manage</button>
-                  </div>
-
-                  <div className="team-member-card">
-                    <div className="member-avatar">
-                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&h=150&fit=crop" alt="Rahul S. - Talent Scout India" loading="lazy" />
-                      <div className="status-indicator online"></div>
-                    </div>
-                    <div className="member-info">
-                      <h4>Rahul Sharma</h4>
-                      <p>Associate Director</p>
-                    </div>
-                    <button className="btn-member-action">Manage</button>
-                  </div>
-
-                  <div className="team-member-card">
-                    <div className="member-avatar">
-                      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&h=150&fit=crop" alt="Emma W. - Casting Assistant" loading="lazy" />
-                      <div className="status-indicator offline"></div>
-                    </div>
-                    <div className="member-info">
-                      <h4>Emma Watson</h4>
-                      <p>Junior CD</p>
-                    </div>
-                    <button className="btn-member-action">Manage</button>
-                  </div>
-                </div>
-
-                <div className="quick-actions-grid">
-                  <div className="action-card">
-                    <Users size={20} />
-                    <span>Talent management</span>
-                  </div>
-                  <div className="action-card">
-                    <Briefcase size={20} />
-                    <span>Create Role</span>
-                  </div>
-                  <div className="action-card">
-                    <ImageIcon size={20} />
-                    <span>Visual Outreach Studio</span>
-                  </div>
-                  <div className="action-card">
-                    <Activity size={20} />
-                    <span>Activity management</span>
                   </div>
                 </div>
               </div>
@@ -686,43 +847,108 @@ function DashboardPreview({ onCtaClick }) {
                 </div>
               </div>
 
-              {/* Actors Gallery */}
-              <div className="ui-section-title">Featured Talent</div>
-              <div className="ui-actors-grid-new">
-                <div className="ui-actor-card-new">
-                  <div className="actor-image-container">
-                    <div className="actor-image-placeholder">
-                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=600&fit=crop&fm=jpg" alt="Arjun Sharma - Portfolio Photo on JAMz Casting Platform" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
-                      <span className="badge-available">Available</span>
-                      <div className="view-icon"><Eye size={16} /></div>
+              {/* Communication Management Section */}
+              <div className="ui-section-title">Communication Centre</div>
+              <div className="ui-communication-row">
+                {/* Internal App Chat */}
+                <div className="ui-card half">
+                  <div className="card-header">
+                    <div className="card-title"><MessageSquare size={18} /> In-App Messaging</div>
+                    <div className="online-status">
+                      <span className="status-dot online"></span>
+                      <span className="status-text">Live Chat</span>
                     </div>
                   </div>
-                  <div className="actor-info-new">
-                    <h3>Arjun Sharma</h3>
-                    <p className="age-text">28 years old</p>
-                    <span className="badge-private-sm">Private</span>
-                  </div>
-                  <div className="actor-card-btns">
-                    <button className="btn-ui-icon"><Pencil size={14} /> Edit</button>
-                    <button className="btn-ui-icon"><Upload size={14} /> Upload</button>
-                    <button className="btn-ui-dark"><Video size={14} /> Video</button>
+                  <div className="chat-interface-mini">
+                    <div className="chat-groups">
+                      <div className="chat-group-item active">
+                        <div className="group-avatar">PM</div>
+                        <div className="group-info">
+                          <span className="group-name">Project Shadow Team</span>
+                          <span className="last-msg">Client: Reviewing auditions...</span>
+                        </div>
+                        <span className="msg-count">3</span>
+                      </div>
+                      <div className="chat-group-item">
+                        <div className="group-avatar client">C</div>
+                        <div className="group-info">
+                          <span className="group-name">Netflix India (Client)</span>
+                          <span className="last-msg">You: Agreement sent.</span>
+                        </div>
+                      </div>
+                      <div className="chat-group-item">
+                        <div className="group-avatar talent">T</div>
+                        <div className="group-info">
+                          <div className="group-name-row">
+                            <span className="group-name">Talent: Jake Thompson</span>
+                            <a href="https://instagram.com/jake_thompson_official" target="_blank" rel="noopener noreferrer" className="insta-link-card" onClick={(e) => e.stopPropagation()}>
+                              <Instagram size={10} />
+                            </a>
+                          </div>
+                          <span className="last-msg">Jake: Audition uploaded!</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Actor Top Actions */}
-              <div className="ui-actor-actions">
-                <div className="action-circle-item">
-                  <div className="circle-bg green"><Pencil size={20} color="#16a34a" /></div>
-                  <span>Edit Profile</span>
-                </div>
-                <div className="action-circle-item">
-                  <div className="circle-bg blue"><ImageIcon size={20} color="#2563eb" /></div>
-                  <span>Upload Images</span>
-                </div>
-                <div className="action-circle-item">
-                  <div className="circle-bg red"><Video size={20} color="#dc2626" /></div>
-                  <span>Share Video</span>
+                {/* WhatsApp Outreach */}
+                <div className="ui-card half">
+                  <div className="card-header">
+                    <div className="card-title text-green"><MessageCircle size={18} /> WhatsApp Outreach</div>
+                    <div className="ai-badge-sm"><Zap size={10} /> Smart Select</div>
+                  </div>
+                  <div className="whatsapp-management" onClick={(e) => e.stopPropagation()}>
+                    <div className="ai-message-box">
+                      <textarea 
+                        placeholder="Draft your outreach message..." 
+                        className="ai-textarea-sm"
+                        value={outreachMessage}
+                        onChange={(e) => setOutreachMessage(e.target.value)}
+                      />
+                      <div className="ai-action-row">
+                        <button 
+                          className="ai-btn-text" 
+                          onClick={handleAiRewrite}
+                          disabled={isAiRewriting || !outreachMessage}
+                        >
+                          {isAiRewriting ? <Loader2 size={10} className="animate-spin" /> : <Zap size={10} />}
+                          AI Professional Rewrite
+                        </button>
+                        <div className="suggested-chips">
+                          <span className="chip" onClick={() => setOutreachMessage("Hi, are you available for an audition tomorrow?")}>Availability?</span>
+                          <span className="chip" onClick={() => setOutreachMessage("Great news! You've been shortlisted for Project Shadow.")}>Shortlisted!</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="broadcast-options">
+                      <div className="broadcast-card">
+                        <div className="b-icon"><Users size={16} /></div>
+                        <div className="b-info">
+                          <span className="b-title">Group Outreach</span>
+                          <span className="b-desc">Broadcasting to all 120 applicants</span>
+                        </div>
+                        <button className="btn-send-wa"><Zap size={12} /> Send</button>
+                      </div>
+                      <div className="broadcast-card">
+                        <div className="b-icon sub"><Users size={16} /></div>
+                        <div className="b-info">
+                          <span className="b-title">Sub-Group Filter</span>
+                          <span className="b-desc">Shortlisted (12) • Trained Only</span>
+                        </div>
+                        <button className="btn-send-wa"><Zap size={12} /> Send</button>
+                      </div>
+                      <div className="broadcast-card">
+                        <div className="b-icon individual"><UserPlus size={16} /></div>
+                        <div className="b-info">
+                          <span className="b-title">Individual Connect</span>
+                          <span className="b-desc">Personalized 1:1 reaching</span>
+                        </div>
+                        <button className="btn-send-wa"><Zap size={12} /> Chat</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

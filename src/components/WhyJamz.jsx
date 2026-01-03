@@ -15,13 +15,13 @@ function WhyJamz() {
   const reasons = [
     {
       icon: <Clock size={24} />,
-      title: "Double Your Output",
-      desc: "Save hours of manual work and handle more projects with ease."
+      title: "Do More of What You Love",
+      desc: "Skip the tedious tasks and handle more projects with ease."
     },
     {
       icon: <Lock size={24} />,
-      title: "Private & Secure",
-      desc: "Your talent data is 100% private and protected within your unique login."
+      title: "Safe & Protected",
+      desc: "Your talent data is 100% confidential and protected within your secure account."
     },
     {
       icon: <Users size={24} />,
@@ -31,12 +31,12 @@ function WhyJamz() {
     {
       icon: <Layout size={24} />,
       title: "Smart Search",
-      desc: "Search your private database using any industry criteria you need."
+      desc: "Search your personal database using any casting requirements you need."
     },
     {
       icon: <ShieldCheck size={24} />,
-      title: "Total Team Control",
-      desc: "Keep your entire team in sync and maintain full control over every decision."
+      title: "Seamless Collaboration",
+      desc: "Keep your entire team in sync and stay updated on every choice."
     },
     {
       icon: <Globe size={24} />,
@@ -49,7 +49,7 @@ function WhyJamz() {
     <section id="why-jamz" className="why-jamz-section reveal">
       <div className="container">
         <h2 className="text-gradient-primary">Why Casting Directors Choose JAMz</h2>
-        <p className="section-subtitle">The preferred talent management app for India's creative industry.</p>
+        <p className="section-subtitle">The favorite casting tool for India's creative community.</p>
         <div className="why-cards-container">
           {reasons.map((r, i) => (
             <div key={i} className="why-card">

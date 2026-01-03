@@ -49,15 +49,15 @@ function Header({ onCtaClick }) {
         <div className="hero-content-main">
           <div className="hero-announcement">
             <span className="announcement-badge">Launching Soon</span>
-            <span className="announcement-text">Crafting the Future of Casting Excellence</span>
+            <span className="announcement-text">Redefining the Art of Finding Talent</span>
           </div>
           <h1 className="hero-title">
-            <span className="text-gradient-gold">AI Talent Management App India</span>
-            <span className="hero-title-accent">For Visionary Casting Directors</span>
+            <span className="text-gradient-gold">The Smart Casting Partner for India</span>
+            <span className="hero-title-accent">For the Visionaries Behind the Camera</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
-            Eliminate the manual grind. Our AI-driven engine finds your perfect 
-            cast 70% faster while automating your entire workflow.
+            Spend less time on paperwork. Your AI assistant helps you find the perfect 
+            cast 70% faster while streamlining your entire process.
           </p>
           
           <div className="hero-benefits-row">
