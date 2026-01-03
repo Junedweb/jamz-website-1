@@ -16,12 +16,12 @@ function WhyJamz() {
     {
       icon: <Clock size={24} />,
       title: "Do More of What You Love",
-      desc: "Skip the tedious tasks and handle more projects with ease."
+      desc: "Skip admin and take on more projects without burning out."
     },
     {
       icon: <Lock size={24} />,
       title: "Safe & Protected",
-      desc: "Your talent data is 100% confidential and protected within your secure account."
+      desc: "Your talent data stays private and protected inside your account."
     },
     {
       icon: <Users size={24} />,
@@ -31,17 +31,17 @@ function WhyJamz() {
     {
       icon: <Layout size={24} />,
       title: "Smart Search",
-      desc: "Search your personal database using any casting requirements you need."
+      desc: "Search your own database using the same language as your briefs."
     },
     {
       icon: <ShieldCheck size={24} />,
       title: "Seamless Collaboration",
-      desc: "Keep your entire team in sync and stay updated on every choice."
+      desc: "Keep your team and clients aligned on every decision."
     },
     {
       icon: <Globe size={24} />,
       title: "Work Anywhere",
-      desc: "Access your dashboard from the office, the studio, or right on the film set."
+      desc: "Access your dashboard from office, studio or set."
     }
   ];
 
@@ -49,7 +49,7 @@ function WhyJamz() {
     <section id="why-jamz" className="why-jamz-section reveal">
       <div className="container">
         <h2 className="text-gradient-primary">Why Casting Directors Choose JAMz</h2>
-        <p className="section-subtitle">The favorite casting tool for India's creative community.</p>
+        <p className="section-subtitle">The casting OS built for India's creative community.</p>
         <div className="why-cards-container">
           {reasons.map((r, i) => (
             <div key={i} className="why-card">

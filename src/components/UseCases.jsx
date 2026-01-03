@@ -5,17 +5,17 @@ function UseCases() {
     {
       icon: <User size={32} />,
       title: "Solo Directors",
-      desc: "JAMz is your productivity partner—achieve the results of a full team on your own."
+      desc: "Get the output of a full team while working solo."
     },
     {
       icon: <Zap size={32} />,
       title: "OTT & Large Projects",
-      desc: "Organize thousands of actors across multiple seasons without the endless clutter."
+      desc: "Organise thousands of actors across seasons without the usual clutter."
     },
     {
       icon: <Users size={32} />,
       title: "Casting Studios",
-      desc: "Stay in sync with your crew. Lead your team with clarity and confidence on every project."
+      desc: "Keep your crew in sync and projects moving with clarity."
     }
   ];
 
@@ -24,7 +24,7 @@ function UseCases() {
       <div className="container">
         <div className="section-header">
           <h2 className="text-gradient-primary">Casting Solutions Built for Growth</h2>
-          <p className="section-subtitle">Custom solutions for every casting journey in India.</p>
+          <p className="section-subtitle">Designed for every casting journey in India.</p>
         </div>
 
         <div className="use-cases-grid-simple">

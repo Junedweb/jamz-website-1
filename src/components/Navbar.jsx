@@ -14,10 +14,10 @@ const Navbar = ({ onCtaClick }) => {
   }, []);
 
   const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'App Demonstration', href: '#dashboard' },
+    { name: 'Toolkit', href: '#features' },
+    { name: 'Demo', href: '#dashboard' },
     { name: 'Impact', href: '#use-cases' },
-    { name: 'About', href: '#why-jamz' },
+    { name: 'Why JAMz', href: '#why-jamz' },
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);

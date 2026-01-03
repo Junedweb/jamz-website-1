@@ -257,8 +257,8 @@ function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
             <h2>{type === 'suggestion' ? 'Thank You!' : 'Request Received!'}</h2>
             <p className="subtitle">
               {type === 'suggestion' 
-                ? "We value your input. Your suggestions help us build a better platform for everyone."
-                : "Our team will contact you shortly to confirm your early access."}
+                ? "Your input helps us build a better platform for everyone."
+                : "We’ll contact you soon to confirm your early access."}
             </p>
             <button className="btn-back" onClick={onClose}>Close</button>
           </div>
@@ -267,8 +267,8 @@ function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
             <h2>{type === 'suggestion' ? 'Share Your Thoughts' : 'Join the Waitlist'}</h2>
             <p className="subtitle">
               {type === 'suggestion' 
-                ? "Help us build the industry standard for casting today with your feedback."
-                : "Be among the first to experience the future of smart casting."}
+                ? "Help us build the casting standard for India with your feedback."
+                : "Be among the first to try JAMz when we launch."}
             </p>
 
             <form onSubmit={handleSubmit}>

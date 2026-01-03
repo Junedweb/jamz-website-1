@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   Users, 
   Briefcase, 
@@ -13,7 +13,6 @@ import {
   MapPin,
   Calendar,
   UserPlus,
-  Snowflake,
   Facebook,
   Instagram,
   MessageCircle,
@@ -29,8 +28,8 @@ import {
   Star,
   Smartphone,
   Monitor,
-  Loader2,
-  ChevronDown
+  ChevronDown,
+  Loader2
 } from 'lucide-react';
 
 function DashboardPreview({ onCtaClick }) {
@@ -77,10 +76,8 @@ function DashboardPreview({ onCtaClick }) {
   // Deep Search States
   const [searchCommand, setSearchCommand] = useState('');
   const [mandatoryFilters, setMandatoryFilters] = useState({
-    gender: '',
     ageGroups: [] // Changed to array for multi-selection
   });
-  const [dynamicFilters, setDynamicFilters] = useState([]);
   const [isVaultSearching, setIsVaultSearching] = useState(false);
   const [vaultResults, setVaultResults] = useState([]);
   const [isGeneratingPoster, setIsGeneratingPoster] = useState(false);
@@ -89,27 +86,69 @@ function DashboardPreview({ onCtaClick }) {
   const [isAiRewriting, setIsAiRewriting] = useState(false);
   const [isLocked, setIsLocked] = useState(true);
   const statsRef = useRef(null);
-  const lastSectionRef = useRef(null);
   const dashboardContainerRef = useRef(null);
 
-  const handleDashboardScroll = (e) => {
+  const handleDashboardScroll = () => {
     if (isLocked) return;
     
     // Auto-scroll logic removed as per user request
   };
 
-  // Add wheel event listener for desktop users who might be using a mouse 
-  // while the dashboard is in a fixed-height container (like the browser-window if it had one)
+  // Add wheel and touch event listeners to allow natural scroll transition at boundaries
   useEffect(() => {
     const container = dashboardContainerRef.current;
     if (!container || isLocked) return;
 
+    let touchStartY = 0;
+
     const handleWheel = (e) => {
-      // Auto-scroll logic removed as per user request
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const delta = e.deltaY;
+
+      // Check if we are at the bottom boundary
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5;
+      const isAtTop = scrollTop <= 0;
+
+      if (delta > 0 && isAtBottom) {
+        // At the bottom, scrolling down - scroll the window
+        window.scrollBy({ top: delta, behavior: 'auto' });
+      } else if (delta < 0 && isAtTop) {
+        // At the top, scrolling up - scroll the window
+        window.scrollBy({ top: delta, behavior: 'auto' });
+      }
+    };
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchStartY - touchY;
+
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5;
+      const isAtTop = scrollTop <= 0;
+
+      if (deltaY > 0 && isAtBottom) {
+        // Scrolling down at the bottom - scroll the window
+        window.scrollBy(0, deltaY);
+      } else if (deltaY < 0 && isAtTop) {
+        // Scrolling up at the top - scroll the window
+        window.scrollBy(0, deltaY);
+      }
+      touchStartY = touchY;
     };
 
     container.addEventListener('wheel', handleWheel, { passive: true });
-    return () => container.removeEventListener('wheel', handleWheel);
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+    };
   }, [isLocked]);
 
   const handleExploreClick = (e) => {
@@ -128,8 +167,8 @@ function DashboardPreview({ onCtaClick }) {
     // Auto-scroll to stats removed as per user request
   };
 
-  // Logic to suggest filters based on command
-  useEffect(() => {
+  // Logic to suggest filters based on command - derived from searchCommand
+  const dynamicFilters = useMemo(() => {
     const command = searchCommand.toLowerCase();
     const suggestions = [];
     
@@ -146,10 +185,10 @@ function DashboardPreview({ onCtaClick }) {
       suggestions.push({ id: 'f4', label: 'Height: 5\'10"+', active: true });
     }
     
-    setDynamicFilters(suggestions);
+    return suggestions;
   }, [searchCommand]);
 
-  const selectedProject = projects.find(p => p.id === selectedProjectId);
+  const selectedProject = projects.find(p => p.id === selectedProjectId) || projects[0];
   const selectedCasting = selectedProject.castings.find(c => c.id === selectedCastingId) || selectedProject.castings[0];
 
   const toggleAgeGroup = (group) => {
@@ -164,8 +203,8 @@ function DashboardPreview({ onCtaClick }) {
   };
 
   const handleVaultSearch = () => {
-    if (!mandatoryFilters.gender || mandatoryFilters.ageGroups.length === 0) {
-      alert("Please select mandatory filters (Gender & at least one Age Group)");
+    if (mandatoryFilters.ageGroups.length === 0) {
+      alert("Please select at least one Age Group");
       return;
     }
     setIsVaultSearching(true);
@@ -290,7 +329,7 @@ function DashboardPreview({ onCtaClick }) {
             <Zap size={20} className="icon-gold" />
             <div>
               <strong>Launching Soon Preview</strong>
-              <p>You're exploring a sandbox version of JAMz while we build the future. Join our waitlist to be among the first to experience the full platform.</p>
+              <p>You’re exploring a sandbox preview of JAMz. Join the waitlist to be first in line for the full platform.</p>
             </div>
             <button className="demo-cta-inline" onClick={onCtaClick}>Join Waitlist</button>
           </div>
@@ -301,7 +340,7 @@ function DashboardPreview({ onCtaClick }) {
         <div className="section-header">
           <h2>AI-Powered <span className="text-gradient-gold">Casting Dashboard</span></h2>
           <p>
-            Explore our pre-launch interactive demonstration to see how we're building the future of casting.
+            Preview how JAMz runs your casting day from search to shortlist.
           </p>
         </div>
 
@@ -395,6 +434,15 @@ function DashboardPreview({ onCtaClick }) {
                   </div>
                   <p>{isChristmas ? 'Merry Christmas! Managing ' : 'Currently managing '} <span className="text-gold-bold">{selectedProject.name}</span> for {selectedProject.client}</p>
                   
+                  {!isLocked && (
+                    <div className="banner-health-mini">
+                      <Zap size={14} className="text-gold" />
+                      <span>Casting Health: <strong>82/100</strong></span>
+                      <span className="health-divider">|</span>
+                      <span className="health-status-text">On track</span>
+                    </div>
+                  )}
+
                   {isLocked && (
                     <button className="explore-ai-btn pulse" onClick={handleExploreClick}>
                       <Zap size={16} />
@@ -416,7 +464,7 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="ui-stats-grid" ref={statsRef}>
                   <div className="stat-card blue">
                     <div className="stat-header">
-                      <Activity size={20} />
+                      <Activity size={18} />
                       <span>Audition Funnel</span>
                     </div>
                     <div className="stat-value-row">
@@ -429,7 +477,7 @@ function DashboardPreview({ onCtaClick }) {
                   </div>
                   <div className="stat-card green">
                     <div className="stat-header">
-                      <FileSignature size={20} />
+                      <FileSignature size={18} />
                       <span>Smart Agreements</span>
                     </div>
                     <div className="stat-value-row">
@@ -440,7 +488,7 @@ function DashboardPreview({ onCtaClick }) {
                   </div>
                   <div className="stat-card orange">
                     <div className="stat-header">
-                      <Share2 size={20} />
+                      <Share2 size={18} />
                       <span>Easy Posting</span>
                     </div>
                     <div className="stat-value-row">
@@ -462,10 +510,32 @@ function DashboardPreview({ onCtaClick }) {
                       </div>
                     </div>
                     <div className="social-mini-icons">
-                      <Facebook size={12} />
-                      <Instagram size={12} />
-                      <MessageCircle size={12} />
-                      <MessageSquare size={12} />
+                      <Facebook size={11} />
+                      <Instagram size={11} />
+                      <MessageCircle size={11} />
+                      <MessageSquare size={11} />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="ui-card next-best-actions-card">
+                  <div className="card-header">
+                    <div className="card-title">
+                      <Zap size={16} className="text-gold" /> Next Best Actions
+                    </div>
+                  </div>
+                  <div className="next-actions-list">
+                    <div className="next-action-item">
+                      <span className="next-action-label">Follow up with 12 talents who opened but did not reply.</span>
+                      <button className="ui-btn-outline-sm">View list</button>
+                    </div>
+                    <div className="next-action-item">
+                      <span className="next-action-label">Schedule auditions for shortlisted profiles this week.</span>
+                      <button className="ui-btn-outline-sm">Plan slots</button>
+                    </div>
+                    <div className="next-action-item">
+                      <span className="next-action-label">Review 1 flagged profile before sending final shortlist.</span>
+                      <button className="ui-btn-outline-sm">Review now</button>
                     </div>
                   </div>
                 </div>
@@ -559,6 +629,13 @@ function DashboardPreview({ onCtaClick }) {
                         <div className="progress-bar-fill" style={{ width: '18%' }}></div>
                       </div>
                     </div>
+
+                    <div className="ai-shortlist-hint">
+                      <div className="ai-badge-sm">
+                        <Zap size={10} /> AI Shortlist Coach
+                      </div>
+                      <p>AI suggests adding 3 more profiles to reach a strong client-ready shortlist.</p>
+                    </div>
                   </div>
                 </div>
 
@@ -567,6 +644,9 @@ function DashboardPreview({ onCtaClick }) {
                   <div className="casting-sidebar">
                     <div className="sidebar-header">
                       <h3>Casting Requirements</h3>
+                      <div className="ai-inline-alert">
+                        <Zap size={10} /> <span>AI check: 2 shortlisted actors are double-booked next week.</span>
+                      </div>
                     </div>
                     <div className="casting-list">
                       {selectedProject.castings.map(casting => (
@@ -757,6 +837,28 @@ function DashboardPreview({ onCtaClick }) {
                           </div>
                         </div>
                       </div>
+
+                      <div className="ai-brief-breakdown" onClick={(e) => e.stopPropagation()}>
+                        <div className="card-subtitle">Paste a short brief and see a sample role breakdown.</div>
+                        <div className="brief-layout">
+                          <div className="brief-input">
+                            <textarea 
+                              className="brief-textarea" 
+                              placeholder="Paste a short scene or casting brief..."
+                            />
+                          </div>
+                          <div className="brief-output">
+                            <div className="brief-output-title">
+                              <Zap size={12} /> AI Role Breakdown
+                            </div>
+                            <ul className="brief-role-list">
+                              <li>Lead: Action hero, 28–35, Hindi and English fluent.</li>
+                              <li>Supporting: Best friend, 25–32, strong comic timing.</li>
+                              <li>Recurring: Police officer, 35–45, authoritative presence.</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -767,17 +869,6 @@ function DashboardPreview({ onCtaClick }) {
                     
                     <div className="deep-search-controls" onClick={(e) => e.stopPropagation()}>
                       <div className="mandatory-filters-row">
-                        <select 
-                          value={mandatoryFilters.gender} 
-                          onChange={(e) => setMandatoryFilters(prev => ({ ...prev, gender: e.target.value }))}
-                          className="filter-select-sm gender-select"
-                        >
-                          <option value="">Gender (Req)</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
-                        </select>
-                        
                         <div className="age-multi-select">
                           <span className="multi-label">Age Groups:</span>
                           <div className="age-tags">
@@ -884,6 +975,19 @@ function DashboardPreview({ onCtaClick }) {
                                   </div>
                                   <span className="feedback-count">({actor.jobs} jobs)</span>
                                 </div>
+                                <div className="similar-talent-row">
+                                  <span className="similar-label">
+                                    <Zap size={10} /> Similar talent:
+                                  </span>
+                                  <div className="similar-tags">
+                                    {(idx === 0 
+                                      ? ["Action-ready male, 28–35", "High reliability"] 
+                                      : ["Drama lead, 25–32", "Trained"]
+                                    ).map(label => (
+                                      <span key={label} className="similar-tag">{label}</span>
+                                    ))}
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           ))}
@@ -912,7 +1016,7 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="ui-section-title">Communication Centre</div>
                 <div className="ui-communication-row">
                   {/* WhatsApp Outreach */}
-                  <div className="ui-card" ref={lastSectionRef}>
+                  <div className="ui-card">
                     <div className="card-header">
                       <div className="card-title text-green"><MessageCircle size={18} /> WhatsApp Outreach</div>
                       <div className="ai-badge-sm"><Zap size={10} /> Smart Select</div>
@@ -938,6 +1042,12 @@ function DashboardPreview({ onCtaClick }) {
                             <span className="chip" onClick={() => setOutreachMessage("Hi, are you available for an audition tomorrow?")}>Availability?</span>
                             <span className="chip" onClick={() => setOutreachMessage("Great news! You've been shortlisted for Project Shadow.")}>Shortlisted!</span>
                           </div>
+                        </div>
+                        <div className="ai-review-row">
+                          <span className="ai-review-label">
+                            <Zap size={10} /> AI Review:
+                          </span>
+                          <span className="ai-review-text">Tone looks professional. Likely to get a quick response.</span>
                         </div>
                       </div>
 
@@ -1021,6 +1131,129 @@ function DashboardPreview({ onCtaClick }) {
 
                       <button className="ui-btn-outline-full">View Detailed Report</button>
                     </div>
+                  </div>
+                </div>
+
+                <div className="ui-section-title">Casting Director Control Center</div>
+                <div className="cd-modules-grid">
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Project & Role Management</h3>
+                    <p className="cd-module-desc">Create, manage, and track projects and roles in one place.</p>
+                    <ul className="cd-module-list">
+                      <li>Project overview & quick statuses</li>
+                      <li>Role briefs, requirements, and deadlines</li>
+                      <li>Applicants, shortlisted, and confirmed counts</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Funnel & Casting Health Analytics</h3>
+                    <p className="cd-module-desc">Understand where each casting stands and what needs attention.</p>
+                    <ul className="cd-module-list">
+                      <li>Funnel from invite to finalised</li>
+                      <li>Casting health score drill-down</li>
+                      <li>Drop-off reasons and bottlenecks</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Smart Agreements & Compliance</h3>
+                    <p className="cd-module-desc">Centralise contracts, consent, and paperwork for every talent.</p>
+                    <ul className="cd-module-list">
+                      <li>Generate and track agreements</li>
+                      <li>Minor consent and legal documents</li>
+                      <li>Status: not sent, sent, signed, issues</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Deep Talent Search & Vault</h3>
+                    <p className="cd-module-desc">Search your private vault and wider network with precision.</p>
+                    <ul className="cd-module-list">
+                      <li>Filters for age, look, skills, languages</li>
+                      <li>AI search commands and suggestions</li>
+                      <li>Saved searches and reusable lists</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Communication & Outreach</h3>
+                    <p className="cd-module-desc">Run all casting communication from one control centre.</p>
+                    <ul className="cd-module-list">
+                      <li>Broadcast, sub-group, and 1:1 outreach</li>
+                      <li>AI rewrites and tone checks</li>
+                      <li>Templates across WhatsApp, email, SMS</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Scheduling & Availability</h3>
+                    <p className="cd-module-desc">Coordinate auditions and callbacks without manual chaos.</p>
+                    <ul className="cd-module-list">
+                      <li>Slot planning for auditions</li>
+                      <li>Talent availability and confirmations</li>
+                      <li>Auto-reminders and rescheduling</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Shortlisting & Evaluation</h3>
+                    <p className="cd-module-desc">Compare and curate the right mix of talents for each role.</p>
+                    <ul className="cd-module-list">
+                      <li>Side-by-side comparisons and notes</li>
+                      <li>Internal vs client shortlist versions</li>
+                      <li>Team ratings and opinions</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Client Share & Handover</h3>
+                    <p className="cd-module-desc">Present cast options cleanly to clients and track feedback.</p>
+                    <ul className="cd-module-list">
+                      <li>Branded client links and decks</li>
+                      <li>Client like / maybe / no feedback</li>
+                      <li>Round-wise shortlist history</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Talent Feedback & History</h3>
+                    <p className="cd-module-desc">Build long-term relationships and memory with your talent base.</p>
+                    <ul className="cd-module-list">
+                      <li>Performance notes per audition</li>
+                      <li>Internal-only tags and flags</li>
+                      <li>Optional feedback sharing with talent</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">AI Creative Tools</h3>
+                    <p className="cd-module-desc">Use AI to turn briefs into posters, roles, and ideas.</p>
+                    <ul className="cd-module-list">
+                      <li>Visual outreach posters and creatives</li>
+                      <li>AI role breakdown from client briefs</li>
+                      <li>Suggestions for diversity and options</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Reporting & Insights</h3>
+                    <p className="cd-module-desc">See what is working across clients, projects, and talents.</p>
+                    <ul className="cd-module-list">
+                      <li>Client and project performance reports</li>
+                      <li>Time-to-cast and success metrics</li>
+                      <li>Top collaborators and talent reliability</li>
+                    </ul>
+                  </div>
+
+                  <div className="cd-module-card">
+                    <h3 className="cd-module-title">Team & Permissions</h3>
+                    <p className="cd-module-desc">Run your casting office with clear roles and access.</p>
+                    <ul className="cd-module-list">
+                      <li>Coordinator, assistant, and admin roles</li>
+                      <li>Task assignments and responsibilities</li>
+                      <li>Access control for sensitive data</li>
+                    </ul>
                   </div>
                 </div>
               </div>
