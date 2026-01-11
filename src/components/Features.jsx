@@ -19,62 +19,62 @@ function Features({ onCtaClick }) {
   const features = [
     { 
       icon: <Briefcase size={24} />, 
-      title: "Project & Role Management", 
-      desc: "Create, manage, and track projects and roles in one place.",
+      title: "AI Recruitment & Role Management", 
+      desc: "The complete hiring platform for creative projects and role tracking.",
       color: "#3b82f6"
     },
     { 
       icon: <Activity size={24} />, 
-      title: "Funnel & Casting Health Analytics", 
-      desc: "Understand where each casting stands and what needs attention.",
+      title: "Funnel & Artist Booking Analytics", 
+      desc: "Understand where each artist booking stands and what needs attention.",
       color: "#a855f7"
     },
     { 
       icon: <FileSignature size={24} />, 
       title: "Smart Agreements & Compliance", 
-      desc: "Centralise contracts, consent, and paperwork for every talent.",
+      desc: "Centralise contracts and artist booking paperwork for every talent.",
       color: "#22c55e"
     },
     { 
       icon: <Search size={24} />, 
-      title: "Deep Talent Search & Vault", 
-      desc: "Search your private vault and wider network with precision.",
+      title: "Talent Booking System & Search", 
+      desc: "A powerful talent booking system to search your private vault with precision.",
       color: "#eab308"
     },
     { 
       icon: <MessageSquare size={24} />, 
       title: "Communication & Outreach", 
-      desc: "Run all casting communication from one control centre.",
+      desc: "Run all recruitment communication from one control centre.",
       color: "#f97316"
     },
     { 
       icon: <Clock size={24} />, 
       title: "Scheduling & Availability", 
-      desc: "Coordinate auditions and callbacks without manual chaos.",
+      desc: "Coordinate auditions for hiring platforms without manual chaos.",
       color: "#881337"
     },
     { 
       icon: <CheckCircle size={24} />, 
       title: "Shortlisting & Evaluation", 
-      desc: "Compare and curate the right mix of talents for each role.",
+      desc: "Compare and curate the right mix of talents for your job app needs.",
       color: "#6366f1"
     },
     { 
       icon: <ExternalLink size={24} />, 
       title: "Client Share & Handover", 
-      desc: "Present cast options cleanly to clients and track feedback.",
+      desc: "Present artist booking options cleanly to clients and track feedback.",
       color: "#14b8a6"
     },
     { 
       icon: <Users size={24} />, 
       title: "Talent Feedback & History", 
-      desc: "Build long-term relationships and memory with your talent base.",
+      desc: "Build long-term relationships in the AI recruitment lifecycle.",
       color: "#ec4899"
     },
     { 
       icon: <Zap size={24} />, 
-      title: "AI Creative Tools", 
-      desc: "Use AI to turn briefs into posters, roles, and ideas.",
+      title: "AI Studios & Creative Tools", 
+      desc: "Use AI studios tools to turn briefs into posters, roles, and ideas.",
       color: "#facc15"
     },
     { 
@@ -139,7 +139,7 @@ function Features({ onCtaClick }) {
         </div>
 
         <a href="#" className="btn-primary features-cta" onClick={onCtaClick}>
-          Join Waitlist →
+          Get Early Access →
         </a>
       </div>
     </section>

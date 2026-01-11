@@ -52,11 +52,11 @@ function Header({ onCtaClick }) {
             <span className="announcement-text">Built with casting directors, for casting directors</span>
           </div>
           <h1 className="hero-title">
-            <span className="text-gradient-gold">Your AI Casting Partner for India</span>
-            <span className="hero-title-accent">Find the right talent in a fraction of the time</span>
+            <span className="text-gradient-gold">Your AI Casting & Talent Booking System</span>
+            <span className="hero-title-accent">The ultimate job app for India's creative industry</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
-            Cut admin, not ambition. JAMz helps you search, shortlist and coordinate talent up to 70% faster across projects.
+            The AI recruitment platform built for India. JAMz helps you with artist booking, shortlisting, and hiring up to 70% faster across AI studios and large projects.
           </p>
           
           <div className="hero-benefits-row">
@@ -76,7 +76,7 @@ function Header({ onCtaClick }) {
         </div>
         
         <div className="cta-group">
-          <a href="#" className="btn-primary" onClick={onCtaClick}>Join Waitlist</a>
+          <a href="#" className="btn-primary" onClick={onCtaClick}>Get Early Access</a>
           <a href="#" className="btn-secondary" onClick={() => onCtaClick('suggestion')}>Share Feedback</a>
         </div>
       </div>

@@ -40,7 +40,7 @@ const Navbar = ({ onCtaClick }) => {
             </a>
           ))}
           <button className="btn-primary nav-cta" onClick={onCtaClick}>
-            Waitlist
+            Early Access
           </button>
         </div>
 
@@ -67,7 +67,7 @@ const Navbar = ({ onCtaClick }) => {
             setIsMobileMenuOpen(false);
             onCtaClick();
           }}>
-            Waitlist
+            Early Access
           </button>
         </div>
       </div>

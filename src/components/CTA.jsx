@@ -8,7 +8,7 @@ function CTA({ onCtaClick }) {
           Join casting teams and acting schools using JAMz to make everyday work lighter.
         </p>
         <div className="cta-group">
-          <a href="#" className="btn-primary" onClick={onCtaClick}>Join Waitlist</a>
+          <a href="#" className="btn-primary" onClick={onCtaClick}>Get Early Access</a>
           <a href="#" className="btn-secondary" onClick={() => onCtaClick('suggestion')}>Share Feedback</a>
         </div>
       </div>

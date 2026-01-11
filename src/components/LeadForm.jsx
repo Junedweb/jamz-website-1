@@ -264,7 +264,7 @@ function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
           </div>
         ) : (
           <>
-            <h2>{type === 'suggestion' ? 'Share Your Thoughts' : 'Join the Waitlist'}</h2>
+            <h2>{type === 'suggestion' ? 'Share Your Thoughts' : 'Get Early Access'}</h2>
             <p className="subtitle">
               {type === 'suggestion' 
                 ? "Help us build the casting standard for India with your feedback."
@@ -468,7 +468,7 @@ function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
                 {status === 'loading' ? (
                   <><Loader2 className="animate-spin" size={20} /> Sending...</>
                 ) : (
-                  type === 'suggestion' ? 'Submit Suggestion' : 'Join Waitlist'
+                  type === 'suggestion' ? 'Submit Suggestion' : 'Get Early Access'
                 )}
               </button>
               <button type="button" className="btn-back" onClick={onClose}>Back to Home</button>

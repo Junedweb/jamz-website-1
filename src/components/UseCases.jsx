@@ -5,17 +5,17 @@ function UseCases() {
     {
       icon: <User size={32} />,
       title: "Solo Directors/Freelancers",
-      desc: "Get the output of a full team while working solo."
+      desc: "Use our talent booking system to manage your projects solo."
     },
     {
       icon: <Zap size={32} />,
       title: "OTT, TV, Brands & Large Projects",
-      desc: "Organise thousands of actors across seasons without the usual clutter."
+      desc: "The ultimate hiring platform for large-scale AI recruitment across seasons."
     },
     {
       icon: <Users size={32} />,
       title: "Casting Agencies",
-      desc: "Keep your crew in sync and projects moving with clarity."
+      desc: "Synchronise your artist booking workflow across hiring platforms."
     }
   ];
 

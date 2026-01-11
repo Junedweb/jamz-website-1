@@ -1,6 +1,4 @@
 <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Head: Slightly offset to the right as in the image -->
-  <ellipse cx="58" cy="28" rx="30" ry="22" fill="#2563eb"/>
-  <!-- Body: Asymmetrical curve starting lower on the left and ending higher on the right -->
-  <path d="M12 88C12 58 48 52 58 52C68 52 88 58 88 78" stroke="#2563eb" stroke-width="26" stroke-linecap="round"/>
+  <rect width="100" height="100" rx="25" fill="#F8FAFC"/>
+  <path d="M58 12L20 54H46L42 88L80 46H54L58 12Z" fill="#F97316" stroke="#F97316" stroke-width="4" stroke-linejoin="round"/>
 </svg>

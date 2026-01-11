@@ -16,17 +16,17 @@ function WhyJamz() {
     {
       icon: <Clock size={24} />,
       title: "Do More of What You Love",
-      desc: "Skip admin and take on more projects without burning out."
+      desc: "Skip admin on your job app and take on more projects without burning out."
     },
     {
       icon: <Lock size={24} />,
       title: "Safe & Protected",
-      desc: "Your talent data stays private and protected inside your account."
+      desc: "Your talent booking system data stays private and protected."
     },
     {
       icon: <Users size={24} />,
       title: "Fresh Talent Pool",
-      desc: "Access serious talent from the JAMz Drama School network for your next project."
+      desc: "Access serious talent for your hiring platform from our network."
     },
     {
       icon: <Layout size={24} />,

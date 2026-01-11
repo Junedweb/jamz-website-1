@@ -832,9 +832,9 @@ function DashboardPreview({ onCtaClick }) {
             <Zap size={20} className="icon-gold" />
             <div>
               <strong>Launching Soon Preview</strong>
-              <p>You’re exploring a sandbox preview of JAMz. Join the waitlist to be first in line for the full platform.</p>
+              <p>You’re exploring a sandbox preview of JAMz. Get early access to be first in line for the full platform.</p>
             </div>
-            <button className="demo-cta-inline" onClick={onCtaClick}>Join Waitlist</button>
+            <button className="demo-cta-inline" onClick={onCtaClick}>Get Early Access</button>
           </div>
         </div>
       )}
