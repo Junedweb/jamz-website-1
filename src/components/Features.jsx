@@ -1,78 +1,92 @@
 import { 
-  Share2, 
-  Filter, 
-  Activity, 
-  ShieldCheck, 
-  Flag, 
-  Calendar, 
-  RefreshCw, 
-  FileText, 
-  Users,
-  Star,
-  Image as ImageIcon,
-  Database,
-  Lock,
+  Briefcase,
+  Activity,
+  FileSignature,
+  Search,
   MessageSquare,
-  ExternalLink,
   Clock,
-  BarChart3,
-  CheckCircle
+  CheckCircle,
+  ExternalLink,
+  Users,
+  Zap,
+  BarChart,
+  Shield,
+  Loader2,
+  CheckCircle as CheckCircleIcon
 } from 'lucide-react';
 
 function Features({ onCtaClick }) {
   const features = [
     { 
-      icon: <Filter size={24} />, 
-      title: "Deep Search Command Centre", 
-      desc: "Type natural language commands and smart filters to find talent 70% faster.",
-      color: "#f97316"
-    },
-    { 
-      icon: <Lock size={24} />, 
-      title: "Private Talent Vault", 
-      desc: "Search your trusted database with tags, training and history in one place.",
-      color: "#10b981"
-    },
-    { 
-      icon: <Users size={24} />, 
-      title: "JAMz Talent Pool Access", 
-      desc: "Tap into the JAMz Drama School network when you need fresh, serious talent fast.",
-      color: "#8b5cf6"
-    },
-    { 
-      icon: <Activity size={24} />, 
-      title: "Live Casting Dashboard", 
-      desc: "View projects, roles, auditions and follow-ups in one real-time dashboard.",
-      color: "#06b6d4"
-    },
-    { 
-      icon: <ImageIcon size={24} />, 
-      title: "Visual Outreach Studio", 
-      desc: "Generate co-branded casting posters ready to share on social and WhatsApp.",
-      color: "#ec4899"
-    },
-    { 
-      icon: <MessageSquare size={24} />, 
-      title: "WhatsApp Outreach Automation", 
-      desc: "Broadcast, segment and 1:1 message talent with polished outreach in a few clicks.",
-      color: "#25d366"
-    },
-    { 
-      icon: <FileText size={24} />, 
-      title: "Smart Agreements & Contracts", 
-      desc: "Send digital T&Cs, per diems and confirmations so work starts faster.",
+      icon: <Briefcase size={24} />, 
+      title: "Project & Role Management", 
+      desc: "Create, manage, and track projects and roles in one place.",
       color: "#3b82f6"
     },
     { 
-      icon: <Star size={24} />, 
-      title: "Reputation & Reliability Scores", 
-      desc: "Track feedback for talent and clients so you know who delivers on set.",
-      color: "#ef4444"
+      icon: <Activity size={24} />, 
+      title: "Funnel & Casting Health Analytics", 
+      desc: "Understand where each casting stands and what needs attention.",
+      color: "#a855f7"
+    },
+    { 
+      icon: <FileSignature size={24} />, 
+      title: "Smart Agreements & Compliance", 
+      desc: "Centralise contracts, consent, and paperwork for every talent.",
+      color: "#22c55e"
+    },
+    { 
+      icon: <Search size={24} />, 
+      title: "Deep Talent Search & Vault", 
+      desc: "Search your private vault and wider network with precision.",
+      color: "#eab308"
+    },
+    { 
+      icon: <MessageSquare size={24} />, 
+      title: "Communication & Outreach", 
+      desc: "Run all casting communication from one control centre.",
+      color: "#f97316"
+    },
+    { 
+      icon: <Clock size={24} />, 
+      title: "Scheduling & Availability", 
+      desc: "Coordinate auditions and callbacks without manual chaos.",
+      color: "#881337"
+    },
+    { 
+      icon: <CheckCircle size={24} />, 
+      title: "Shortlisting & Evaluation", 
+      desc: "Compare and curate the right mix of talents for each role.",
+      color: "#6366f1"
     },
     { 
       icon: <ExternalLink size={24} />, 
-      title: "Team & Client Collaboration", 
-      desc: "Share clear shortlists and updates with your team and clients without spreadsheets.",
+      title: "Client Share & Handover", 
+      desc: "Present cast options cleanly to clients and track feedback.",
+      color: "#14b8a6"
+    },
+    { 
+      icon: <Users size={24} />, 
+      title: "Talent Feedback & History", 
+      desc: "Build long-term relationships and memory with your talent base.",
+      color: "#ec4899"
+    },
+    { 
+      icon: <Zap size={24} />, 
+      title: "AI Creative Tools", 
+      desc: "Use AI to turn briefs into posters, roles, and ideas.",
+      color: "#facc15"
+    },
+    { 
+      icon: <BarChart size={24} />, 
+      title: "Reporting & Insights", 
+      desc: "See what is working across clients, projects, and talents.",
+      color: "#06b6d4"
+    },
+    { 
+      icon: <Shield size={24} />, 
+      title: "Team & Permissions", 
+      desc: "Run your casting office with clear roles and access.",
       color: "#64748b"
     }
   ];
@@ -98,28 +112,28 @@ function Features({ onCtaClick }) {
           <h3 className="offerings-title">What's Included in Your Access:</h3>
           <div className="offerings-grid-mini">
             <div className="offering-item-mini">
-              <CheckCircle size={16} className="text-primary" />
-              <span>Full Casting Dashboard</span>
+              <CheckCircleIcon size={16} className="text-primary" />
+              <span>Full 12-Module Control Centre</span>
             </div>
             <div className="offering-item-mini">
-              <CheckCircle size={16} className="text-primary" />
-              <span>Talent Mobile App Access</span>
+              <CheckCircleIcon size={16} className="text-primary" />
+              <span>AI-Powered Search & Creative Tools</span>
             </div>
             <div className="offering-item-mini">
-              <CheckCircle size={16} className="text-primary" />
-              <span>Private Database Sync</span>
+              <CheckCircleIcon size={16} className="text-primary" />
+              <span>Secure Private Talent Vault</span>
             </div>
             <div className="offering-item-mini">
-              <CheckCircle size={16} className="text-primary" />
-              <span>WhatsApp Outreach Tools</span>
+              <CheckCircleIcon size={16} className="text-primary" />
+              <span>Automated WhatsApp & Outreach Hub</span>
             </div>
             <div className="offering-item-mini">
-              <CheckCircle size={16} className="text-primary" />
-              <span>Project Performance Analytics</span>
+              <CheckCircleIcon size={16} className="text-primary" />
+              <span>Real-time Analytics & Reporting</span>
             </div>
             <div className="offering-item-mini">
-              <CheckCircle size={16} className="text-primary" />
-              <span>Priority support for issues and new requirements.</span>
+              <CheckCircleIcon size={16} className="text-primary" />
+              <span>Team Permissions & Client Portals</span>
             </div>
           </div>
         </div>

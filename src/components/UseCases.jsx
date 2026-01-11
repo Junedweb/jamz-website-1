@@ -4,17 +4,17 @@ function UseCases() {
   const cases = [
     {
       icon: <User size={32} />,
-      title: "Solo Directors",
+      title: "Solo Directors/Freelancers",
       desc: "Get the output of a full team while working solo."
     },
     {
       icon: <Zap size={32} />,
-      title: "OTT & Large Projects",
+      title: "OTT, TV, Brands & Large Projects",
       desc: "Organise thousands of actors across seasons without the usual clutter."
     },
     {
       icon: <Users size={32} />,
-      title: "Casting Studios",
+      title: "Casting Agencies",
       desc: "Keep your crew in sync and projects moving with clarity."
     }
   ];

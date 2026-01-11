@@ -227,7 +227,7 @@ const FortuneTeller = () => {
     if (window.gtag) {
       window.gtag('event', 'open_suggestion_fab', {
         'event_category': 'engagement',
-        'event_label': 'Let us know what you need in the app'
+        'event_label': 'You suggest, we build.'
       });
     }
     setIsOpen(true);
@@ -289,7 +289,7 @@ const FortuneTeller = () => {
         <div className="fab-icon">
           <MessageSquare size={24} />
         </div>
-        <div className="fab-text">Let us know what you need in the app</div>
+        <div className="fab-text">You suggest, we build.</div>
       </div>
     );
   }

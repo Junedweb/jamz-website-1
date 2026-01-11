@@ -29,7 +29,10 @@ import {
   Smartphone,
   Monitor,
   ChevronDown,
-  Loader2
+  Loader2,
+  BarChart,
+  Shield,
+  Mail
 } from 'lucide-react';
 
 function DashboardPreview({ onCtaClick }) {
@@ -72,6 +75,106 @@ function DashboardPreview({ onCtaClick }) {
   ]);
   const [selectedProjectId, setSelectedProjectId] = useState(1);
   const [selectedCastingId, setSelectedCastingId] = useState(101);
+  const [activeModule, setActiveModule] = useState(null);
+
+  const modules = [
+    {
+      id: 'projects',
+      title: "Project & Role Management",
+      icon: <Briefcase size={20} />,
+      desc: "Create, manage, and track projects and roles in one place.",
+      color: "blue",
+      items: ["Project overview & quick statuses", "Role briefs, requirements, and deadlines", "Applicants, shortlisted, and confirmed counts"]
+    },
+    {
+      id: 'analytics',
+      title: "Funnel & Casting Health Analytics",
+      icon: <Activity size={20} />,
+      desc: "Understand where each casting stands and what needs attention.",
+      color: "purple",
+      items: ["Funnel from invite to finalised", "Casting health score drill-down", "Drop-off reasons and bottlenecks"]
+    },
+    {
+      id: 'agreements',
+      title: "Smart Agreements & Compliance",
+      icon: <FileSignature size={20} />,
+      desc: "Centralise contracts, consent, and paperwork for every talent.",
+      color: "green",
+      items: ["Generate and track agreements", "Minor consent and legal documents", "Status: not sent, sent, signed, issues"]
+    },
+    {
+      id: 'search',
+      title: "Deep Talent Search & Vault",
+      icon: <Search size={20} />,
+      desc: "Search your private vault and wider network with precision.",
+      color: "gold",
+      items: ["Filters for age, look, skills, languages", "AI search commands and suggestions", "Saved searches and reusable lists"]
+    },
+    {
+      id: 'outreach',
+      title: "Communication & Outreach",
+      icon: <MessageSquare size={20} />,
+      desc: "Run all casting communication from one control centre.",
+      color: "orange",
+      items: ["Broadcast, sub-group, and 1:1 outreach", "AI rewrites and tone checks", "Templates across WhatsApp, email, SMS"]
+    },
+    {
+      id: 'scheduling',
+      title: "Scheduling & Availability",
+      icon: <Clock size={20} />,
+      desc: "Coordinate auditions and callbacks without manual chaos.",
+      color: "maroon",
+      items: ["Slot planning for auditions", "Talent availability and confirmations", "Auto-reminders and rescheduling"]
+    },
+    {
+      id: 'evaluation',
+      title: "Shortlisting & Evaluation",
+      icon: <CheckCircle size={20} />,
+      desc: "Compare and curate the right mix of talents for each role.",
+      color: "indigo",
+      items: ["Side-by-side comparisons and notes", "Internal vs client shortlist versions", "Team ratings and opinions"]
+    },
+    {
+      id: 'client',
+      title: "Client Share & Handover",
+      icon: <ExternalLink size={20} />,
+      desc: "Present cast options cleanly to clients and track feedback.",
+      color: "teal",
+      items: ["Branded client links and decks", "Client like / maybe / no feedback", "Round-wise shortlist history"]
+    },
+    {
+      id: 'feedback',
+      title: "Talent Feedback & History",
+      icon: <Users size={20} />,
+      desc: "Build long-term relationships and memory with your talent base.",
+      color: "pink",
+      items: ["Performance notes per audition", "Internal-only tags and flags", "Optional feedback sharing with talent"]
+    },
+    {
+      id: 'ai-tools',
+      title: "AI Creative Tools",
+      icon: <Zap size={20} />,
+      desc: "Use AI to turn briefs into posters, roles, and ideas.",
+      color: "yellow",
+      items: ["Visual outreach posters and creatives", "AI role breakdown from client briefs", "Suggestions for diversity and options"]
+    },
+    {
+      id: 'reporting',
+      title: "Reporting & Insights",
+      icon: <BarChart size={20} />,
+      desc: "See what is working across clients, projects, and talents.",
+      color: "cyan",
+      items: ["Client and project performance reports", "Time-to-cast and success metrics", "Top collaborators and talent reliability"]
+    },
+    {
+      id: 'team',
+      title: "Team & Permissions",
+      icon: <Shield size={20} />,
+      desc: "Run your casting office with clear roles and access.",
+      color: "slate",
+      items: ["Coordinator, assistant, and admin roles", "Task assignments and responsibilities", "Access control for sensitive data"]
+    }
+  ];
 
   // Deep Search States
   const [searchCommand, setSearchCommand] = useState('');
@@ -84,6 +187,7 @@ function DashboardPreview({ onCtaClick }) {
   const [aiPosterPrompt, setAiPosterPrompt] = useState('');
   const [outreachMessage, setOutreachMessage] = useState('');
   const [isAiRewriting, setIsAiRewriting] = useState(false);
+  const [activeOutreachChannel, setActiveOutreachChannel] = useState('whatsapp');
   const [isLocked, setIsLocked] = useState(true);
   const statsRef = useRef(null);
   const dashboardContainerRef = useRef(null);
@@ -311,6 +415,405 @@ function DashboardPreview({ onCtaClick }) {
     });
   };
 
+  const renderModuleContent = () => {
+    const mod = modules.find(m => m.id === activeModule);
+    if (!mod) return null;
+
+    return (
+      <article className="cd-module-detail-view fade-in" role="region" aria-labelledby={`module-title-${mod.id}`}>
+        <header className="module-detail-header">
+          <button 
+            className="back-to-grid" 
+            onClick={() => setActiveModule(null)}
+            aria-label="Back to Control Centre grid"
+          >
+            <X size={20} /> <span>Back to Control Centre</span>
+          </button>
+          <div className="module-title-row">
+            <div className={`module-icon-large ${mod.color}`} aria-hidden="true">{mod.icon}</div>
+            <div>
+              <h2 id={`module-title-${mod.id}`}>{mod.title}</h2>
+              <p>{mod.desc}</p>
+            </div>
+          </div>
+        </header>
+
+        <main className="module-prototype-content">
+          {activeModule === 'projects' && (
+            <section className="prototype-projects" aria-label="Projects Overview">
+              <div className="proto-stats-row">
+                <div className="proto-stat"><span>Active Projects</span><strong>5</strong></div>
+                <div className="proto-stat"><span>Total Roles</span><strong>12</strong></div>
+                <div className="proto-stat"><span>Openings</span><strong>8</strong></div>
+              </div>
+              <div className="proto-card-list">
+                {projects.map(p => (
+                  <div key={p.id} className="proto-project-card">
+                    <div className="project-card-header">
+                      <strong>{p.name}</strong>
+                      <span className="badge-green-soft">Active</span>
+                    </div>
+                    <div className="project-card-details">
+                      <div className="detail-item">
+                        <span className="label">Client:</span>
+                        <span className="value">{p.client}</span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="label">Roles:</span>
+                        <span className="value">{p.castings.length}</span>
+                      </div>
+                    </div>
+                    <button className="ui-btn-gold-sm" aria-label={`View details for ${p.name}`}>View Project</button>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'analytics' && (
+            <section className="prototype-analytics" aria-label="Casting Analytics">
+              <div className="funnel-viz" role="img" aria-label="Casting funnel visualization">
+                <div className="funnel-step"><span>Reach</span><div className="bar" style={{width: '100%'}} aria-label="12,400 reach">12,400</div></div>
+                <div className="funnel-step"><span>Interest</span><div className="bar" style={{width: '45%'}} aria-label="5,580 interest">5,580</div></div>
+                <div className="funnel-step"><span>Audition</span><div className="bar" style={{width: '12%'}} aria-label="1,488 auditions">1,488</div></div>
+                <div className="funnel-step"><span>Shortlist</span><div className="bar" style={{width: '3%'}} aria-label="372 shortlists">372</div></div>
+                <div className="funnel-step"><span>Cast</span><div className="bar" style={{width: '0.5%'}} aria-label="62 cast">62</div></div>
+              </div>
+              <div className="health-metrics">
+                <div className="metric-card">
+                  <span>Average Time to Cast</span>
+                  <strong>14 Days</strong>
+                </div>
+                <div className="metric-card">
+                  <span>Talent Response Rate</span>
+                  <strong>88%</strong>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'search' && (
+            <section className="prototype-search" aria-label="Talent Search">
+              <div className="search-controls">
+                <div className="proto-search-bar">
+                  <Search size={18} aria-hidden="true" />
+                  <input 
+                    type="text" 
+                    placeholder="Search talent by skill, look, or name..." 
+                    aria-label="Search talent"
+                  />
+                </div>
+                <div className="search-filters-proto" role="group" aria-label="Active filters">
+                  <span className="p-filter">Age: 20-30</span>
+                  <span className="p-filter">Gender: Male</span>
+                  <span className="p-filter">Location: Mumbai</span>
+                </div>
+              </div>
+              <div className="search-results-proto">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="search-result-card">
+                    <div className="result-avatar" aria-hidden="true"></div>
+                    <div className="result-info">
+                      <strong>Talent Name {i}</strong>
+                      <span>Actor • 25 Years • Mumbai</span>
+                    </div>
+                    <button className="ui-btn-outline-sm" aria-label={`Add Talent Name ${i} to list`}>Add to List</button>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'agreements' && (
+            <section className="prototype-agreements" aria-label="Agreements Status">
+              <div className="proto-stats-row">
+                <div className="proto-stat"><span>Pending Signature</span><strong>14</strong></div>
+                <div className="proto-stat"><span>Signed</span><strong>42</strong></div>
+                <div className="proto-stat"><span>Legal Issues</span><strong>2</strong></div>
+              </div>
+              <div className="proto-card-list">
+                {[
+                  { name: "Rahul Khanna", type: "Actor Agreement", date: "10 Jan", status: "Signed", color: "green" },
+                  { name: "Priya Sharma", type: "Minor Consent", date: "11 Jan", status: "Pending", color: "orange" },
+                  { name: "Amit Shah", type: "NDA", date: "09 Jan", status: "Signed", color: "green" }
+                ].map((doc, i) => (
+                  <div key={i} className="proto-agreement-card">
+                    <div className="agreement-card-header">
+                      <strong>{doc.name}</strong>
+                      <span className={`badge-${doc.color}-soft`}>{doc.status}</span>
+                    </div>
+                    <div className="agreement-card-details">
+                      <div className="detail-item">
+                        <span className="label">Type:</span>
+                        <span className="value">{doc.type}</span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="label">Sent:</span>
+                        <span className="value">{doc.date}</span>
+                      </div>
+                    </div>
+                    <div className="agreement-card-actions">
+                      <button className="ui-btn-outline-sm" aria-label={`View ${doc.type} for ${doc.name}`}>View</button>
+                      {doc.status !== 'Signed' && (
+                        <button className="ui-btn-gold-sm" aria-label={`Resend ${doc.type} to ${doc.name}`}>Resend</button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'outreach' && (
+            <section className="prototype-outreach" aria-label="Outreach Channels">
+              <div className="outreach-channels">
+                <button 
+                  className={`channel-card ${activeOutreachChannel === 'whatsapp' ? 'active' : ''}`} 
+                  aria-pressed={activeOutreachChannel === 'whatsapp'}
+                  onClick={() => setActiveOutreachChannel('whatsapp')}
+                >
+                  <MessageCircle size={24} aria-hidden="true" />
+                  <span>WhatsApp</span>
+                  <div className="status-dot green" aria-label="Online"></div>
+                </button>
+                <button 
+                  className={`channel-card ${activeOutreachChannel === 'email' ? 'active' : ''}`} 
+                  aria-pressed={activeOutreachChannel === 'email'}
+                  onClick={() => setActiveOutreachChannel('email')}
+                >
+                  <Mail size={24} aria-hidden="true" />
+                  <span>Email</span>
+                  <div className="status-dot green" aria-label="Online"></div>
+                </button>
+                <button 
+                  className={`channel-card ${activeOutreachChannel === 'sms' ? 'active' : ''}`} 
+                  aria-pressed={activeOutreachChannel === 'sms'}
+                  onClick={() => setActiveOutreachChannel('sms')}
+                >
+                  <Smartphone size={24} aria-hidden="true" />
+                  <span>SMS</span>
+                  <div className="status-dot gray" aria-label="Offline"></div>
+                </button>
+              </div>
+              <div className="outreach-message-preview">
+                <label htmlFor="outreach-msg">Broadcast Message Preview:</label>
+                <textarea 
+                  id="outreach-msg"
+                  className="proto-textarea"
+                  value={outreachMessage || "Hi [Talent Name], we have an exciting role for you..."}
+                  readOnly
+                  aria-label="Message preview"
+                ></textarea>
+              </div>
+              <div className="outreach-actions">
+                <button className="ui-btn-dark-full" aria-label="Create New Broadcast Message">Create New Broadcast</button>
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'scheduling' && (
+            <section className="prototype-scheduling" aria-label="Audition Scheduling">
+              <header className="calendar-header-proto">
+                <div className="date-nav">
+                  <button aria-label="Previous day" className="ui-nav-btn">&lt;</button>
+                  <span className="current-date">12 Jan 2026</span>
+                  <button aria-label="Next day" className="ui-nav-btn">&gt;</button>
+                </div>
+                <button className="ui-btn-outline-sm">Today</button>
+              </header>
+              <div className="slots-container-scroll">
+                <div className="slots-grid-proto">
+                  {['Studio A', 'Studio B', 'Zoom 1'].map(studio => (
+                    <div key={studio} className="day-column">
+                      <span className="day-header">{studio}</span>
+                      <div className="slot-pill">09:00 AM</div>
+                      <div className="slot-pill active">10:30 AM</div>
+                      <div className="slot-pill">12:00 PM</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'evaluation' && (
+            <section className="prototype-evaluation" aria-label="Talent Evaluation">
+              <div className="evaluation-grid">
+                {[
+                  { name: "Vikram Malhotra", acts: 4, look: 5, note: "Strong performance, great range. Fits the lead brief perfectly." },
+                  { name: "Sanya Deshmukh", acts: 5, look: 4, note: "Exceptional screen presence. Dialogue delivery is spot on." }
+                ].map((candidate, i) => (
+                  <div key={i} className="talent-eval-card">
+                    <div className="eval-card-top">
+                      <div className="eval-photo" aria-hidden="true"></div>
+                      <div className="eval-main-info">
+                        <strong>{candidate.name}</strong>
+                        <div className="ratings-proto">
+                          <div className="rating-item">
+                            <span>Acting</span>
+                            <div className="stars">{"⭐".repeat(candidate.acts)}</div>
+                          </div>
+                          <div className="rating-item">
+                            <span>Look</span>
+                            <div className="stars">{"⭐".repeat(candidate.look)}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="notes-proto">{candidate.note}</p>
+                    <div className="eval-actions">
+                      <button className="ui-btn-green-sm" aria-label={`Shortlist ${candidate.name}`}>Shortlist</button>
+                      <button className="ui-btn-red-sm" aria-label={`Reject ${candidate.name}`}>Reject</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'ai-tools' && (
+            <section className="prototype-ai" aria-label="AI Creative Tools">
+              <div className="ai-actions-proto">
+                <button className="ai-tool-btn">
+                  <ImageIcon size={18} aria-hidden="true" />
+                  <span>Generate Poster</span>
+                </button>
+                <button className="ai-tool-btn">
+                  <Zap size={18} aria-hidden="true" />
+                  <span>AI Role Brief</span>
+                </button>
+              </div>
+              <div className="ai-output-proto" role="log" aria-live="polite">
+                <p>Analyzing brief for 'Project Shadow'...</p>
+                <p>Generating role requirements based on historical success data<span className="ai-cursor" aria-hidden="true"></span></p>
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'reporting' && (
+            <section className="prototype-reporting" aria-label="Performance Reports">
+              <div className="reporting-charts">
+                <div className="chart-placeholder" role="img" aria-label="Bar chart showing project performance">
+                  <div className="chart-bar-v" style={{height: '60%'}} aria-label="Project A: 60%"></div>
+                  <div className="chart-bar-v" style={{height: '85%'}} aria-label="Project B: 85%"></div>
+                  <div className="chart-bar-v" style={{height: '40%'}} aria-label="Project C: 40%"></div>
+                  <div className="chart-bar-v" style={{height: '70%'}} aria-label="Project D: 70%"></div>
+                </div>
+                <div className="chart-labels" aria-hidden="true">
+                  <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
+                </div>
+              </div>
+              <div className="report-list">
+                <div className="report-item">
+                  <BarChart size={16} aria-hidden="true" />
+                  <span>Monthly Casting Success Report</span>
+                  <button className="ui-btn-outline-sm">View</button>
+                </div>
+                <div className="report-item">
+                  <Users size={16} aria-hidden="true" />
+                  <span>Talent Diversity Analytics</span>
+                  <button className="ui-btn-outline-sm">View</button>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'team' && (
+            <section className="prototype-team" aria-label="Team Management">
+              <div className="team-members-list">
+                {[
+                  { name: "Alex Rivers", role: "Lead CD", status: "online" },
+                  { name: "Sarah Chen", role: "Associate", status: "online" },
+                  { name: "Mike Ross", role: "Assistant", status: "offline" }
+                ].map((m, i) => (
+                  <div key={i} className="team-member-card">
+                    <div className="m-avatar" aria-hidden="true"></div>
+                    <div className="m-info">
+                      <strong>{m.name}</strong>
+                      <span>{m.role}</span>
+                    </div>
+                    <span className={`m-status ${m.status}`}>{m.status}</span>
+                  </div>
+                ))}
+              </div>
+              <button className="ui-btn-dark-full">Invite Team Member</button>
+            </section>
+          )}
+
+          {activeModule === 'client' && (
+            <section className="prototype-client" aria-label="Client Collaboration">
+              <div className="client-share-header">
+                <div className="share-info">
+                  <strong>Client Share Link</strong>
+                  <span className="share-url">jamz.app/share/project-shadow-x92</span>
+                </div>
+                <button className="ui-btn-outline-sm">Copy Link</button>
+              </div>
+              <div className="client-feedback-stats">
+                <div className="c-stat"><span>Liked</span><strong>12</strong></div>
+                <div className="c-stat"><span>Maybe</span><strong>5</strong></div>
+                <div className="c-stat"><span>Rejected</span><strong>3</strong></div>
+              </div>
+              <div className="client-talent-list">
+                {[1, 2].map(i => (
+                  <div key={i} className="client-item">
+                    <div className="c-avatar" aria-hidden="true"></div>
+                    <div className="c-info">
+                      <strong>Talent {i}</strong>
+                      <span>Lead Action Role</span>
+                    </div>
+                    <span className="c-feedback-badge liked">LIKED</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {activeModule === 'feedback' && (
+            <section className="prototype-feedback" aria-label="Talent Feedback History">
+              <div className="feedback-search">
+                <Search size={16} aria-hidden="true" />
+                <input type="text" placeholder="Search talent feedback..." aria-label="Search feedback" />
+              </div>
+              <div className="feedback-timeline">
+                {[
+                  { name: "Vikram Malhotra", text: "Exceptional audition for 'Shadow'. Very professional.", tag: "Positive" },
+                  { name: "Sanya Deshmukh", text: "Great energy, needs slight improvement in dialogue delivery.", tag: "Constructive" }
+                ].map((f, i) => (
+                  <div key={i} className="feedback-card-proto">
+                    <div className="f-header">
+                      <strong>{f.name}</strong>
+                      <span className={`f-tag ${f.tag.toLowerCase()}`}>{f.tag}</span>
+                    </div>
+                    <p>{f.text}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </main>
+
+        <footer className="module-navigation-footer">
+          <nav aria-label="Module Quick Navigation">
+            <span>Switch Module:</span>
+            <div className="quick-nav-links">
+              {modules.filter(m => m.id !== activeModule).slice(0, 4).map(m => (
+                <button 
+                  key={m.id} 
+                  className="quick-nav-btn" 
+                  onClick={() => setActiveModule(m.id)}
+                  aria-label={`Switch to ${m.title}`}
+                >
+                  {m.icon} <span>{m.title.split(' ')[0]}</span>
+                </button>
+              ))}
+            </div>
+          </nav>
+        </footer>
+      </article>
+    );
+  };
+
   return (
     <section id="dashboard" className={`dashboard-preview-section reveal ${isChristmas ? 'festive-christmas' : ''}`}>
       {showDemoMsg && (
@@ -465,55 +968,49 @@ function DashboardPreview({ onCtaClick }) {
                   <div className="stat-card blue">
                     <div className="stat-header">
                       <Activity size={18} />
-                      <span>Audition Funnel</span>
+                      <span>Casting Health</span>
                     </div>
                     <div className="stat-value-row">
-                      <div className="stat-value">{selectedCasting.talentCount}/{selectedCasting.applicants}</div>
-                      <span className="stat-sub">Confirmed</span>
+                      <div className="stat-value">82/100</div>
+                      <span className="stat-sub">Overall Score</span>
                     </div>
                     <div className="funnel-bar">
-                      <div className="funnel-fill" style={{ width: `${(selectedCasting.talentCount / selectedCasting.applicants) * 100}%` }}></div>
+                      <div className="funnel-fill" style={{ width: '82%' }}></div>
                     </div>
                   </div>
                   <div className="stat-card green">
                     <div className="stat-header">
                       <FileSignature size={18} />
-                      <span>Smart Agreements</span>
+                      <span>Agreements</span>
                     </div>
                     <div className="stat-value-row">
-                      <div className="stat-value">12</div>
+                      <div className="stat-value">42/50</div>
                       <span className="stat-sub">Signed</span>
                     </div>
-                    <div className="stat-mini-text">T&C • Per Diem Active</div>
+                    <div className="stat-mini-text">8 Pending Compliance</div>
                   </div>
-                  <div className="stat-card orange">
+                  <div className="stat-card gold">
                     <div className="stat-header">
-                      <Share2 size={18} />
-                      <span>Easy Posting</span>
+                      <Zap size={18} />
+                      <span>AI Efficiency</span>
                     </div>
                     <div className="stat-value-row">
-                      <div className="stat-value" style={{ fontSize: '1.2rem' }}>Link Socials</div>
-                      <span className="stat-sub">1-Click Post</span>
+                      <div className="stat-value">12h</div>
+                      <span className="stat-sub">Saved/Week</span>
                     </div>
                     <div className="posting-stats-row">
                       <div className="p-stat">
-                        <span className="p-label">Today</span>
-                        <span className="p-count">12</span>
+                        <span className="p-label">Search</span>
+                        <span className="p-count">4h</span>
                       </div>
                       <div className="p-stat">
-                        <span className="p-label">MTD</span>
-                        <span className="p-count">145</span>
+                        <span className="p-label">Scheduling</span>
+                        <span className="p-count">5h</span>
                       </div>
                       <div className="p-stat">
-                        <span className="p-label">Live</span>
-                        <span className="p-count">1,240</span>
+                        <span className="p-label">Creative</span>
+                        <span className="p-count">3h</span>
                       </div>
-                    </div>
-                    <div className="social-mini-icons">
-                      <Facebook size={11} />
-                      <Instagram size={11} />
-                      <MessageCircle size={11} />
-                      <MessageSquare size={11} />
                     </div>
                   </div>
                 </div>
@@ -521,68 +1018,68 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="ui-card next-best-actions-card">
                   <div className="card-header">
                     <div className="card-title">
-                      <Zap size={16} className="text-gold" /> Next Best Actions
+                      <Zap size={16} className="text-gold" /> AI Recommended Actions
                     </div>
                   </div>
                   <div className="next-actions-list">
                     <div className="next-action-item">
-                      <span className="next-action-label">Follow up with 12 talents who opened but did not reply.</span>
-                      <button className="ui-btn-outline-sm">View list</button>
+                      <span className="next-action-label">Use <strong>AI Creative Tools</strong> to generate audition posters for Jake Thompson role.</span>
+                      <button className="ui-btn-outline-sm" onClick={() => setActiveModule('ai-tools')}>Launch AI</button>
                     </div>
                     <div className="next-action-item">
-                      <span className="next-action-label">Schedule auditions for shortlisted profiles this week.</span>
-                      <button className="ui-btn-outline-sm">Plan slots</button>
+                      <span className="next-action-label">14 agreements are pending in <strong>Compliance</strong>. Send automated reminders.</span>
+                      <button className="ui-btn-outline-sm" onClick={() => setActiveModule('agreements')}>Review</button>
                     </div>
                     <div className="next-action-item">
-                      <span className="next-action-label">Review 1 flagged profile before sending final shortlist.</span>
-                      <button className="ui-btn-outline-sm">Review now</button>
+                      <span className="next-action-label">Run <strong>Deep Talent Search</strong> for the "Police Chief" role in Midnight Heist.</span>
+                      <button className="ui-btn-outline-sm" onClick={() => setActiveModule('search')}>Search</button>
                     </div>
                   </div>
                 </div>
 
-                {/* Activity Management Section */}
-                <div className="ui-section-title">Activity Management</div>
+                {/* Module Quick Access Section */}
+                <div className="ui-section-title">Control Centre Quick Access</div>
                 <div className="ui-activity-grid">
-                  <div className="activity-card-mini">
+                  <div className="activity-card-mini clickable" onClick={() => setActiveModule('projects')}>
                     <div className="activity-icon-mini blue"><Briefcase size={16} /></div>
                     <div className="activity-content-mini">
                       <span className="activity-label-mini">Projects</span>
                       <span className="activity-value-mini">{projects.length} Active</span>
                     </div>
                   </div>
-                  <div className="activity-card-mini">
-                    <div className="activity-icon-mini purple"><Users size={16} /></div>
+                  <div className="activity-card-mini clickable" onClick={() => setActiveModule('analytics')}>
+                    <div className="activity-icon-mini purple"><Activity size={16} /></div>
                     <div className="activity-content-mini">
-                      <span className="activity-label-mini">Castings</span>
-                      <span className="activity-value-mini">{projects.reduce((acc, p) => acc + p.castings.length, 0)} Ongoing</span>
+                      <span className="activity-label-mini">Analytics</span>
+                      <span className="activity-value-mini">Health: 82%</span>
                     </div>
                   </div>
-                  <div className="activity-card-mini">
-                    <div className="activity-icon-mini orange"><Clock size={16} /></div>
+                  <div className="activity-card-mini clickable" onClick={() => setActiveModule('scheduling')}>
+                    <div className="activity-icon-mini maroon"><Clock size={16} /></div>
                     <div className="activity-content-mini">
-                      <span className="activity-label-mini">Followups</span>
-                      <span className="activity-value-mini">6 Pending</span>
+                      <span className="activity-label-mini">Scheduling</span>
+                      <span className="activity-value-mini">8 Slots Open</span>
                     </div>
                   </div>
-                  <div className="activity-card-mini">
-                    <div className="activity-icon-mini green"><CheckCircle size={16} /></div>
+                  <div className="activity-card-mini clickable" onClick={() => setActiveModule('evaluation')}>
+                    <div className="activity-icon-mini indigo"><CheckCircle size={16} /></div>
                     <div className="activity-content-mini">
-                      <span className="activity-label-mini">Shortlistings</span>
-                      <span className="activity-value-mini">32 Selected</span>
+                      <span className="activity-label-mini">Evaluation</span>
+                      <span className="activity-value-mini">12 to Review</span>
                     </div>
                   </div>
-                  <div className="activity-card-mini clickable">
-                    <div className="activity-icon-mini gold"><MessageSquare size={16} /></div>
-                    <div className="activity-content-mini">
-                      <span className="activity-label-mini">Feedback</span>
-                      <span className="activity-value-mini">Share with Talent</span>
-                    </div>
-                  </div>
-                  <div className="activity-card-mini clickable">
-                    <div className="activity-icon-mini maroon"><ExternalLink size={16} /></div>
+                  <div className="activity-card-mini clickable" onClick={() => setActiveModule('client')}>
+                    <div className="activity-icon-mini teal"><ExternalLink size={16} /></div>
                     <div className="activity-content-mini">
                       <span className="activity-label-mini">Client Share</span>
-                      <span className="activity-value-mini">Share Shortlist</span>
+                      <span className="activity-value-mini">3 New Likes</span>
+                    </div>
+                  </div>
+                  <div className="activity-card-mini clickable" onClick={() => setActiveModule('outreach')}>
+                    <div className="activity-icon-mini orange"><MessageSquare size={16} /></div>
+                    <div className="activity-content-mini">
+                      <span className="activity-label-mini">Outreach</span>
+                      <span className="activity-value-mini">92% Reach</span>
                     </div>
                   </div>
                 </div>
@@ -739,10 +1236,10 @@ function DashboardPreview({ onCtaClick }) {
                 <div className="ui-dashboard-row">
                   <div className="ui-card half">
                     <div className="card-header">
-                      <div className="card-title"><ImageIcon size={18} /> Visual Outreach Studio</div>
-                      <div className="ai-badge-sm"><Zap size={10} /> AI Powered</div>
+                      <div className="card-title"><Zap size={18} className="text-gold" /> AI Creative Tools</div>
+                      <div className="ai-badge-sm">Active</div>
                     </div>
-                    <p className="card-subtitle">Generate co-branded requirement posters with JAMz & Your Agency branding</p>
+                    <p className="card-subtitle">Use AI to turn briefs into posters, roles, and ideas.</p>
                     
                     <div className="ai-poster-creator" onClick={(e) => e.stopPropagation()}>
                       <div className="ai-input-wrapper">
@@ -864,8 +1361,10 @@ function DashboardPreview({ onCtaClick }) {
 
                   <div className="ui-card half">
                     <div className="card-header">
-                      <div className="card-title"><Zap size={18} className="text-gold" /> Deep Search Command Center</div>
+                      <div className="card-title"><Search size={18} className="text-gold" /> Deep Talent Search & Vault</div>
+                      <div className="ai-badge-sm">Private</div>
                     </div>
+                    <p className="card-subtitle">Search your private vault and wider network with precision.</p>
                     
                     <div className="deep-search-controls" onClick={(e) => e.stopPropagation()}>
                       <div className="mandatory-filters-row">
@@ -1012,14 +1511,14 @@ function DashboardPreview({ onCtaClick }) {
                   </div>
                 </div>
 
-                {/* Communication Management Section */}
-                <div className="ui-section-title">Communication Centre</div>
+                {/* Communication & Outreach Section */}
+                <div className="ui-section-title">Communication & Outreach Hub</div>
                 <div className="ui-communication-row">
                   {/* WhatsApp Outreach */}
                   <div className="ui-card">
                     <div className="card-header">
-                      <div className="card-title text-green"><MessageCircle size={18} /> WhatsApp Outreach</div>
-                      <div className="ai-badge-sm"><Zap size={10} /> Smart Select</div>
+                      <div className="card-title text-green"><MessageSquare size={18} /> Communication & Outreach</div>
+                      <div className="ai-badge-sm"><Zap size={10} /> Smart Hub</div>
                     </div>
                     <div className="whatsapp-management" onClick={(e) => e.stopPropagation()}>
                       <div className="ai-message-box">
@@ -1080,11 +1579,11 @@ function DashboardPreview({ onCtaClick }) {
                     </div>
                   </div>
 
-                  {/* Project Communication Trail & Summary */}
+                  {/* Reporting & Insights Section */}
                   <div className="ui-card">
                     <div className="card-header">
-                      <div className="card-title text-gold"><Activity size={18} /> Communication Trail & Summary</div>
-                      <div className="ai-badge-sm">Project Wise</div>
+                      <div className="card-title text-gold"><BarChart size={18} /> Reporting & Insights</div>
+                      <div className="ai-badge-sm">Performance</div>
                     </div>
                     <div className="comm-trail-content" onClick={(e) => e.stopPropagation()}>
                       <div className="comm-summary-stats">
@@ -1135,126 +1634,38 @@ function DashboardPreview({ onCtaClick }) {
                 </div>
 
                 <div className="ui-section-title">Casting Director Control Center</div>
-                <div className="cd-modules-grid">
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Project & Role Management</h3>
-                    <p className="cd-module-desc">Create, manage, and track projects and roles in one place.</p>
-                    <ul className="cd-module-list">
-                      <li>Project overview & quick statuses</li>
-                      <li>Role briefs, requirements, and deadlines</li>
-                      <li>Applicants, shortlisted, and confirmed counts</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Funnel & Casting Health Analytics</h3>
-                    <p className="cd-module-desc">Understand where each casting stands and what needs attention.</p>
-                    <ul className="cd-module-list">
-                      <li>Funnel from invite to finalised</li>
-                      <li>Casting health score drill-down</li>
-                      <li>Drop-off reasons and bottlenecks</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Smart Agreements & Compliance</h3>
-                    <p className="cd-module-desc">Centralise contracts, consent, and paperwork for every talent.</p>
-                    <ul className="cd-module-list">
-                      <li>Generate and track agreements</li>
-                      <li>Minor consent and legal documents</li>
-                      <li>Status: not sent, sent, signed, issues</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Deep Talent Search & Vault</h3>
-                    <p className="cd-module-desc">Search your private vault and wider network with precision.</p>
-                    <ul className="cd-module-list">
-                      <li>Filters for age, look, skills, languages</li>
-                      <li>AI search commands and suggestions</li>
-                      <li>Saved searches and reusable lists</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Communication & Outreach</h3>
-                    <p className="cd-module-desc">Run all casting communication from one control centre.</p>
-                    <ul className="cd-module-list">
-                      <li>Broadcast, sub-group, and 1:1 outreach</li>
-                      <li>AI rewrites and tone checks</li>
-                      <li>Templates across WhatsApp, email, SMS</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Scheduling & Availability</h3>
-                    <p className="cd-module-desc">Coordinate auditions and callbacks without manual chaos.</p>
-                    <ul className="cd-module-list">
-                      <li>Slot planning for auditions</li>
-                      <li>Talent availability and confirmations</li>
-                      <li>Auto-reminders and rescheduling</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Shortlisting & Evaluation</h3>
-                    <p className="cd-module-desc">Compare and curate the right mix of talents for each role.</p>
-                    <ul className="cd-module-list">
-                      <li>Side-by-side comparisons and notes</li>
-                      <li>Internal vs client shortlist versions</li>
-                      <li>Team ratings and opinions</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Client Share & Handover</h3>
-                    <p className="cd-module-desc">Present cast options cleanly to clients and track feedback.</p>
-                    <ul className="cd-module-list">
-                      <li>Branded client links and decks</li>
-                      <li>Client like / maybe / no feedback</li>
-                      <li>Round-wise shortlist history</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Talent Feedback & History</h3>
-                    <p className="cd-module-desc">Build long-term relationships and memory with your talent base.</p>
-                    <ul className="cd-module-list">
-                      <li>Performance notes per audition</li>
-                      <li>Internal-only tags and flags</li>
-                      <li>Optional feedback sharing with talent</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">AI Creative Tools</h3>
-                    <p className="cd-module-desc">Use AI to turn briefs into posters, roles, and ideas.</p>
-                    <ul className="cd-module-list">
-                      <li>Visual outreach posters and creatives</li>
-                      <li>AI role breakdown from client briefs</li>
-                      <li>Suggestions for diversity and options</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Reporting & Insights</h3>
-                    <p className="cd-module-desc">See what is working across clients, projects, and talents.</p>
-                    <ul className="cd-module-list">
-                      <li>Client and project performance reports</li>
-                      <li>Time-to-cast and success metrics</li>
-                      <li>Top collaborators and talent reliability</li>
-                    </ul>
-                  </div>
-
-                  <div className="cd-module-card">
-                    <h3 className="cd-module-title">Team & Permissions</h3>
-                    <p className="cd-module-desc">Run your casting office with clear roles and access.</p>
-                    <ul className="cd-module-list">
-                      <li>Coordinator, assistant, and admin roles</li>
-                      <li>Task assignments and responsibilities</li>
-                      <li>Access control for sensitive data</li>
-                    </ul>
-                  </div>
+                <div className="cd-control-centre-wrapper">
+                  {!activeModule ? (
+                    <div className="cd-modules-grid">
+                      {modules.map(mod => (
+                        <div 
+                          key={mod.id} 
+                          className={`cd-module-card clickable-card ${mod.color}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveModule(mod.id);
+                          }}
+                        >
+                          <div className="module-card-header">
+                            <div className="module-icon">{mod.icon}</div>
+                            <h3 className="cd-module-title">{mod.title}</h3>
+                          </div>
+                          <p className="cd-module-desc">{mod.desc}</p>
+                          <ul className="cd-module-list">
+                            {mod.items.map((item, idx) => (
+                              <li key={idx}>{item}</li>
+                            ))}
+                          </ul>
+                          <div className="module-card-footer">
+                            <span className="launch-text">Launch Module</span>
+                            <ExternalLink size={14} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    renderModuleContent()
+                  )}
                 </div>
               </div>
             </div>

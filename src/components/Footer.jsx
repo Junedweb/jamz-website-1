@@ -6,9 +6,9 @@ function Footer({ onInfoClick }) {
       <div className="container">
         <div className="footer-top-row">
           <div className="footer-brand-section">
-            <div className="footer-logo-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-              <img src="/logo.svg" alt="JAMz - India's AI Talent Management App" loading="lazy" style={{ width: '32px', height: '32px' }} />
-              <h3 className="footer-logo" style={{ marginBottom: 0 }}>JAMz</h3>
+            <div className="footer-logo-wrapper">
+              <img src="/logo.svg" alt="JAMz - India's AI Talent Management App" loading="lazy" className="footer-logo-img" />
+              <h3 className="footer-logo">JAMz</h3>
             </div>
             <p className="footer-tagline">
               AI - Powered Casting & Acting School Platform
