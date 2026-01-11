@@ -15,18 +15,18 @@ function WhyJamz() {
   const reasons = [
     {
       icon: <Clock size={24} />,
-      title: "Do More of What You Love",
-      desc: "Skip admin on your job app and take on more projects without burning out."
+      title: "Focus on Creativity",
+      desc: "Automate agency admin and take on more projects without burning out."
     },
     {
       icon: <Lock size={24} />,
-      title: "Safe & Protected",
-      desc: "Your talent booking system data stays private and protected."
+      title: "Private Casting Database",
+      desc: "Your casting data and talent vault stay 100% private and protected."
     },
     {
       icon: <Users size={24} />,
-      title: "Fresh Talent Pool",
-      desc: "Access serious talent for your hiring platform from our network."
+      title: "Verified Artist Pool",
+      desc: "Access serious, verified talent for your casting calls from our network."
     },
     {
       icon: <Layout size={24} />,

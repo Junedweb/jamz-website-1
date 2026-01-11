@@ -19,50 +19,50 @@ function Features({ onCtaClick }) {
   const features = [
     { 
       icon: <Briefcase size={24} />, 
-      title: "AI Recruitment & Role Management", 
-      desc: "The complete hiring platform for creative projects and role tracking.",
+      title: "AI Casting & Role Management", 
+      desc: "The complete casting platform for creative projects and role tracking.",
       color: "#3b82f6"
     },
     { 
       icon: <Activity size={24} />, 
-      title: "Funnel & Artist Booking Analytics", 
-      desc: "Understand where each artist booking stands and what needs attention.",
+      title: "Casting Funnel & Booking Analytics", 
+      desc: "Understand where each talent booking stands and what needs attention.",
       color: "#a855f7"
     },
     { 
       icon: <FileSignature size={24} />, 
-      title: "Smart Agreements & Compliance", 
-      desc: "Centralise contracts and artist booking paperwork for every talent.",
+      title: "Agency Agreements & Compliance", 
+      desc: "Centralise contracts and agency paperwork for every artist booking.",
       color: "#22c55e"
     },
     { 
       icon: <Search size={24} />, 
-      title: "Talent Booking System & Search", 
-      desc: "A powerful talent booking system to search your private vault with precision.",
+      title: "Casting Database & Talent Search", 
+      desc: "A powerful casting database to search your private talent pool with precision.",
       color: "#eab308"
     },
     { 
       icon: <MessageSquare size={24} />, 
-      title: "Communication & Outreach", 
-      desc: "Run all recruitment communication from one control centre.",
+      title: "Agency Communication & Outreach", 
+      desc: "Run all agency and artist communication from one central control centre.",
       color: "#f97316"
     },
     { 
       icon: <Clock size={24} />, 
-      title: "Scheduling & Availability", 
-      desc: "Coordinate auditions for hiring platforms without manual chaos.",
+      title: "Audition Scheduling & Availability", 
+      desc: "Coordinate auditions and artist availability without manual chaos.",
       color: "#881337"
     },
     { 
       icon: <CheckCircle size={24} />, 
-      title: "Shortlisting & Evaluation", 
-      desc: "Compare and curate the right mix of talents for your job app needs.",
+      title: "Digital Casting Sheets & Evaluation", 
+      desc: "Compare and curate the right mix of talents with digital evaluation sheets.",
       color: "#6366f1"
     },
     { 
       icon: <ExternalLink size={24} />, 
-      title: "Client Share & Handover", 
-      desc: "Present artist booking options cleanly to clients and track feedback.",
+      title: "Director Share & Presentation", 
+      desc: "Present casting options cleanly to directors and track feedback in real-time.",
       color: "#14b8a6"
     },
     { 

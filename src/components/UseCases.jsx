@@ -4,18 +4,18 @@ function UseCases() {
   const cases = [
     {
       icon: <User size={32} />,
-      title: "Solo Directors/Freelancers",
-      desc: "Use our talent booking system to manage your projects solo."
+      title: "Casting Directors & Freelancers",
+      desc: "The ultimate casting director software to manage your private talent vault and projects solo."
     },
     {
       icon: <Zap size={32} />,
-      title: "OTT, TV, Brands & Large Projects",
-      desc: "The ultimate hiring platform for large-scale AI recruitment across seasons."
+      title: "OTT, TV, Brands & Studios",
+      desc: "High-scale casting workflow automation for large projects, OTT series, and brand campaigns."
     },
     {
       icon: <Users size={32} />,
-      title: "Casting Agencies",
-      desc: "Synchronise your artist booking workflow across hiring platforms."
+      title: "Talent Agencies & Production Houses",
+      desc: "A complete agency management system to synchronise artist booking and talent representation."
     }
   ];
 
