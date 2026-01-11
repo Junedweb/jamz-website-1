@@ -322,7 +322,7 @@ function DashboardPreview({ onCtaClick }) {
           jobs: 24,
           isVault: true,
           instagram: "vikram_malhotra_official",
-          image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&h=200&auto=format&fit=crop",
+          image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=60&w=150&h=150&auto=format&fit=crop",
           tags: ["Trained", "Action Ready"]
         },
         {
@@ -332,7 +332,7 @@ function DashboardPreview({ onCtaClick }) {
           jobs: 18,
           isVault: true,
           instagram: "sanya_deshmukh_acts",
-          image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&h=200&auto=format&fit=crop",
+          image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=60&w=150&h=150&auto=format&fit=crop",
           tags: ["Fluent Hindi", "Intro Video"]
         }
       ]);
@@ -1271,9 +1271,11 @@ function DashboardPreview({ onCtaClick }) {
                         <div className="poster-item-ui">
                           <div className="poster-preview-mini casting">
                             <img 
-                              src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=100" 
+                              src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=60&w=100" 
                               alt="Casting Preview" 
                               className="mini-preview-img"
+                              loading="lazy"
+                              decoding="async"
                             />
                           </div>
                           <div className="poster-details">
@@ -1285,9 +1287,11 @@ function DashboardPreview({ onCtaClick }) {
                         <div className="poster-item-ui">
                           <div className="poster-preview-mini christmas">
                             <img 
-                              src="https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&q=80&w=100" 
+                              src="https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&q=60&w=100" 
                               alt="Festive Preview" 
                               className="mini-preview-img"
+                              loading="lazy"
+                              decoding="async"
                             />
                           </div>
                           <div className="poster-details">
@@ -1308,6 +1312,8 @@ function DashboardPreview({ onCtaClick }) {
                               src="/assets/casting-call.jpg" 
                               alt="Casting Call Poster" 
                               className="poster-sample-img"
+                              loading="lazy"
+                              decoding="async"
                               onError={(e) => {
                                 e.target.src = "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=800";
                               }}
@@ -1324,6 +1330,8 @@ function DashboardPreview({ onCtaClick }) {
                               src="https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&q=80&w=400" 
                               alt="Festive Poster" 
                               className="poster-sample-img" 
+                              loading="lazy"
+                              decoding="async"
                             />
                             <div className="poster-sample-overlay top-left">
                               <span className="poster-tag mini">Festive</span>
@@ -1426,7 +1434,7 @@ function DashboardPreview({ onCtaClick }) {
                               score: 4.8,
                               jobs: 12,
                               instagram: "arjun_sharma_actor",
-                              image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop",
+                              image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=60&w=150&h=150&auto=format&fit=crop",
                               tags: ["Trained"]
                             },
                             {
@@ -1435,7 +1443,7 @@ function DashboardPreview({ onCtaClick }) {
                               score: 2.1,
                               jobs: 5,
                               instagram: "priya_patel_official",
-                              image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop",
+                              image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=150&h=150&auto=format&fit=crop",
                               tags: ["Flagged"],
                               isFlagged: true
                             }
@@ -1443,7 +1451,7 @@ function DashboardPreview({ onCtaClick }) {
                             <div key={actor.id} className={`actor-item ${actor.isFlagged ? 'flagged' : ''}`}>
                               <div className="rank">{idx + 1}</div>
                               <div className="avatar">
-                                <img src={actor.image} alt={actor.name} loading="lazy" />
+                                <img src={actor.image} alt={actor.name} loading="lazy" decoding="async" />
                                 {actor.isVault && <div className="vault-avatar-badge"><Zap size={8} /></div>}
                               </div>
                               <div className="info">

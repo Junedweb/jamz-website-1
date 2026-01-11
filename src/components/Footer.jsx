@@ -7,7 +7,7 @@ function Footer({ onInfoClick }) {
         <div className="footer-top-row">
           <div className="footer-brand-section">
             <div className="footer-logo-wrapper">
-              <img src="/logo.svg" alt="JAMz - Best Casting Director Software" loading="lazy" className="footer-logo-img" />
+              <img src="/logo.svg" alt="JAMz - Best Casting Director Software" loading="lazy" decoding="async" className="footer-logo-img" />
               <h3 className="footer-logo">JAMz</h3>
             </div>
             <p className="footer-tagline">

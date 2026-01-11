@@ -17,23 +17,24 @@ function Home() {
   const [infoModal, setInfoModal] = useState({ isOpen: false, type: null });
 
   useEffect(() => {
-    const reveal = () => {
-      const reveals = document.querySelectorAll('.reveal');
-      for (let i = 0; i < reveals.length; i++) {
-        const windowHeight = window.innerHeight;
-        const elementTop = reveals[i].getBoundingClientRect().top;
-        const elementVisible = 150;
-        if (elementTop < windowHeight - elementVisible) {
-          reveals[i].classList.add('active');
-        }
-      }
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
     };
 
-    window.addEventListener('scroll', reveal);
-    // Initial check
-    reveal();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach((el) => observer.observe(el));
     
-    return () => window.removeEventListener('scroll', reveal);
+    return () => observer.disconnect();
   }, []);
 
   const openModal = (type = 'waitlist') => {
