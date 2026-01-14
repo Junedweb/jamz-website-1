@@ -19,74 +19,74 @@ function Features({ onCtaClick }) {
   const features = [
     { 
       icon: <Briefcase size={24} />, 
-      title: "AI Casting & Role Management", 
-      desc: "The complete casting platform for creative projects and role tracking.",
+      title: "Central Casting Workspace", 
+      desc: "Track projects, roles and approvals in one place instead of scattered sheets.",
       color: "#3b82f6"
     },
     { 
       icon: <Activity size={24} />, 
-      title: "Casting Funnel & Booking Analytics", 
-      desc: "Understand where each talent booking stands and what needs attention.",
+      title: "Live Casting Funnel Analytics", 
+      desc: "See invites, auditions, shortlists and bookings at a glance for every role.",
       color: "#a855f7"
     },
     { 
       icon: <FileSignature size={24} />, 
-      title: "Agency Agreements & Compliance", 
-      desc: "Centralise contracts and agency paperwork for every artist booking.",
+      title: "Smart Agreements & Compliance", 
+      desc: "Auto-organise contracts, consent forms and paperwork against each talent and job.",
       color: "#22c55e"
     },
     { 
       icon: <Search size={24} />, 
-      title: "Casting Database & Talent Search", 
-      desc: "A powerful casting database to search your private talent pool with precision.",
+      title: "Private Talent Vault Search", 
+      desc: "Search your own database by age, look, skills and tags in seconds.",
       color: "#eab308"
     },
     { 
       icon: <MessageSquare size={24} />, 
-      title: "Agency Communication & Outreach", 
-      desc: "Run all agency and artist communication from one central control centre.",
+      title: "WhatsApp-Ready Outreach", 
+      desc: "Send structured casting messages from one hub instead of manual forwards.",
       color: "#f97316"
     },
     { 
       icon: <Clock size={24} />, 
-      title: "Audition Scheduling & Availability", 
-      desc: "Coordinate auditions and artist availability without manual chaos.",
+      title: "Scheduling Without Chaos", 
+      desc: "Plan audition slots and callbacks with automatic reminders and confirmations.",
       color: "#881337"
     },
     { 
       icon: <CheckCircle size={24} />, 
-      title: "Digital Casting Sheets & Evaluation", 
-      desc: "Compare and curate the right mix of talents with digital evaluation sheets.",
+      title: "Side-by-Side Talent Evaluation", 
+      desc: "Compare self-tapes, photos and notes to build strong shortlists faster.",
       color: "#6366f1"
     },
     { 
       icon: <ExternalLink size={24} />, 
-      title: "Director Share & Presentation", 
-      desc: "Present casting options cleanly to directors and track feedback in real-time.",
+      title: "Client-Friendly Casting Links", 
+      desc: "Share clean digital decks with like/maybe/no feedback built in.",
       color: "#14b8a6"
     },
     { 
       icon: <Users size={24} />, 
-      title: "Talent Feedback & History", 
-      desc: "Build long-term relationships in the AI recruitment lifecycle.",
+      title: "Talent Relationship Memory", 
+      desc: "Keep history, performance notes and tags to re-cast trusted artists quickly.",
       color: "#ec4899"
     },
     { 
       icon: <Zap size={24} />, 
-      title: "AI Studios & Creative Tools", 
-      desc: "Use AI studios tools to turn briefs into posters, roles, and ideas.",
+      title: "AI Creative Assist", 
+      desc: "Turn rough client briefs into role breakdowns, outreach copy and visual ideas.",
       color: "#facc15"
     },
     { 
       icon: <BarChart size={24} />, 
-      title: "Reporting & Insights", 
-      desc: "See what is working across clients, projects, and talents.",
+      title: "Time & Win-Rate Insights", 
+      desc: "Understand response rates, time-to-cast and which channels bring the best talent.",
       color: "#06b6d4"
     },
     { 
       icon: <Shield size={24} />, 
-      title: "Team & Permissions", 
-      desc: "Run your casting office with clear roles and access.",
+      title: "Team & Client Permissions", 
+      desc: "Invite coordinators, assistants and clients with the right level of access.",
       color: "#64748b"
     }
   ];
@@ -94,7 +94,7 @@ function Features({ onCtaClick }) {
   return (
     <section id="features" className="features-section reveal">
       <div className="container">
-        <h2 className="text-gradient-primary">Everything Included in Your Casting Toolkit</h2>
+        <h2 className="text-gradient-primary">Features That Remove Casting Busywork</h2>
         
         <div className="features-grid">
           {features.map((f, i) => (

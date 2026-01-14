@@ -766,13 +766,14 @@ section {
 .mouse-glow {
   display: none !important;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 800px;
   height: 800px;
   background: radial-gradient(circle, rgba(29, 78, 216, 0.1) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
-  transform: translate(-50%, -50%);
   will-change: transform;
 }
 

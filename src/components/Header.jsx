@@ -48,15 +48,15 @@ function Header({ onCtaClick }) {
       <div className="container fade-in">
         <div className="hero-content-main">
           <div className="hero-announcement">
-            <span className="announcement-badge">Launching Soon</span>
-            <span className="announcement-text">Built with casting directors, for casting directors</span>
+            <span className="announcement-badge">For Casting Teams & Talent Agencies</span>
+            <span className="announcement-text">Built with working casting directors across film, OTT and ads</span>
           </div>
           <h1 className="hero-title">
-            <span className="text-gradient-gold">Your AI Casting & Talent Booking System</span>
-            <span className="hero-title-accent">The ultimate job app for India's creative industry</span>
+            <span className="text-gradient-gold">Run Every Casting From One Control Centre</span>
+            <span className="hero-title-accent">JAMz streamlines briefs, auditions, shortlists and bookings in one place</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
-            The AI recruitment platform built for India. JAMz helps you with artist booking, shortlisting, and hiring up to 70% faster across AI studios and large projects.
+            Replace scattered WhatsApp chats, sheets and drives with a single casting workspace. JAMz gives directors and recruiters a live view of roles, talent pipelines and client approvals so you can cast up to 70% faster with less admin.
           </p>
           
           <div className="hero-benefits-row">

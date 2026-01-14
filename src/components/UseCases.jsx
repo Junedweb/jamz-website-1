@@ -4,18 +4,18 @@ function UseCases() {
   const cases = [
     {
       icon: <User size={32} />,
-      title: "Casting Directors & Freelancers",
-      desc: "The ultimate casting director software to manage your private talent vault and projects solo."
+      title: "Solo Film Casting Director, Mumbai",
+      desc: "Has shared detailed requirements for managing a private vault, live role tracking and cleaner client approvals. Currently waiting for JAMz to replace manual sheets and WhatsApp threads with one organised dashboard."
     },
     {
       icon: <Zap size={32} />,
-      title: "OTT, TV, Brands & Studios",
-      desc: "High-scale casting workflow automation for large projects, OTT series, and brand campaigns."
+      title: "OTT Series Production And Showrunner Team",
+      desc: "In early conversations, they outlined the need to track dozens of speaking roles, auditions and chemistry tests in a single live view. They are awaiting the first JAMz release to pilot this workflow once the application is ready."
     },
     {
       icon: <Users size={32} />,
-      title: "Talent Agencies & Production Houses",
-      desc: "A complete agency management system to synchronise artist booking and talent representation."
+      title: "Talent And Artist Management Agency",
+      desc: "Has expressed the need for a shared system for availability, contracts and payments that connects directly to casting briefs. They are on the early access list and are waiting for the initial JAMz deployment."
     }
   ];
 
@@ -23,8 +23,8 @@ function UseCases() {
     <section id="use-cases" className="use-cases reveal">
       <div className="container">
         <div className="section-header">
-          <h2 className="text-gradient-primary">Casting Solutions Built for Growth</h2>
-          <p className="section-subtitle">Designed for every casting journey in India.</p>
+          <h2 className="text-gradient-primary">What Early Partners Need From JAMz</h2>
+          <p className="section-subtitle">Based on requirements shared by agencies, solo directors and production teams who are awaiting the first release.</p>
         </div>
 
         <div className="use-cases-grid-simple">

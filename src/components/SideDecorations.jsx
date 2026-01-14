@@ -13,33 +13,43 @@ const SideDecorations = () => {
   const glowRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 300;
-      
-      for (const section of sections) {
-        const element = document.getElementById(section.id);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section.id);
-            break;
-          }
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
         }
-      }
+      });
     };
 
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (element) observer.observe(element);
+    });
+
+    let rafId;
     const handleMouseMove = (e) => {
-      if (glowRef.current) {
-        glowRef.current.style.left = `${e.clientX}px`;
-        glowRef.current.style.top = `${e.clientY}px`;
-      }
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        if (glowRef.current) {
+          // Center the 800x800 glow by subtracting 400px
+          glowRef.current.style.transform = `translate3d(${e.clientX - 400}px, ${e.clientY - 400}px, 0)`;
+        }
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
