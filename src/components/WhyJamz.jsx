@@ -15,60 +15,95 @@ function WhyJamz() {
   const reasons = [
     {
       icon: <Clock size={24} />,
-      title: "Cut Admin, Protect Energy",
-      desc: "Automate updates, reminders and sheets so you can focus on casting, not chasing."
+      category: "Efficiency",
+      title: "Reclaim Your Creative Energy",
+      desc: "Automate repetitive updates, reminders, and call sheets. Spend 80% less time on admin and 100% more on finding the perfect face."
     },
     {
       icon: <Lock size={24} />,
-      title: "Private Casting Database",
-      desc: "Your vault of artists, notes and contracts stays private to your team."
+      category: "Security",
+      title: "Your Private Talent Vault",
+      desc: "A secure, encrypted database of your artists and contracts. Your proprietary notes stay private to your team, always."
+    },
+    {
+      icon: <Zap size={24} />,
+      category: "Intelligence",
+      title: "AI-Powered Smart Search",
+      desc: "Search your database exactly like you brief clients – by specific looks, niche skills, and subtle nuances in seconds."
     },
     {
       icon: <Users size={24} />,
-      title: "Verified Artist Pool",
-      desc: "Access serious, verified talent profiles while still prioritising your private vault."
-    },
-    {
-      icon: <Layout size={24} />,
-      title: "Smart Search",
-      desc: "Search your own database the way you brief clients – by look, skills and nuance."
+      category: "Network",
+      title: "Verified Talent Ecosystem",
+      desc: "Instantly access a pool of serious, verified talent profiles while seamlessly integrating them into your private workflow."
     },
     {
       icon: <ShieldCheck size={24} />,
-      title: "Seamless Collaboration",
-      desc: "Give coordinators, assistants and clients a shared view of what is happening."
+      category: "Workflow",
+      title: "Seamless Team Collaboration",
+      desc: "Keep coordinators, assistants, and clients in perfect sync with real-time shared views and controlled permissions."
     },
     {
       icon: <Globe size={24} />,
-      title: "Work Anywhere",
-      desc: "Review shortlists and update statuses from office, vanity van or set."
+      category: "Mobility",
+      title: "The Mobile Casting Office",
+      desc: "Review shortlists, update statuses, and manage auditions from the office, a vanity van, or directly on set."
     }
   ];
 
   return (
     <section id="why-jamz" className="why-jamz-section reveal">
+      <div className="section-bg-glow"></div>
       <div className="container">
-        <h2 className="text-gradient-primary">Why Casting Directors Choose JAMz</h2>
-        <p className="section-subtitle">The casting OS built for India's creative community.</p>
+        <div className="section-header">
+          <span className="section-badge">Why JAMz AI</span>
+          <h2 className="text-gradient-primary">Built for the Modern Casting Director</h2>
+          <p className="section-subtitle">The first AI-native casting operating system designed specifically for India's high-speed creative industry.</p>
+        </div>
+
         <div className="why-cards-container">
           {reasons.map((r, i) => (
             <div key={i} className="why-card">
-              <div className="why-card-icon">
-                {r.icon}
+              <div className="why-card-top">
+                <div className="why-card-icon">
+                  {r.icon}
+                </div>
+                <span className="why-card-category">{r.category}</span>
               </div>
               <h3>{r.title}</h3>
               <p>{r.desc}</p>
             </div>
           ))}
         </div>
-        <div className="onboarding-steps">
-          <h3>Getting Started With JAMz</h3>
-          <ol className="onboarding-list">
-            <li><strong>Step 1:</strong> Request early access and share how your casting team works today.</li>
-            <li><strong>Step 2:</strong> Our team sets up your workspace, talent vault structure and key projects.</li>
-            <li><strong>Step 3:</strong> Invite coordinators, assistants and clients with the right permissions.</li>
-            <li><strong>Step 4:</strong> Start running live briefs, auditions and shortlists inside JAMz with support on chat.</li>
-          </ol>
+
+        <div className="process-section">
+          <div className="process-header">
+            <h3>Seamless Onboarding</h3>
+            <p>From zero to live projects in 4 simple steps</p>
+          </div>
+          
+          <div className="process-timeline">
+            <div className="process-step">
+              <div className="step-number">01</div>
+              <h4>Request Access</h4>
+              <p>Share your team's unique workflow with our experts.</p>
+            </div>
+            <div className="process-step">
+              <div className="step-number">02</div>
+              <h4>Custom Setup</h4>
+              <p>We build your workspace and talent vault structure for you.</p>
+            </div>
+            <div className="process-step">
+              <div className="step-number">03</div>
+              <h4>Team Invite</h4>
+              <p>Onboard your coordinators and clients with custom permissions.</p>
+            </div>
+            <div className="process-step">
+              <div className="step-number">04</div>
+              <h4>Go Live</h4>
+              <p>Run live briefs and auditions with 24/7 dedicated support.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -53,10 +53,10 @@ function Header({ onCtaClick }) {
           </div>
           <h1 className="hero-title">
             <span className="text-gradient-gold">Run Every Casting From One Control Centre</span>
-            <span className="hero-title-accent">JAMz streamlines briefs, auditions, shortlists and bookings in one place</span>
+            <span className="hero-title-accent">JAMz AI streamlines briefs, auditions, shortlists and bookings in one place</span>
           </h1>
           <p className="sub-headline" style={{ maxWidth: '650px', margin: '0 auto 2rem' }}>
-            Replace scattered WhatsApp chats, sheets and drives with a single casting workspace. JAMz gives directors and recruiters a live view of roles, talent pipelines and client approvals so you can cast up to 70% faster with less admin.
+            Replace scattered WhatsApp chats, sheets and drives with a single casting workspace. JAMz AI gives directors and recruiters a live view of roles, talent pipelines and client approvals so you can cast up to 70% faster with less admin.
           </p>
           
           <div className="hero-benefits-row">

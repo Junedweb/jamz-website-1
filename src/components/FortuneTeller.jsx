@@ -24,7 +24,7 @@ const FortuneTeller = () => {
   });
   
   const [chatMessages, setChatMessages] = useState([
-    { role: 'bot', text: "Hello! I'm your JAMz design assistant. We are so grateful for your interest in helping us build the perfect casting platform. To get started, which area of the app would you like to suggest an improvement for?", type: 'module_selection' }
+    { role: 'bot', text: "Hello! I'm your JAMz AI design assistant. We are so grateful for your interest in helping us build the perfect casting platform. To get started, which area of the app would you like to suggest an improvement for?", type: 'module_selection' }
   ]);
 
   const chatEndRef = useRef(null);
@@ -164,7 +164,7 @@ const FortuneTeller = () => {
           response = `Nice to meet you, ${userMessage}! Lastly, would you like to share your Mobile Number in case our tech team needs to discuss this further? (Or skip to finish)`;
         } else {
           setChatStep('completed');
-          response = "No problem! I'm submitting your anonymous suggestion now. Thank you for helping us build JAMz!";
+          response = "No problem! I'm submitting your anonymous suggestion now. Thank you for helping us build JAMz AI!";
           handleFinalSubmit(formData);
         }
       }
@@ -175,7 +175,7 @@ const FortuneTeller = () => {
           setFormData(finalData);
         }
         setChatStep('completed');
-        response = "Thank you! I've recorded everything. Our team will review your suggestions as we build the next version of JAMz.";
+        response = "Thank you! I've recorded everything. Our team will review your suggestions as we build the next version of JAMz AI.";
         handleFinalSubmit(finalData);
       }
 
@@ -430,7 +430,7 @@ const FortuneTeller = () => {
                     <CheckCircle size={64} color="#10b981" />
                   </div>
                   <h3>Thank You!</h3>
-                  <p>Your suggestions have been recorded. We're building JAMz based on needs just like yours.</p>
+                  <p>Your suggestions have been recorded. We're building JAMz AI based on needs just like yours.</p>
                   <button className="btn-demo" onClick={() => setIsOpen(false)}>Close</button>
                 </div>
               )}

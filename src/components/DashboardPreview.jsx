@@ -354,7 +354,7 @@ function DashboardPreview({ onCtaClick }) {
     if (!outreachMessage) return;
     setIsAiRewriting(true);
     setTimeout(() => {
-      setOutreachMessage("Dear Talent, we are currently casting for 'Project Shadow'. Based on your profile, we believe you'd be a great fit for the Lead Action role. Please review the details in the JAMz app.");
+      setOutreachMessage("Dear Talent, we are currently casting for 'Project Shadow'. Based on your profile, we believe you'd be a great fit for the Lead Action role. Please review the details in the JAMz AI app.");
       setIsAiRewriting(false);
     }, 1200);
   };
@@ -745,7 +745,7 @@ function DashboardPreview({ onCtaClick }) {
               <div className="client-share-header">
                 <div className="share-info">
                   <strong>Client Share Link</strong>
-                  <span className="share-url">jamz.app/share/project-shadow-x92</span>
+                  <span className="share-url">jamzai.app/share/project-shadow-x92</span>
                 </div>
                 <button className="ui-btn-outline-sm">Copy Link</button>
               </div>
@@ -832,7 +832,7 @@ function DashboardPreview({ onCtaClick }) {
             <Zap size={20} className="icon-gold" />
             <div>
               <strong>Launching Soon Preview</strong>
-              <p>You’re exploring a sandbox preview of JAMz. Get early access to be first in line for the full platform.</p>
+              <p>You’re exploring a sandbox preview of JAMz AI. Get early access to be first in line for the full platform.</p>
             </div>
             <button className="demo-cta-inline" onClick={onCtaClick}>Get Early Access</button>
           </div>
@@ -843,7 +843,7 @@ function DashboardPreview({ onCtaClick }) {
         <div className="section-header">
           <h2>AI-Powered <span className="text-gradient-gold">Casting Dashboard</span></h2>
           <p>
-            Preview how JAMz runs your casting day from search to shortlist.
+            Preview how JAMz AI runs your casting day from search to shortlist.
           </p>
         </div>
 
@@ -892,7 +892,7 @@ function DashboardPreview({ onCtaClick }) {
               {/* Top Bar */}
               <div className="ui-top-bar">
                 <div className="ui-logo-user-row">
-                  <div className="ui-logo">JAM<span>z</span></div>
+                  <div className="ui-logo">JAM<span>z</span> AI</div>
                   <div className="ui-search-bar">
                     <Search size={16} className="search-icon" />
                     <input type="text" placeholder="Deep Search talent..." className="search-input" />
@@ -1322,7 +1322,7 @@ function DashboardPreview({ onCtaClick }) {
                               <span className="poster-tag">Latest Gen</span>
                             </div>
                             <div className="poster-sample-overlay bottom-right">
-                              <span className="agency-branding-sm">Raj Malhotra Casting × JAMz</span>
+                              <span className="agency-branding-sm">Raj Malhotra Casting × JAMz AI</span>
                             </div>
                           </div>
                           <div className="poster-sample-card secondary">
@@ -1503,7 +1503,7 @@ function DashboardPreview({ onCtaClick }) {
 
                       <div className="results-section premium-gated">
                         <div className="section-label">
-                          Jamz Talent base
+                          JAMz AI Talent base
                           <span className="premium-badge">Premium</span>
                         </div>
                         <div className="locked-state">

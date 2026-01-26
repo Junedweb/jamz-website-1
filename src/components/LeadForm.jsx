@@ -268,7 +268,7 @@ function LeadForm({ isOpen, onClose, type = 'waitlist' }) {
             <p className="subtitle">
               {type === 'suggestion' 
                 ? "Help us build the casting standard for India with your feedback."
-                : "Be among the first to try JAMz when we launch."}
+                : "Be among the first to try JAMz AI when we launch."}
             </p>
 
             <form onSubmit={handleSubmit}>

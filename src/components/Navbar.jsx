@@ -17,7 +17,7 @@ const Navbar = ({ onCtaClick }) => {
     { name: 'Toolkit', href: '#features' },
     { name: 'Demo', href: '#dashboard' },
     { name: 'Impact', href: '#use-cases' },
-    { name: 'Why JAMz', href: '#why-jamz' },
+    { name: 'Why JAMz AI', href: '#why-jamz' },
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -29,7 +29,7 @@ const Navbar = ({ onCtaClick }) => {
           <div className="logo-icon">
             <Zap size={24} fill="var(--accent)" color="var(--accent)" />
           </div>
-          <span className="logo-text">JAM<span className="text-accent">z</span></span>
+          <span className="logo-text">JAM<span className="text-accent">z</span> AI</span>
         </div>
 
         {/* Desktop Links */}
