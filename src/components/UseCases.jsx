@@ -4,18 +4,18 @@ function UseCases() {
   const cases = [
     {
       icon: <User size={32} />,
-      title: "Solo Film Casting Director, Mumbai",
-      desc: "Has shared detailed requirements for managing a private vault, live role tracking and cleaner client approvals. Currently waiting for JAMz AI to replace manual sheets and WhatsApp threads with one organised dashboard."
+      title: "Solo Casting Directors",
+      desc: "Replacing manual sheets and WhatsApp chaos with a unified dashboard for vault management, role tracking, and instant client approvals."
     },
     {
       icon: <Zap size={32} />,
-      title: "OTT Series Production And Showrunner Team",
-      desc: "In early conversations, they outlined the need to track dozens of speaking roles, auditions and chemistry tests in a single live view. They are awaiting the first JAMz AI release to pilot this workflow once the application is ready."
+      title: "Production & Showrunners",
+      desc: "Tracking dozens of speaking roles and chemistry tests in a single live view to streamline high-volume OTT and film casting."
     },
     {
       icon: <Users size={32} />,
-      title: "Talent And Artist Management Agency",
-      desc: "Has expressed the need for a shared system for availability, contracts and payments that connects directly to casting briefs. They are on the early access list and are waiting for the initial JAMz AI deployment."
+      title: "Talent Agencies",
+      desc: "Syncing availability, contracts, and payments directly with casting briefs for a seamless agency-to-director workflow."
     }
   ];
 
@@ -23,8 +23,8 @@ function UseCases() {
     <section id="use-cases" className="use-cases reveal">
       <div className="container">
         <div className="section-header">
-          <h2 className="text-gradient-primary">What Early Partners Need From JAMz AI</h2>
-          <p className="section-subtitle">Based on requirements shared by agencies, solo directors and production teams who are awaiting the first release.</p>
+          <h2 className="text-gradient-primary">Early Partner Requirements</h2>
+          <p className="section-subtitle">Core features requested by the directors and agencies piloting our first release.</p>
         </div>
 
         <div className="use-cases-grid-simple">
