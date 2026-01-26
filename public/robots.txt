@@ -3,5 +3,15 @@ Allow: /
 Disallow: /admin/
 Disallow: /dashboard/private/
 
+# AI Crawler Optimization
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+
 # Sitemaps
 Sitemap: https://www.jamzconnect.com/sitemap.xml
