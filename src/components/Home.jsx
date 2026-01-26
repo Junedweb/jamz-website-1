@@ -11,6 +11,9 @@ import LeadForm from './LeadForm';
 import FortuneTeller from './FortuneTeller';
 import InfoModal from './InfoModal';
 import SideDecorations from './SideDecorations';
+import TrustedBy from './TrustedBy';
+import Workflow from './Workflow';
+import WhatsAppUSP from './WhatsAppUSP';
 
 function Home() {
   const [modalConfig, setModalConfig] = useState({ isOpen: false, type: 'waitlist' });
@@ -58,7 +61,10 @@ function Home() {
       <Navbar onCtaClick={openModal} />
       <SideDecorations />
       <Header onCtaClick={openModal} />
+      <TrustedBy />
       <Features onCtaClick={openModal} />
+      <Workflow />
+      <WhatsAppUSP />
       <DashboardPreview onCtaClick={openModal} />
       <UseCases onCtaClick={openModal} />
       <WhyJamz onCtaClick={openModal} />

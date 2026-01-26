@@ -75,9 +75,10 @@ function Header({ onCtaClick }) {
           </div>
         </div>
         
-        <div className="cta-group">
-          <a href="#" className="btn-primary" onClick={onCtaClick}>Get Early Access</a>
-          <a href="#" className="btn-secondary" onClick={() => onCtaClick('suggestion')}>Share Feedback</a>
+        <div className="cta-group" style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+          <a href="https://forms.gle/your-form-link" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ background: '#4f46e5' }}>Book 15-min walkthrough</a>
+          <a href="https://forms.gle/your-form-link" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ background: '#0f172a' }}>Get Demo Workspace Created</a>
+          <a href="https://forms.gle/your-form-link" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ background: '#F97316' }}>Run 1 Casting Free With Us</a>
         </div>
       </div>
     </section>
