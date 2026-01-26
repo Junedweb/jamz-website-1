@@ -20,13 +20,10 @@ function Workflow() {
         </p>
 
         {/* Before vs After Comparison */}
-        <div style={{ marginBottom: '3rem', background: 'white', border: '1px solid #cbd5e1', borderRadius: '12px', overflow: 'hidden' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: '1px solid #cbd5e1' }}>
-            <div style={{ padding: '1rem', background: '#fee2e2', color: '#991b1b', fontWeight: 700, textAlign: 'center' }}>BEFORE (The Chaos)</div>
-            <div style={{ padding: '1rem', background: '#dcfce7', color: '#166534', fontWeight: 700, textAlign: 'center' }}>AFTER (JAMz AI)</div>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
-            <div style={{ padding: '1.5rem', borderRight: '1px solid #cbd5e1' }}>
+        <div className="workflow-comparison">
+          <div className="workflow-col before">
+            <div className="workflow-header before">BEFORE (The Chaos)</div>
+            <div className="workflow-content">
               <ul style={{ listStyle: 'none', padding: 0, color: '#475569', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ color: '#ef4444' }}>❌</span> 100s of unorganized WhatsApp chats</li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ color: '#ef4444' }}>❌</span> Manual Excel trackers & copy-pasting</li>
@@ -34,7 +31,11 @@ function Workflow() {
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ color: '#ef4444' }}>❌</span> "Did I reply to him?" confusion</li>
               </ul>
             </div>
-            <div style={{ padding: '1.5rem', background: '#f0fdf4' }}>
+          </div>
+          
+          <div className="workflow-col after">
+            <div className="workflow-header after">AFTER (JAMz AI)</div>
+            <div className="workflow-content after">
               <ul style={{ listStyle: 'none', padding: 0, color: '#334155', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ color: '#22c55e' }}>✅</span> One central dashboard for all chats</li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ color: '#22c55e' }}>✅</span> Auto-generated casting sheets</li>
