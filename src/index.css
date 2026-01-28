@@ -5867,7 +5867,7 @@ section {
 
 @media (max-width: 768px) {
   .why-jamz-section {
-    padding: 1.5rem 0;
+    padding: 1rem 0;
   }
 }
 
@@ -5896,13 +5896,13 @@ section {
 
 @media (max-width: 768px) {
   .section-header {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     padding: 0 1rem;
   }
   
   .why-jamz-section h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.4rem;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
     line-height: 1.2;
     color: var(--text-dark);
   }
@@ -5910,14 +5910,14 @@ section {
   .section-badge {
     padding: 0.2rem 0.6rem;
     font-size: 0.65rem;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
   }
   
   .section-subtitle {
     font-size: 0.8rem;
     line-height: 1.3;
     color: var(--text-muted);
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto;
   }
 }
@@ -5956,20 +5956,15 @@ section {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 0.75rem;
-    padding: 0.5rem 1rem 1.5rem 1rem;
-    margin-bottom: 1rem;
+    padding: 0.25rem 1rem 1rem 1rem;
+    margin-bottom: 1.5rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
   .why-cards-container::-webkit-scrollbar { display: none; }
 }
 
-@media (max-width: 480px) {
-  .why-cards-container {
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-  }
-}
+
 
 @media (min-width: 1024px) {
   .why-cards-container {
@@ -5992,10 +5987,11 @@ section {
 
 @media (max-width: 768px) {
   .why-card {
-    min-width: 80%;
+    min-width: 260px;
     scroll-snap-align: center;
     padding: 1rem;
     gap: 0.5rem;
+    border-radius: var(--radius-md);
   }
   
   .why-card-icon {
@@ -6014,13 +6010,14 @@ section {
   }
   
   .why-card h3 {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--text-dark);
+    margin-bottom: 0.25rem;
   }
   
   .why-card p {
-    font-size: 0.75rem;
-    line-height: 1.3;
+    font-size: 0.8rem;
+    line-height: 1.4;
     color: var(--text-muted);
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -6091,7 +6088,7 @@ section {
 
 @media (max-width: 768px) {
   .process-section {
-    padding: 1rem;
+    padding: 0.5rem 0;
     background: transparent;
     border: none;
     box-shadow: none;
@@ -6100,7 +6097,7 @@ section {
   .process-header {
     margin-bottom: 1rem;
     text-align: left;
-    padding-left: 0.5rem;
+    padding: 0 1rem;
   }
   
   .process-header h3 {
@@ -6110,7 +6107,7 @@ section {
   }
   
   .process-header p {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
   }
 }
@@ -6145,48 +6142,49 @@ section {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 0.75rem;
-    padding: 0.5rem;
+    padding: 0.25rem 1rem 1rem 1rem;
     scrollbar-width: none;
   }
   .process-timeline::-webkit-scrollbar { display: none; }
   
   .process-step {
-    min-width: 65%;
+    min-width: 240px;
     scroll-snap-align: start;
-    padding: 0.75rem;
+    padding: 1rem;
     background: var(--bg-white);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-light);
     box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
-}
 
-@media (max-width: 480px) {
-  .process-timeline {
-    gap: 1rem;
-  }
-  
   .step-number {
     width: 2rem;
     height: 2rem;
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
     background: var(--bg-near-white);
     color: var(--primary);
+    border-width: 1px;
   }
   
   .process-step h4 {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     margin-bottom: 0.25rem;
     color: var(--text-dark);
   }
   
   .process-step p {
-    font-size: 0.7rem;
-    line-height: 1.2;
+    font-size: 0.8rem;
+    line-height: 1.4;
     color: var(--text-muted);
   }
 }
+
+
 
 @media (min-width: 768px) {
   .process-timeline {
