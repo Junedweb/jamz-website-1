@@ -8545,7 +8545,7 @@ section {
 .text-xs { font-size: 0.75rem; }
 .text-sm { font-size: 0.875rem; }
 .text-base { font-size: 1rem; }
-.text-[10px] { font-size: 10px; }
+.text-\[10px\] { font-size: 10px; }
 
 .font-bold { font-weight: 700; }
 .font-semibold { font-weight: 600; }
