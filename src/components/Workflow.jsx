@@ -1,16 +1,6 @@
 import React from 'react';
 
 function Workflow() {
-  const steps = [
-    { num: '01', title: 'Brief Received', desc: 'Client brief converted into structured roles.' },
-    { num: '02', title: 'Roles Created', desc: 'Breakdowns & eligibility filters auto-saved.' },
-    { num: '03', title: 'Outreach', desc: 'WhatsApp broadcasts with tracking & auto-follow-ups.' },
-    { num: '04', title: 'Auditions', desc: 'Responses flow into live funnel with audit trail.' },
-    { num: '05', title: 'Shortlist', desc: 'Filter best takes and share with client.' },
-    { num: '06', title: 'Approval', desc: 'Client reviews and locks final choices.' },
-    { num: '07', title: 'Booking', desc: 'Contracts & status updates finalized.' }
-  ];
-
   return (
     <section className="workflow-section reveal" style={{ marginBottom: '4rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '2rem', marginTop: '2rem' }}>
       <div className="container">
@@ -45,17 +35,6 @@ function Workflow() {
             </div>
           </div>
         </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-          {steps.map((step, i) => (
-            <div key={i} style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '1rem', textAlign: 'center' }}>
-              <div style={{ fontWeight: 800, color: '#cbd5e1', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{step.num}</div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem' }}>{step.title}</h3>
-              <p style={{ fontSize: '0.9rem', color: '#475569' }}>{step.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
