@@ -108,35 +108,6 @@ function Features({ onCtaClick }) {
           ))}
         </div>
 
-        <div className="offerings-summary">
-          <h3 className="offerings-title">What's Included in Your Access:</h3>
-          <div className="offerings-grid-mini">
-            <div className="offering-item-mini">
-              <CheckCircleIcon size={16} className="text-primary" />
-              <span>Full 12-Module Control Centre</span>
-            </div>
-            <div className="offering-item-mini">
-              <CheckCircleIcon size={16} className="text-primary" />
-              <span>AI-Powered Search & Creative Tools</span>
-            </div>
-            <div className="offering-item-mini">
-              <CheckCircleIcon size={16} className="text-primary" />
-              <span>Secure Private Talent Vault</span>
-            </div>
-            <div className="offering-item-mini">
-              <CheckCircleIcon size={16} className="text-primary" />
-              <span>Automated WhatsApp & Outreach Hub</span>
-            </div>
-            <div className="offering-item-mini">
-              <CheckCircleIcon size={16} className="text-primary" />
-              <span>Real-time Analytics & Reporting</span>
-            </div>
-            <div className="offering-item-mini">
-              <CheckCircleIcon size={16} className="text-primary" />
-              <span>Team Permissions & Client Portals</span>
-            </div>
-          </div>
-        </div>
 
         <a href="#" className="btn-primary features-cta" onClick={onCtaClick}>
           Get Early Access →
