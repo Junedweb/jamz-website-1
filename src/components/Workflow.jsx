@@ -1,5 +1,6 @@
 import React from 'react';
 
+/* Updated */
 function Workflow() {
   return (
     <section className="workflow-section reveal" style={{ marginBottom: '4rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '2rem', marginTop: '2rem' }}>
@@ -35,6 +36,7 @@ function Workflow() {
             </div>
           </div>
         </div>
+      </div>
     </section>
   );
 }

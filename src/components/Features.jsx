@@ -15,6 +15,7 @@ import {
   CheckCircle as CheckCircleIcon
 } from 'lucide-react';
 
+/* Updated */
 function Features({ onCtaClick }) {
   const features = [
     { 
