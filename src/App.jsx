@@ -1,8 +1,12 @@
+import { Analytics } from '@vercel/analytics/react';
 import Home from './components/Home';
 
 function App() {
   return (
-    <Home />
+    <>
+      <Home />
+      <Analytics />
+    </>
   );
 }
 
